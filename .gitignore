@@ -1,0 +1,11 @@
+__pycache__/
+/*.egg-info
+/.eggs
+/dist
+/tests/spec_*/
+*.vcd
+*.gtkw
+/*.il
+/*.v
+/*.sv
+/build
