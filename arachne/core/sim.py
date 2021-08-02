@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from .util import *
+from ..util import *
 
 __all__ = (
 	'sim_case',
@@ -19,7 +19,7 @@ def _collect_sims(*, pkg):
 
 	for _, name, is_pkg in pkgutil.itr_modules(path = pkg):
 		if not is_pkg:
-			__import__(f'{pkg}.{name}')
+			pkg_import = __import__(f'{pkg}.{name}')
 			# TODO: Figure out the import stuff
 			# sims.append({
 			# 	'name' : name,

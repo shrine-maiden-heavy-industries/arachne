@@ -1,3 +1,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-__all__ = ()
+from .sim import run_sims
+
+__all__ = (
+	'run_sims',
+)
