@@ -29,11 +29,15 @@ def _collect_sims(*, pkg):
 	return sims
 
 
-def sim_case(*, domains, dut, engine = 'pysim'):
+def sim_case(*, domains, dut, platform = None, engine = 'pysim'):
 	def _reg_sim(func):
-		from nmigen.sim import Simulator
+		from nmigen.sim    import Simulator
+		from nmigen.hdl.ir import Fragment
 
-		sim = Simulator(dut, engine = engine)
+		sim = Simulator(
+			Fragment.get(dut, platform = platform),
+			engine = engine
+		)
 
 		for dom, clk in domains:
 			sim.add_clock(1 / clk, domain = dom)
