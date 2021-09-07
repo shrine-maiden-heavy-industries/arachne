@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from nmigen      import *
+from typing       import Tuple
+from nmigen       import *
 
 from ...amba4.axi import *
 from .mio         import *
 from .resources   import *
+from .adaptors    import *
 
 __all__ = (
 	'PS7', 'PS7CoreResource', 'PS7DDR3Resource'
@@ -130,7 +132,11 @@ class PS7(Elaboratable):
 		perif_map.update(self._map_axi_hp(num = 1))
 		perif_map.update(self._map_axi_hp(num = 2))
 		perif_map.update(self._map_axi_hp(num = 3))
-		perif_map.update(self._map_ddr())
+
+		ddr_map, ddr_adaptor = self._map_ddr()
+		if ddr_adaptor is not None:
+			m.submodules += ddr_adaptor
+		perif_map.update(ddr_map)
 
 		Instance(
 			'PS7',
@@ -270,29 +276,29 @@ class PS7(Elaboratable):
 			f'i_SAXI{name}AWQOS':   bus.awqos,
 		}
 
-	def _map_ddr(self) -> dict:
-		if self._ps_resources['ddr']:
-			ddr = self._ps_resources['ddr']
-			return {
+	def _map_ddr(self) -> Tuple[dict, Elaboratable]:
+		if self._ps_resources['ddr'] is not None:
+			ddr = DDR3Adaptor(bus = self._ps_resources['ddr'])
+			return ({
+				'o_DDRDRSTB': ddr.rst_n,
 				'o_DDRCKP':   ddr.clk_p,
 				'o_DDRCKN':   ddr.clk_n,
 				'o_DDRCKE':   ddr.clk_en,
-				'o_DDRDRSTB': ddr.rst_n,
 				'o_DDRCSB':   ddr.cs_n,
+				'o_DDRWEB':   ddr.we_n,
 				'o_DDRRASB':  ddr.ras_n,
 				'o_DDRCASB':  ddr.cas_n,
-				'o_DDRWEB':   ddr.we_n,
 				'o_DDRA':     ddr.address,
 				'o_DDRBA':    ddr.bank_address,
 
-				'io_DDRDQ':   ddr.data,
-				'io_DDRDM':   ddr.data_mask,
 				'io_DDRDQSP': ddr.data_strobe_p,
 				'io_DDRDQSN': ddr.data_strobe_n,
+				'io_DDRDQ':   ddr.data,
+				'io_DDRDM':   ddr.data_mask,
 
 				'io_DDRODT':  ddr.odt_en,
 				'io_DDRVRP':  ddr.voltage_ref_p,
 				'io_DDRVRN':  ddr.voltage_ref_n,
-			}
+			}, ddr)
 		else:
-			return {}
+			return ({}, None)
