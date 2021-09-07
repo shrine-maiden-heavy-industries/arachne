@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: BSD-3-Clause
-from arachne.hdl.xilinx.ps7.resources import PS7DDR3Resource
 from nmigen import *
 from nmigen.build import *
 from nmigen.hdl.ir import Elaboratable
@@ -40,7 +39,7 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 				we_n =   'M5',
 				ras_n =  'P4',
 				cas_n =  'P5',
-				a =      'N2 K2 M3 K3 M4 L1 L4 K4 K1 J4 F5 G4 E4 D3 F4',
+				a =      'N2 K2 M3 K3 M4 L1 L4 K4 K1 J4 F5 G4 E4 D4 F4',
 				ba =     'L5 R4 J5',
 				dqs_p =  'C2 G2',
 				dqs_n =  'B2 F2',
@@ -72,9 +71,9 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 class System(Elaboratable):
 	def elaborate(self, platform):
 		m = Module()
-		m.submodules.ps7 = PS7(
-			core = platform.request('ps7_core')
-		)
+		m.submodules.ps7 = ps7 = PS7(core = platform.request('ps7_core'))
+
+		ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 
 		return m
 
