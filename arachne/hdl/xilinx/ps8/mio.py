@@ -3,7 +3,7 @@
 from nmigen import *
 
 
-__all__ = (,)
+__all__ = ()
 
 _PS8_MIO_MAPPING = {
 	# PN, PKG: PINS (MIO0...MION)
