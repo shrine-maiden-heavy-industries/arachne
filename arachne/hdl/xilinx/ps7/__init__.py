@@ -274,7 +274,7 @@ class PS7(Elaboratable):
 		if self._ps_resources['ddr']:
 			ddr = self._ps_resources['ddr']
 			return {
-				'o_DDRCKP':   ddr.clk,
+				'o_DDRCKP':   ddr.clk_p,
 				'o_DDRCKN':   ddr.clk_n,
 				'o_DDRCKE':   ddr.clk_en,
 				'o_DDRDRSTB': ddr.rst_n,
@@ -287,11 +287,11 @@ class PS7(Elaboratable):
 
 				'io_DDRDQ':   ddr.data,
 				'io_DDRDM':   ddr.data_mask,
-				'io_DDRDQSP': ddr.data_strobe,
+				'io_DDRDQSP': ddr.data_strobe_p,
 				'io_DDRDQSN': ddr.data_strobe_n,
 
 				'io_DDRODT':  ddr.odt_en,
-				'io_DDRVRP':  ddr.voltage_ref,
+				'io_DDRVRP':  ddr.voltage_ref_p,
 				'io_DDRVRN':  ddr.voltage_ref_n,
 			}
 		else:
