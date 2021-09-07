@@ -2,6 +2,7 @@
 
 from nmigen import *
 
+from ..amba4.axi import *
 from .ps    import *
 
 __all__ = (
@@ -96,8 +97,8 @@ class PS7(Elaboratable):
 			pass
 
 		perif_map = {}
-		perif_map.update(self._map_axi_manager_gp(0))
-		perif_map.update(self._map_axi_manager_gp(1))
+		perif_map.update(self._map_axi_gp(0))
+		perif_map.update(self._map_axi_gp(1))
 		perif_map.update(self._map_ddr())
 
 		Instance(
@@ -109,8 +110,14 @@ class PS7(Elaboratable):
 		)
 		return m
 
-	def _map_axi_manager_gp(self, *, num) -> dict:
-		bus = self._pl_resources[f'axi_gp{num}']
+	def _map_axi_gp(self, *, num) -> dict:
+		manager, subordinate = self._pl_resources[f'axi_gp{num}']
+		return {}.update(
+			self._map_axi_manager_gp(num = num, bus = manager),
+			self._map_axi_subordinate_gp(num = num, bus = subordinate),
+		)
+
+	def _map_axi_manager_gp(self, *, num, bus) -> dict:
 		return {
 			f'i_MAXIGP{num}ACLK':    bus.clk,
 			f'o_MAXIGP{num}ARESETN': bus.rst_n,
@@ -163,6 +170,61 @@ class PS7(Elaboratable):
 			f'o_MAXIGP{num}AWLOCK':  bus.awlock,
 			# Write QoS
 			f'o_MAXIGP{num}AWQOS':   bus.awqos,
+		}
+
+	def _map_axi_subordinate_gp(self, *, num, bus) -> dict:
+		return {
+			f'i_SAXIGP{num}ACLK':    bus.clk,
+			f'o_SAXIGP{num}ARESETN': bus.rst_n,
+
+			# Read Address
+			f'i_SAXIGP{num}ARVALID': bus.arvalid,
+			f'o_SAXIGP{num}ARREADY': bus.arready,
+			f'i_SAXIGP{num}ARADDR':  bus.araddr,
+			f'i_SAXIGP{num}ARID':    bus.arid,
+			f'i_SAXIGP{num}ARPROT':  bus.arprot,
+			f'i_SAXIGP{num}ARLEN':   bus.arlen,
+			f'i_SAXIGP{num}ARSIZE':  bus.arsize,
+			f'i_SAXIGP{num}ARBURST': bus.arburst,
+			f'i_SAXIGP{num}ARCACHE': bus.arcache,
+			# Read Data
+			f'o_SAXIGP{num}RVALID':  bus.rvalid,
+			f'i_SAXIGP{num}RREADY':  bus.rready,
+			f'o_SAXIGP{num}RDATA':   bus.rdata,
+			f'o_SAXIGP{num}RRESP':   bus.rresp,
+			f'o_SAXIGP{num}RID':     bus.rid,
+			f'o_SAXIGP{num}RLAST':   bus.rlast,
+			# Read Atomic
+			f'i_SAXIGP{num}ARLOCK':  bus.arlock,
+			# Read QoS
+			f'i_SAXIGP{num}ARQOS':   bus.arqos,
+
+			# Write Address
+			f'i_SAXIGP{num}AWVALID': bus.awvalid,
+			f'o_SAXIGP{num}AWREADY': bus.awready,
+			f'i_SAXIGP{num}AWADDR':  bus.awaddr,
+			f'i_SAXIGP{num}AWPROT':  bus.awprot,
+			f'i_SAXIGP{num}AWID':    bus.awid,
+			f'i_SAXIGP{num}AWLEN':   bus.awlen,
+			f'i_SAXIGP{num}AWSIZE':  bus.awsize,
+			f'i_SAXIGP{num}AWBURST': bus.awburst,
+			f'i_SAXIGP{num}AWCACHE': bus.awcache,
+			# Write Data
+			f'i_SAXIGP{num}WVALID':  bus.wvalid,
+			f'o_SAXIGP{num}WREADY':  bus.wready,
+			f'i_SAXIGP{num}WDATA':   bus.wdata,
+			f'i_SAXIGP{num}WSTRB':   bus.wstrobe,
+			f'i_SAXIGP{num}WID':     bus.wid,
+			f'i_SAXIGP{num}WLAST':   bus.wlast,
+			# Write Response
+			f'o_SAXIGP{num}BVALID':  bus.bvalid,
+			f'i_SAXIGP{num}BREADY':  bus.bready,
+			f'o_SAXIGP{num}BRESP':   bus.bresp,
+			f'o_SAXIGP{num}BID':     bus.bid,
+			# Write Atomic
+			f'i_SAXIGP{num}AWLOCK':  bus.awlock,
+			# Write QoS
+			f'i_SAXIGP{num}AWQOS':   bus.awqos,
 		}
 
 	def _map_ddr(self) -> dict:
