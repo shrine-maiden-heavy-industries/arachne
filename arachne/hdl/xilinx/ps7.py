@@ -37,6 +37,38 @@ class PS7(Elaboratable):
 			'usb1':    kwargs.get('usb1', None),
 		}
 		self._pl_resources = {
+			'axi_gp0': (
+				Interface(
+					addr_width = 32, data_width = 32, id_width = 12,
+					bus_type = AXIBusType.Full,
+					interface_type = AXIInterfaceType.Manager,
+					features = {'atomic', 'qos'},
+					name = 'axi_m_gp0'
+				),
+				Interface(
+					addr_width = 32, data_width = 32, id_width = 12,
+					bus_type = AXIBusType.Full,
+					interface_type = AXIInterfaceType.Subordinate,
+					features = {'atomic', 'qos'},
+					name = 'axi_s_gp0'
+				),
+			),
+			'axi_gp1': (
+				Interface(
+					addr_width = 32, data_width = 32, id_width = 12,
+					bus_type = AXIBusType.Full,
+					interface_type = AXIInterfaceType.Manager,
+					features = {'atomic', 'qos'},
+					name = 'axi_m_gp1'
+				),
+				Interface(
+					addr_width = 32, data_width = 32, id_width = 12,
+					bus_type = AXIBusType.Full,
+					interface_type = AXIInterfaceType.Subordinate,
+					features = {'atomic', 'qos'},
+					name = 'axi_s_gp1'
+				),
+			),
 		}
 		self._clk = clk
 		self._por_n = por_n
@@ -64,6 +96,8 @@ class PS7(Elaboratable):
 			pass
 
 		perif_map = {}
+		perif_map.update(self._map_axi_manager_gp(0))
+		perif_map.update(self._map_axi_manager_gp(1))
 		perif_map.update(self._map_ddr())
 
 		Instance(
@@ -74,6 +108,62 @@ class PS7(Elaboratable):
 			**perif_map,
 		)
 		return m
+
+	def _map_axi_manager_gp(self, *, num) -> dict:
+		bus = self._pl_resources[f'axi_gp{num}']
+		return {
+			f'i_MAXIGP{num}ACLK':    bus.clk,
+			f'o_MAXIGP{num}ARESETN': bus.rst_n,
+
+			# Read Address
+			f'o_MAXIGP{num}ARVALID': bus.arvalid,
+			f'i_MAXIGP{num}ARREADY': bus.arready,
+			f'o_MAXIGP{num}ARADDR':  bus.araddr,
+			f'o_MAXIGP{num}ARID':    bus.arid,
+			f'o_MAXIGP{num}ARPROT':  bus.arprot,
+			f'o_MAXIGP{num}ARLEN':   bus.arlen,
+			f'o_MAXIGP{num}ARSIZE':  bus.arsize,
+			f'o_MAXIGP{num}ARBURST': bus.arburst,
+			f'o_MAXIGP{num}ARCACHE': bus.arcache,
+			# Read Data
+			f'i_MAXIGP{num}RVALID':  bus.rvalid,
+			f'o_MAXIGP{num}RREADY':  bus.rready,
+			f'i_MAXIGP{num}RDATA':   bus.rdata,
+			f'i_MAXIGP{num}RRESP':   bus.rresp,
+			f'i_MAXIGP{num}RID':     bus.rid,
+			f'i_MAXIGP{num}RLAST':   bus.rlast,
+			# Read Atomic
+			f'o_MAXIGP{num}ARLOCK':  bus.arlock,
+			# Read QoS
+			f'o_MAXIGP{num}ARQOS':   bus.arqos,
+
+			# Write Address
+			f'o_MAXIGP{num}AWVALID': bus.awvalid,
+			f'i_MAXIGP{num}AWREADY': bus.awready,
+			f'o_MAXIGP{num}AWADDR':  bus.awaddr,
+			f'o_MAXIGP{num}AWPROT':  bus.awprot,
+			f'o_MAXIGP{num}AWID':    bus.awid,
+			f'o_MAXIGP{num}AWLEN':   bus.awlen,
+			f'o_MAXIGP{num}AWSIZE':  bus.awsize,
+			f'o_MAXIGP{num}AWBURST': bus.awburst,
+			f'o_MAXIGP{num}AWCACHE': bus.awcache,
+			# Write Data
+			f'o_MAXIGP{num}WVALID':  bus.wvalid,
+			f'i_MAXIGP{num}WREADY':  bus.wready,
+			f'o_MAXIGP{num}WDATA':   bus.wdata,
+			f'o_MAXIGP{num}WSTRB':   bus.wstrobe,
+			f'o_MAXIGP{num}WID':     bus.wid,
+			f'o_MAXIGP{num}WLAST':   bus.wlast,
+			# Write Response
+			f'i_MAXIGP{num}BVALID':  bus.bvalid,
+			f'o_MAXIGP{num}BREADY':  bus.bready,
+			f'i_MAXIGP{num}BRESP':   bus.bresp,
+			f'i_MAXIGP{num}BID':     bus.bid,
+			# Write Atomic
+			f'o_MAXIGP{num}AWLOCK':  bus.awlock,
+			# Write QoS
+			f'o_MAXIGP{num}AWQOS':   bus.awqos,
+		}
 
 	def _map_ddr(self) -> dict:
 		if self._ps_resources['ddr']:
