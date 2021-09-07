@@ -2,7 +2,6 @@
 
 from nmigen      import *
 
-
 from .mio        import *
 
 __all__ = (
