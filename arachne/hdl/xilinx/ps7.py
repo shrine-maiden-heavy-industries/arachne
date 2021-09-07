@@ -99,6 +99,10 @@ class PS7(Elaboratable):
 		perif_map = {}
 		perif_map.update(self._map_axi_gp(0))
 		perif_map.update(self._map_axi_gp(1))
+		perif_map.update(self._map_axi_hp(0))
+		perif_map.update(self._map_axi_hp(1))
+		perif_map.update(self._map_axi_hp(2))
+		perif_map.update(self._map_axi_hp(3))
 		perif_map.update(self._map_ddr())
 
 		Instance(
@@ -115,6 +119,19 @@ class PS7(Elaboratable):
 		return {}.update(
 			self._map_axi_manager(name = f'GP{num}', bus = manager),
 			self._map_axi_subordinate(name = f'GP{num}', bus = subordinate),
+		)
+
+	def _map_axi_hp(self, *, num) -> dict:
+		bus = self._pl_resources[f'axi_hp{num}']
+		return {
+			f'o_SAXIHP{num}RACOUNT':       Signal(),
+			f'o_SAXIHP{num}RCOUNT':        Signal(),
+			f'i_SAXIHP{num}RDISSUECAP1EN': Signal(),
+			f'o_SAXIHP{num}WACOUNT':       Signal(),
+			f'o_SAXIHP{num}WCOUNT':        Signal(),
+			f'i_SAXIHP{num}WRISSUECAP1EN': Signal(),
+		}.update(
+			self._map_axi_subordinate(name = f'HP{num}', bus = bus)
 		)
 
 	def _map_axi_manager(self, *, name, bus) -> dict:
