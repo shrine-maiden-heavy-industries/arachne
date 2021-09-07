@@ -2,7 +2,7 @@
 
 from nmigen      import *
 
-from ..amba4.axi import *
+from ...amba4.axi import *
 from .mio        import *
 
 __all__ = (
@@ -69,6 +69,34 @@ class PS7(Elaboratable):
 					features = {'atomic', 'qos'},
 					name = 'axi_s_gp1'
 				),
+			),
+			'axi_hp0': Interface(
+				addr_width = 32, data_width = 64, id_width = 6,
+				bus_type = AXIBusType.Full,
+				interface_type = AXIInterfaceType.Subordinate,
+				features = {'atomic', 'qos'},
+				name = 'axi_hp0'
+			),
+			'axi_hp1': Interface(
+				addr_width = 32, data_width = 64, id_width = 6,
+				bus_type = AXIBusType.Full,
+				interface_type = AXIInterfaceType.Subordinate,
+				features = {'atomic', 'qos'},
+				name = 'axi_hp1'
+			),
+			'axi_hp2': Interface(
+				addr_width = 32, data_width = 64, id_width = 6,
+				bus_type = AXIBusType.Full,
+				interface_type = AXIInterfaceType.Subordinate,
+				features = {'atomic', 'qos'},
+				name = 'axi_hp2'
+			),
+			'axi_hp3': Interface(
+				addr_width = 32, data_width = 64, id_width = 6,
+				bus_type = AXIBusType.Full,
+				interface_type = AXIInterfaceType.Subordinate,
+				features = {'atomic', 'qos'},
+				name = 'axi_hp3'
 			),
 		}
 		self._clk = clk
