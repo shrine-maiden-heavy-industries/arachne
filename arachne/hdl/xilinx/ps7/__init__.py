@@ -129,7 +129,7 @@ class PS7(Elaboratable):
 		if ddr_adaptor is not None:
 			m.submodules += ddr_adaptor
 
-		Instance(
+		m.submodules += Instance(
 			'PS7',
 			# Core
 			i_PSCLK = self._core.clk.i,
@@ -145,7 +145,6 @@ class PS7(Elaboratable):
 			# DDR
 			**ddr_map,
 		)
-
 		return m
 
 	def _map_axi_gp(self, *, num) -> dict:
