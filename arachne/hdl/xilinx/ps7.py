@@ -36,6 +36,8 @@ class PS7(Elaboratable):
 			'usb0':    kwargs.get('usb0', None),
 			'usb1':    kwargs.get('usb1', None),
 		}
+		self._pl_resources = {
+		}
 		self._clk = clk
 		self._por_n = por_n
 		self._srst_n = srst_n
@@ -46,6 +48,11 @@ class PS7(Elaboratable):
 		elif self._ps_resources[name] is not None:
 			raise ValueError('Resource already assigned, refusing to reassign to a new resource')
 		self._ps_resources[name] = resource
+
+	def get_resource(self, *, name) -> Record:
+		if name not in self._pl_resources:
+			raise ValueError('Resource name not valid')
+		return self._pl_resources[name]
 
 	def elaborate(self, platform) -> Module:
 		m = Module()
