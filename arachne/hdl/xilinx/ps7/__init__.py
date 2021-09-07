@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from nmigen import *
+from nmigen      import *
 
 from ..amba4.axi import *
-from .ps    import *
+from .mio        import *
 
 __all__ = (
 	'PS7',
