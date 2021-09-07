@@ -57,6 +57,7 @@ class PS7(Elaboratable):
 			pass
 
 		perif_map = {}
+		perif_map.update(self._map_ddr())
 
 		Instance(
 			'PS7',
@@ -66,3 +67,30 @@ class PS7(Elaboratable):
 			**perif_map,
 		)
 		return m
+
+	def _map_ddr(self) -> dict:
+		if self._ps_resources['ddr']:
+			ddr = self._ps_resources['ddr']
+			return {
+				'o_DDRCKP':   ddr.clk,
+				'o_DDRCKN':   ddr.clk_n,
+				'o_DDRCKE':   ddr.clk_en,
+				'o_DDRDRSTB': ddr.rst_n,
+				'o_DDRCSB':   ddr.cs_n,
+				'o_DDRRASB':  ddr.ras_n,
+				'o_DDRCASB':  ddr.cas_n,
+				'o_DDRWEB':   ddr.we_n,
+				'o_DDRA':     ddr.address,
+				'o_DDRBA':    ddr.bank_address,
+
+				'io_DDRDQ':   ddr.data,
+				'io_DDRDM':   ddr.data_mask,
+				'io_DDRDQSP': ddr.data_strobe,
+				'io_DDRDQSN': ddr.data_strobe_n,
+
+				'io_DDRODT':  ddr.odt_en,
+				'io_DDRVRP':  ddr.voltage_ref,
+				'io_DDRVRN':  ddr.voltage_ref_n,
+			}
+		else:
+			return {}
