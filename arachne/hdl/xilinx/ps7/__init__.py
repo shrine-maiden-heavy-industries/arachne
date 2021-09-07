@@ -125,26 +125,27 @@ class PS7(Elaboratable):
 		else:
 			pass
 
-		perif_map = {}
-		perif_map.update(self._map_axi_gp(num = 0))
-		perif_map.update(self._map_axi_gp(num = 1))
-		perif_map.update(self._map_axi_hp(num = 0))
-		perif_map.update(self._map_axi_hp(num = 1))
-		perif_map.update(self._map_axi_hp(num = 2))
-		perif_map.update(self._map_axi_hp(num = 3))
-
 		ddr_map, ddr_adaptor = self._map_ddr()
 		if ddr_adaptor is not None:
 			m.submodules += ddr_adaptor
-		perif_map.update(ddr_map)
 
 		Instance(
 			'PS7',
+			# Core
 			i_PSCLK = self._core.clk.i,
 			i_PSPORB = self._core.por_n.i,
 			i_PSSRSTB = self._core.srst_n.i,
-			**perif_map,
+			# AXI Bus'
+			**self._map_axi_gp(num = 0),
+			**self._map_axi_gp(num = 1),
+			**self._map_axi_hp(num = 0),
+			**self._map_axi_hp(num = 1),
+			**self._map_axi_hp(num = 2),
+			**self._map_axi_hp(num = 3),
+			# DDR
+			**ddr_map,
 		)
+
 		return m
 
 	def _map_axi_gp(self, *, num) -> dict:
