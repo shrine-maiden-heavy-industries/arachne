@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
-
 from nmigen import *
+
+from .ps    import *
 
 __all__ = (
 	'ps8',
