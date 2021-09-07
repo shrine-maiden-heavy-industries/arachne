@@ -4,10 +4,10 @@ from nmigen import *
 from .ps    import *
 
 __all__ = (
-	'ps8',
+	'PS8',
 )
 
-class ps8(Elaboratable):
+class PS8(Elaboratable):
 	"""Xilinx Zynq UltraScale+ MPSoC PS Block
 
 	"""
