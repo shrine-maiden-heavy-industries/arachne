@@ -4,10 +4,10 @@ from nmigen      import *
 
 from ...amba4.axi import *
 from .mio         import *
-from .resources   import PS7CoreResource
+from .resources   import *
 
 __all__ = (
-	'PS7', 'PS7CoreResource'
+	'PS7', 'PS7CoreResource', 'PS7DDR3Resource'
 )
 
 class PS7(Elaboratable):
