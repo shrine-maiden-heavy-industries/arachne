@@ -146,6 +146,8 @@ class PS7(Elaboratable):
 			**ddr_map,
 			# JTAG
 			**self._map_jtag(m),
+			**self._map_sdio(m, num = 0),
+			**self._map_sdio(m, num = 1),
 		)
 		return m
 
@@ -346,4 +348,29 @@ class PS7(Elaboratable):
 				'i_EMIOPJTAGTDI':  Signal(),
 				'o_EMIOPJTAGTDO':  Signal(),
 				'o_EMIOPJTAGTDTN': Signal(),
+			}
+
+	def _map_sdio(self, m, *, num) -> dict:
+		sdio = self._ps_resources[f'sdio{num}']
+		if sdio is not None:
+			data_oe_n = Signal()
+
+			m.d.comb += sdio.dat.oe.eq(~data_oe_n)
+
+			return {
+				f'i_EMIOSDIO{num}CDN':    sdio.cd.i,
+				f'o_EMIOSDIO{num}CLK':    sdio.clk.o,
+				f'o_EMIOSDIO{num}CMDO':   sdio.cmd.o,
+				f'i_EMIOSDIO{num}DATAI':  sdio.dat.i,
+				f'o_EMIOSDIO{num}DATAO':  sdio.dat.o,
+				f'o_EMIOSDIO{num}DATATN': data_oe_n,
+			}
+		else:
+			return {
+				f'i_EMIOSDIO{num}CDN':    Signal(),
+				f'o_EMIOSDIO{num}CLK':    Signal(),
+				f'o_EMIOSDIO{num}CMDO':   Signal(),
+				f'i_EMIOSDIO{num}DATAI':  Signal(4),
+				f'o_EMIOSDIO{num}DATAO':  Signal(4),
+				f'o_EMIOSDIO{num}DATATN': Signal(4),
 			}
