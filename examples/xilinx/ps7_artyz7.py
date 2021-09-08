@@ -19,6 +19,7 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 		PS7CoreResource(0,
 			device = ArtyZ720Platform.device,
 			package = ArtyZ720Platform.package,
+			clk_freq = 50e6,
 			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
 		),
 
