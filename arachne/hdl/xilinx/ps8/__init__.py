@@ -8,6 +8,25 @@ __all__ = (
 	'PS8',
 )
 
+class BUFG_PS(Elaboratable):
+	"""Xilinx Zynq UltraScale+ MPSoC PS Global Buffer
+
+	"""
+	def __init__(self, *, i : Signal, o : Signal):
+		self._i = i
+		self._o = o
+
+	def elaborate(self, platform) -> Module:
+		m = Module()
+
+		m.submodules.bufg_ps = Instance(
+			'BUFG_PS',
+			i_I = self._i,
+			o_O = self._o,
+		)
+
+		return m
+
 class PS8(Elaboratable):
 	"""Xilinx Zynq UltraScale+ MPSoC PS Block
 
