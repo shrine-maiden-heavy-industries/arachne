@@ -53,8 +53,8 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 		),
 
 		UARTResource(0,
-			rx = 'C5',
-			tx = 'C8',
+			rx =    'C5',
+			tx =    'C8',
 			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
 		),
 
@@ -65,8 +65,19 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 			dir =     'C13',
 			nxt =     'E16',
 			stp =     'C15',
+			attrs =   Attrs(IOSTANDARD = 'LVCMOS33')
+		),
+
+		*SDCardResources(0,
+			clk =   'D14',
+			cmd =   'C17',
+			dat0 =  'E12',
+			dat1 =  'A9',
+			dat2 =  'F13',
+			dat3 =  'B15',
+			cd =    'B14',
 			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
-		)
+		),
 	]
 
 class System(Elaboratable):
@@ -76,6 +87,7 @@ class System(Elaboratable):
 
 		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
+		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit'))
 
 		return m
 
