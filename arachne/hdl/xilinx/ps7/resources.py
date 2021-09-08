@@ -24,15 +24,13 @@ _ddr3_name_map = {
 	'odt': 'odt',
 }
 
-def PS7CoreResource(*args, device, package, clk_freq, conn = None, attrs = None):
+def PS7CoreResource(*args, device, package, clk_freq, conn = None):
 	mapping = _PS7_MIO_MAPPING[(device, package)]['core']
 	ios = [
-		Subsignal('clk', Pins(mapping['clk'], dir = 'i', conn = conn), Clock(clk_freq)),
-		Subsignal('por_n', Pins(mapping['por_n'], dir = 'i', conn = conn)),
-		Subsignal('srst_n', Pins(mapping['srst_n'], dir = 'i', conn = conn)),
+		Subsignal('clk', Pins(mapping['clk'], dir = 'i', conn = conn), Clock(clk_freq), Attrs(IOSTANDARD = 'LVCMOS33')),
+		Subsignal('por_n', Pins(mapping['por_n'], dir = 'i', conn = conn), Attrs(IOSTANDARD = 'LVCMOS33')),
+		Subsignal('srst_n', Pins(mapping['srst_n'], dir = 'i', conn = conn), Attrs(IOSTANDARD = 'LVCMOS18')),
 	]
-	if attrs is not None:
-		ios.append(attrs)
 	return Resource.family(*args, default_name = 'ps7_core', ios = ios)
 
 def PS7DDR3Resource(*args, device, package, ddr3 : Resource, conn = None):
