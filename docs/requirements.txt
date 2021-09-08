@@ -1,0 +1,5 @@
+sphinx
+sphinx-rtd-theme
+sphinxcontrib-mermaid
+myst-parser
+sphinxcontrib-platformpicker~=1.1
