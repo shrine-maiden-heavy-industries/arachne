@@ -1,0 +1,21 @@
+arachne.platforms.xilinx package
+================================
+
+Submodules
+----------
+
+arachne.platforms.xilinx.kria module
+------------------------------------
+
+.. automodule:: arachne.platforms.xilinx.kria
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.platforms.xilinx
+   :members:
+   :undoc-members:
+   :show-inheritance:

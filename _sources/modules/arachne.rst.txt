@@ -1,0 +1,39 @@
+arachne package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arachne.core
+   arachne.hdl
+   arachne.platforms
+
+Submodules
+----------
+
+arachne.cli module
+------------------
+
+.. automodule:: arachne.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.util module
+-------------------
+
+.. automodule:: arachne.util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne
+   :members:
+   :undoc-members:
+   :show-inheritance:

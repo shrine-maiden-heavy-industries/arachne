@@ -1,0 +1,37 @@
+arachne.hdl.xilinx.ps7 package
+==============================
+
+Submodules
+----------
+
+arachne.hdl.xilinx.ps7.adaptors module
+--------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.adaptors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps7.mio module
+---------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.mio
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps7.resources module
+---------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.hdl.xilinx.ps7
+   :members:
+   :undoc-members:
+   :show-inheritance:

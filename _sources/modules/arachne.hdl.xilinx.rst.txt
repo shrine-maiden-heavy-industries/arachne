@@ -1,0 +1,19 @@
+arachne.hdl.xilinx package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arachne.hdl.xilinx.ps7
+   arachne.hdl.xilinx.ps8
+
+Module contents
+---------------
+
+.. automodule:: arachne.hdl.xilinx
+   :members:
+   :undoc-members:
+   :show-inheritance:

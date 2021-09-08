@@ -1,0 +1,29 @@
+arachne.core package
+====================
+
+Submodules
+----------
+
+arachne.core.formal module
+--------------------------
+
+.. automodule:: arachne.core.formal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.core.sim module
+-----------------------
+
+.. automodule:: arachne.core.sim
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

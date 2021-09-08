@@ -1,0 +1,18 @@
+arachne.platforms package
+=========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arachne.platforms.xilinx
+
+Module contents
+---------------
+
+.. automodule:: arachne.platforms
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,29 @@
+arachne.hdl.xilinx.ps8 package
+==============================
+
+Submodules
+----------
+
+arachne.hdl.xilinx.ps8.mio module
+---------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.mio
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources module
+---------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.hdl.xilinx.ps8
+   :members:
+   :undoc-members:
+   :show-inheritance:
