@@ -49,7 +49,7 @@ setup(
 	),
 
 	project_urls = {
-		'Documentation': 'https://github.com/shrine-maiden-heavy-industries/arachne',
+		'Documentation': 'https://shrine-maiden-heavy-industries.github.io/arachne/',
 		'Source Code'  : 'https://github.com/shrine-maiden-heavy-industries/arachne',
 		'Bug Tracker'  : 'https://github.com/shrine-maiden-heavy-industries/arachne/issues',
 
