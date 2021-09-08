@@ -31,7 +31,7 @@ class PS8(Elaboratable):
 	"""Xilinx Zynq UltraScale+ MPSoC PS Block
 
 	"""
-	def __init__(self, *, clk : Signal, por_n : Signal, srst_n : Signal, **kwargs):
+	def __init__(self, **kwargs):
 		self._ps_resources = {
 
 		}
@@ -39,11 +39,6 @@ class PS8(Elaboratable):
 		self._pl_resources = {
 
 		}
-
-
-		self._clk    = clk
-		self._por_n  = por_n
-		self._srst_n = srst_n
 
 	def add_resource(self, *, name, resource):
 		if name not in self._ps_resources:
