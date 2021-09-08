@@ -17,8 +17,8 @@ extensions = [
 	'sphinx.ext.graphviz',
 	'sphinx.ext.autosectionlabel',
 	'sphinxcontrib.mermaid',
-	'sphinxcontrib.platformpicker'
-	'sphinx_rtd_theme',,
+	'sphinxcontrib.platformpicker',
+	'sphinx_rtd_theme',
 	'myst_parser',
 ]
 
