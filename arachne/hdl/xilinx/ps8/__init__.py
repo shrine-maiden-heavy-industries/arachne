@@ -61,4 +61,9 @@ class PS8(Elaboratable):
 	def elaborate(self, platform) -> Module:
 		m = Module()
 
+
+		m.submodules.ps8 = Instance(
+			'PS8',
+		)
+
 		return m
