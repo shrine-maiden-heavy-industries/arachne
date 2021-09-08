@@ -1,4 +1,4 @@
-name: "Tempest documentation generation and publication"
+name: "Arachne Docs"
 on:
   push:
     branches:
@@ -30,6 +30,7 @@ jobs:
       - name: Build Docs
         shell: bash
         run: |
+          sphinx-apidoc -o ./docs/modules ./arachne
           sphinx-build -b html ./docs ./_build/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
