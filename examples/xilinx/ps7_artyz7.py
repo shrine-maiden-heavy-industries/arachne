@@ -19,8 +19,7 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 		PS7CoreResource(0,
 			device = ArtyZ720Platform.device,
 			package = ArtyZ720Platform.package,
-			clk_freq = 50e6,
-			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
+			clk_freq = 50e6
 		),
 
 		JTAGResource(0,
@@ -47,8 +46,8 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 				dq =     'C3 B3 A2 A4 D3 D1 C1 E1 E2 E3 G3 H3 J3 H2 H1 J1',
 				dm =     'A1 F1',
 				odt =    'N5',
-				diff_attrs = Attrs(IOSTANDARD = 'LVCMOS33'),
-				attrs = Attrs(IOSTANDARD = 'LVCMOS33')
+				diff_attrs = Attrs(IOSTANDARD = 'SSTL15'),
+				attrs = Attrs(IOSTANDARD = 'SSTL15')
 			),
 		),
 
@@ -65,7 +64,7 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 			dir =     'C13',
 			nxt =     'E16',
 			stp =     'C15',
-			attrs =   Attrs(IOSTANDARD = 'LVCMOS33')
+			attrs =   Attrs(IOSTANDARD = 'LVCMOS18')
 		),
 
 		*SDCardResources(0,
@@ -76,7 +75,7 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 			dat2 =  'F13',
 			dat3 =  'B15',
 			cd =    'B14',
-			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
+			attrs = Attrs(IOSTANDARD = 'LVCMOS18')
 		),
 	]
 
@@ -87,6 +86,7 @@ class System(Elaboratable):
 
 		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
+		ps7.add_resource(name = 'usb0', resource = platform.request('usb'))
 		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit'))
 
 		return m
