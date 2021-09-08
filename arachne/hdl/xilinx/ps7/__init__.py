@@ -129,7 +129,7 @@ class PS7(Elaboratable):
 		if ddr_adaptor is not None:
 			m.submodules += ddr_adaptor
 
-		m.submodules += Instance(
+		m.submodules.ps7 = Instance(
 			'PS7',
 			# Core
 			i_PSCLK = self._core.clk.i,
@@ -142,8 +142,10 @@ class PS7(Elaboratable):
 			**self._map_axi_hp(num = 1),
 			**self._map_axi_hp(num = 2),
 			**self._map_axi_hp(num = 3),
-			# DDR
+			# DDR3 Memory
 			**ddr_map,
+			# JTAG
+			**self._map_jtag(m),
 		)
 		return m
 
@@ -302,3 +304,20 @@ class PS7(Elaboratable):
 			}, ddr)
 		else:
 			return ({}, None)
+
+	def _map_jtag(self, m) -> dict:
+		if self._ps_resources['jtag'] is not None:
+			jtag = self._ps_resources['jtag']
+			tdo_oe_n = Signal()
+
+			m.d.comb += jtag.tdo.oe.eq(~tdo_oe_n)
+
+			return {
+				'i_EMIOPJTAGTCK':  jtag.tck.i,
+				'i_EMIOPJTAGTMS':  jtag.tms.i,
+				'i_EMIOPJTAGTDI':  jtag.tdi.i,
+				'o_EMIOPJTAGTDO':  jtag.tdo.o,
+				'o_EMIOPJTAGTDTN': tdo_oe_n,
+			}
+		else:
+			return {}
