@@ -11,8 +11,36 @@ __all__ = (
 	'KriaKV260Platform',
 )
 
+class _KriaK26SOMPlatform(XilinxUltraScalePlatform):
+	"""Xilinx Kria KV26 system-on-module
 
-class KriaK26ISOMPlatform(XilinxUltraScalePlatform):
+	Datasheet
+	---------
+	`https://www.xilinx.com/content/dam/xilinx/support/documentation/data_sheets/ds987-k26-som.pdf <https://www.xilinx.com/content/dam/xilinx/support/documentation/data_sheets/ds987-k26-som.pdf>`_
+
+	"""
+
+	device      = 'xck26'
+	package     = 'sfvc784'
+	default_clk = 'clk_pspl'
+	speed_grade = '2lv'
+
+
+	resources   = [
+
+	]
+
+	connectors = [
+		Connector('SOM240_1', 0, {
+
+		}),
+
+		Connector('SOM240_2', 0, {
+
+		}),
+	]
+
+class KriaK26ISOMPlatform(_KriaK26SOMPlatform):
 	"""Xilinx Kria KV26 system-on-module Industrial
 
 	Datasheet
@@ -21,26 +49,10 @@ class KriaK26ISOMPlatform(XilinxUltraScalePlatform):
 
 	"""
 
-	device      = 'xck26'
-	package     = 'sfvc784'
-	speed       = '2LV-i'
-	default_clk = 'clk_pspl'
+	speed = f'{_KriaK26SOMPlatform.speed_grade}-i'
 
-	resources   = [
 
-	]
-
-	connectors = [
-		Connector('SOM240_1', 0, {
-
-		}),
-
-		Connector('SOM240_2', 0, {
-
-		}),
-	]
-
-class KriaK26CSOMPlatform(XilinxUltraScalePlatform):
+class KriaK26CSOMPlatform(_KriaK26SOMPlatform):
 	"""Xilinx Kria KV26 system-on-module Commercial
 
 	Datasheet
@@ -48,25 +60,8 @@ class KriaK26CSOMPlatform(XilinxUltraScalePlatform):
 	`https://www.xilinx.com/content/dam/xilinx/support/documentation/data_sheets/ds987-k26-som.pdf <https://www.xilinx.com/content/dam/xilinx/support/documentation/data_sheets/ds987-k26-som.pdf>`_
 
 	"""
+	speed = f'{_KriaK26SOMPlatform.speed_grade}-c'
 
-	device      = 'xck26'
-	package     = 'sfvc784'
-	speed       = '2LV-c'
-	default_clk = 'clk_pspl'
-
-	resources   = [
-
-	]
-
-	connectors = [
-		Connector('SOM240_1', 0, {
-
-		}),
-
-		Connector('SOM240_2', 0, {
-
-		}),
-	]
 
 class KriaKV260Platform(XilinxUltraScalePlatform):
 	"""Xilinx Kria KV260 Vision AI Starter Kit
@@ -79,7 +74,7 @@ class KriaKV260Platform(XilinxUltraScalePlatform):
 
 	device      = 'xck26'
 	package     = 'sfvc784'
-	speed       = '2LV-c'
+	speed       = '2lv-c'
 	default_clk = 'clk_pspl'
 
 	resources   = [
