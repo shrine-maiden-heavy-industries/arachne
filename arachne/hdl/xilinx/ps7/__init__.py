@@ -303,7 +303,27 @@ class PS7(Elaboratable):
 				'io_DDRVRN':  ddr.voltage_ref_n,
 			}, ddr)
 		else:
-			return ({}, None)
+			return ({
+				'o_DDRDRSTB': Signal(),
+				'o_DDRCKP':   Signal(),
+				'o_DDRCKN':   Signal(),
+				'o_DDRCKE':   Signal(),
+				'o_DDRCSB':   Signal(),
+				'o_DDRWEB':   Signal(),
+				'o_DDRRASB':  Signal(),
+				'o_DDRCASB':  Signal(),
+				'o_DDRA':     Signal(15),
+				'o_DDRBA':    Signal(3),
+
+				'io_DDRDQSP': Signal(4),
+				'io_DDRDQSN': Signal(4),
+				'io_DDRDQ':   Signal(32),
+				'io_DDRDM':   Signal(4),
+
+				'io_DDRODT':  Signal(),
+				'io_DDRVRP':  Signal(),
+				'io_DDRVRN':  Signal(),
+			}, None)
 
 	def _map_jtag(self, m) -> dict:
 		if self._ps_resources['jtag'] is not None:
@@ -320,4 +340,10 @@ class PS7(Elaboratable):
 				'o_EMIOPJTAGTDTN': tdo_oe_n,
 			}
 		else:
-			return {}
+			return {
+				'i_EMIOPJTAGTCK':  Signal(),
+				'i_EMIOPJTAGTMS':  Signal(),
+				'i_EMIOPJTAGTDI':  Signal(),
+				'o_EMIOPJTAGTDO':  Signal(),
+				'o_EMIOPJTAGTDTN': Signal(),
+			}
