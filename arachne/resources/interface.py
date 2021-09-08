@@ -10,7 +10,7 @@ def JTAGResource(*args, tck, tms, tdi, tdo, conn = None, attrs = None):
 		Subsignal("tck", Pins(tck, dir = 'i', conn = conn)),
 		Subsignal("tms", Pins(tms, dir = 'i', conn = conn)),
 		Subsignal("tdi", Pins(tdi, dir = 'i', conn = conn)),
-		Subsignal("tdo", Pins(tdo, dir = 'o', conn = conn)),
+		Subsignal("tdo", Pins(tdo, dir = 'oe', conn = conn)),
 	]
 	if attrs is not None:
 		ios.append(attrs)
