@@ -73,7 +73,8 @@ class System(Elaboratable):
 		m = Module()
 		m.submodules.ps7 = ps7 = PS7(core = platform.request('ps7_core'))
 
-		ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
+		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
+		ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
 
 		return m
 
