@@ -1,0 +1,12 @@
+[run]
+branch = True
+include =
+  arachne/*
+omit =
+  arachne/test/*
+
+[report]
+exclude_lines =
+	:nocov:
+partial_branches =
+  :nobr:
