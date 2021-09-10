@@ -79,6 +79,59 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 		),
 	]
 
+	def __init__(self, *args, **kwargs):
+		from arachne.hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
+		super().__init__(*args, *kwargs)
+		self._mapping = self._flatten_mapping(_PS7_MIO_MAPPING[self.device, self.package])
+
+	@staticmethod
+	def _flatten_mapping(mapping : dict) -> list:
+		flat_map = []
+		for pinset in mapping.values():
+			if isinstance(pinset, dict):
+				flat_map.extend(pinset.values())
+			#elif isinstance(pinset, list):
+			#	for idx, pad in pinset:
+			#		flat_map.append(pad)
+		print(flat_map)
+		return flat_map
+
+	def _demap_pin(self, pin : Record) -> Tuple[str, int, str]:
+		parts = pin.name.split('__', maxsplit = 1)
+		name, number = parts[0].rsplit('_', maxsplit = 1)
+		return (name, int(number), parts[1])
+
+	def _find_subsignal(self, resource : Resource, name : str) -> Subsignal:
+		for subsig in resource.ios:
+			if subsig.name == name:
+				return subsig
+		raise KeyError('Subsignal not found')
+
+	def _map_pin_to_pad(self, pin : Record) -> str:
+		name, number, subsignal = self._demap_pin(pin)
+		resource = self.lookup(name, number)
+		subsignal = self._find_subsignal(resource, subsignal)
+		for part in subsignal.ios:
+			if isinstance(part, Pins):
+				return part.names[0]
+		raise ValueError('Failed to map pin to pad')
+
+	def get_input(self, pin, port, attrs, invert):
+		pad = self._map_pin_to_pad(pin)
+		if pad not in self._mapping:
+			return super().get_input(pin, port, attrs, invert)
+		self._check_feature("single-ended input", pin, attrs,
+							valid_xdrs=self._get_valid_xdrs(), valid_attrs=True)
+		m = Module()
+		i, o, t = self._get_xdr_buffer(m, pin, attrs.get("IOSTANDARD"), i_invert=invert)
+		for bit in range(pin.width):
+			m.submodules["{}_{}".format(pin.name, bit)] = Instance(
+				'BIBUF',
+				io_PAD = port.io[bit],
+				o_IO = i[bit]
+			)
+		return m
+
 class System(Elaboratable):
 	def elaborate(self, platform):
 		m = Module()
