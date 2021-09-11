@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 import sys
 
+from os import environ
+
 __all__ = (
 	'log',
 	'err',
@@ -22,4 +24,5 @@ def inf(str, end = '\n', file = sys.stdout):
 	print(f'\x1B[36m[~]\x1B[0m {str}', end = end, file = file)
 
 def dbg(str, end = '\n', file = sys.stdout):
-	print(f'\x1B[34m[~]\x1B[0m {str}', end = end, file = file)
+	if 'ARACHNE_DEBUG' in environ:
+		print(f'\x1B[34m[~]\x1B[0m {str}', end = end, file = file)
