@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from typing       import Tuple
+from typing       import List, Tuple, Union
 from nmigen       import *
+from nmigen.build import *
 
 from ...amba4.axi import *
-from .mio         import *
+from .mio         import _PS7_MIO_MAPPING
 from .resources   import *
 from .adaptors    import *
 
@@ -135,6 +136,8 @@ class PS7(Elaboratable):
 			i_PSCLK = self._core.clk.i,
 			i_PSPORB = self._core.por_n.i,
 			i_PSSRSTB = self._core.srst_n.i,
+			# MIO
+			io_MIO = mio,
 			# AXI Bus'
 			**self._map_axi_gp(num = 0),
 			**self._map_axi_gp(num = 1),
@@ -146,10 +149,55 @@ class PS7(Elaboratable):
 			**ddr_map,
 			# JTAG
 			**self._map_jtag(m),
-			**self._map_sdio(m, num = 0),
-			**self._map_sdio(m, num = 1),
+			# SDIO (SDCard interfaces)
+			**self._map_sdio(m, platform = platform, mio = mio, num = 0),
+			**self._map_sdio(m, platform = platform, mio = mio, num = 1),
 		)
 		return m
+
+	def _demap_resource(self, resource : Record) -> Tuple[str, int]:
+		name, number = resource.name.rsplit('_', maxsplit = 1)
+		return (name, int(number))
+
+	def _find_subsignal(self, resource : Resource, name : str) -> Subsignal:
+		for subsig in resource.ios:
+			if subsig.name == name:
+				return subsig
+		raise KeyError('Subsignal not found')
+
+	def _map_to_pad(self, *, resource : Resource, name : str) -> List[str]:
+		subsignal = self._find_subsignal(resource, name)
+		for part in subsignal.ios:
+			if isinstance(part, Pins):
+				return part.names
+
+	def _mio_idx(self, *, mapping : List[tuple], pad : str) -> Union[int, None]:
+		for idx, pad_name in mapping:
+			if pad == pad_name:
+				return idx
+		return None
+
+	def _mio_map_pads(self, m, mapping, mio, subsig, pads, dir):
+		unmapped = False
+		for i, pad in enumerate(pads):
+			idx = self._mio_idx(mapping = mapping, pad = pad)
+			if idx is None:
+				unmapped = True
+				continue
+			if 'i' in dir:
+				m.d.comb += mio[idx].eq(subsig.i[i])
+			else:
+				m.d.comb += subsig.o[i].eq(mio[idx])
+		return unmapped
+
+	def _map_mio(self, m, *, mapping, mio, resource, subsignal):
+		unmapped = True
+		for io in subsignal.ios:
+			if isinstance(io, Pins):
+				unmapped &= self._mio_map_pads(m, mapping, mio, getattr(resource, subsignal.name), io.names, io.dir)
+			else:
+				unmapped = False
+		return unmapped
 
 	def _map_axi_gp(self, *, num) -> dict:
 		manager, subordinate = self._pl_resources[f'axi_gp{num}']
@@ -350,27 +398,36 @@ class PS7(Elaboratable):
 				'o_EMIOPJTAGTDTN': Signal(),
 			}
 
-	def _map_sdio(self, m, *, num) -> dict:
+	def _map_sdio(self, m, *, platform, mio, num) -> dict:
 		sdio = self._ps_resources[f'sdio{num}']
 		if sdio is not None:
-			data_oe_n = Signal()
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(sdio))
 
-			m.d.comb += sdio.dat.oe.eq(~data_oe_n)
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = sdio, subsignal = subsignal)
 
-			return {
-				f'i_EMIOSDIO{num}CDN':    sdio.cd.i,
-				f'o_EMIOSDIO{num}CLK':    sdio.clk.o,
-				f'o_EMIOSDIO{num}CMDO':   sdio.cmd.o,
-				f'i_EMIOSDIO{num}DATAI':  sdio.dat.i,
-				f'o_EMIOSDIO{num}DATAO':  sdio.dat.o,
-				f'o_EMIOSDIO{num}DATATN': data_oe_n,
-			}
-		else:
-			return {
-				f'i_EMIOSDIO{num}CDN':    Signal(),
-				f'o_EMIOSDIO{num}CLK':    Signal(),
-				f'o_EMIOSDIO{num}CMDO':   Signal(),
-				f'i_EMIOSDIO{num}DATAI':  Signal(4),
-				f'o_EMIOSDIO{num}DATAO':  Signal(4),
-				f'o_EMIOSDIO{num}DATATN': Signal(4),
+			if unmapped:
+				data_oe_n = Signal()
+
+				m.d.comb += sdio.dat.oe.eq(~data_oe_n)
+
+				return {
+					f'i_EMIOSDIO{num}CDN':    sdio.cd.i,
+					f'o_EMIOSDIO{num}CLK':    sdio.clk.o,
+					f'o_EMIOSDIO{num}CMDO':   sdio.cmd.o,
+					f'i_EMIOSDIO{num}DATAI':  sdio.dat.i,
+					f'o_EMIOSDIO{num}DATAO':  sdio.dat.o,
+					f'o_EMIOSDIO{num}DATATN': data_oe_n,
+				}
+
+		return {
+			f'i_EMIOSDIO{num}CDN':    Signal(),
+			f'o_EMIOSDIO{num}CLK':    Signal(),
+			f'o_EMIOSDIO{num}CMDO':   Signal(),
+			f'i_EMIOSDIO{num}DATAI':  Signal(4),
+			f'o_EMIOSDIO{num}DATAO':  Signal(4),
+			f'o_EMIOSDIO{num}DATATN': Signal(4),
+		}
 			}
