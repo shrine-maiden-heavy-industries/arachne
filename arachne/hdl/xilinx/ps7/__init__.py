@@ -152,6 +152,9 @@ class PS7(Elaboratable):
 			# SDIO (SDCard interfaces)
 			**self._map_sdio(m, platform = platform, mio = mio, num = 0),
 			**self._map_sdio(m, platform = platform, mio = mio, num = 1),
+			# USB
+			**self._map_usb(m, platform = platform, mio = mio, num = 0),
+			**self._map_usb(m, platform = platform, mio = mio, num = 1),
 		)
 		return m
 
@@ -430,4 +433,34 @@ class PS7(Elaboratable):
 			f'o_EMIOSDIO{num}DATAO':  Signal(4),
 			f'o_EMIOSDIO{num}DATATN': Signal(4),
 		}
+
+	def _map_usb(self, m, *, platform, mio, num) -> dict:
+		usb = self._ps_resources[f'usb{num}']
+		if usb is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(usb))
+			port_ind_ctrl = Signal(2)
+			vbus_pwr_select = Signal()
+			vbus_pwr_fault = Signal()
+
+			for subsignal in resource.ios:
+				if subsignal.name == 'ind_ctl':
+					m.d.comb += usb.ind_ctl.eq(port_ind_ctrl)
+				elif subsignal.name == 'vbus_select':
+					m.d.comb += usb.vbus_select.eq(vbus_pwr_select)
+				elif subsignal.name == 'vbus_fault':
+					m.d.comb += vbus_pwr_fault.eq(usb.vbus_fault)
+				else:
+					self._map_mio(m, mapping = mapping, mio = mio, resource = usb, subsignal = subsignal)
+
+			return {
+				f'o_EMIOUSB{num}PORTINDCTL': port_ind_ctrl,
+				f'o_EMIOUSB{num}VBUSPWRSELECT': vbus_pwr_select,
+				f'i_EMIOUSB{num}VBUSPWRFAULT': vbus_pwr_fault,
+			}
+		else:
+			return {
+				f'o_EMIOUSB{num}PORTINDCTL': Signal(2),
+				f'o_EMIOUSB{num}VBUSPWRSELECT': Signal(),
+				f'i_EMIOUSB{num}VBUSPWRFAULT': Signal(),
 			}
