@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from nmigen import *
+from nmigen       import *
 from nmigen.build import *
 
-from nmigen.vendor.xilinx_ultrascale import XilinxUltraScalePlatform
+from nmigen.vendor.xilinx_ultrascale  import XilinxUltraScalePlatform
+
+from arachne.hdl.xilinx.ps8.resources import *
 
 __all__ = (
 	'KriaK26CSOMPlatform',
