@@ -1,8 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from nmigen      import *
+from nmigen     import *
 
-from .mio        import *
+from ....util   import dbg
+
+from .mio       import *
+from .resources import PS8Resource
 
 __all__ = (
 	'PS8',
@@ -31,29 +34,16 @@ class PS8(Elaboratable):
 	"""Xilinx Zynq UltraScale+ MPSoC PS Block
 
 	"""
-	def __init__(self, **kwargs):
-		self._ps_resources = {
-
-		}
-
-		self._pl_resources = {
-
-		}
-
-	def add_resource(self, *, name, resource):
-		if name not in self._ps_resources:
-			raise ValueError('Resource name not valid')
-		elif self._ps_resources[name] is not None:
-			raise ValueError('Resource already assigned, refusing to reassign to a new resource')
-		self._ps_resources[name] = resource
-
-	def get_resource(self, *, name) -> Record:
-		if name not in self._pl_resources:
-			raise ValueError('Resource name not valid')
-
-		return self._pl_resources[name]
+	def __init__(self, *, resources = [], **kwargs):
+		self._ps_resources = [ *resources ]
 
 	def elaborate(self, platform) -> Module:
+		# check to see if there is a `ps8resources` block for us
+		if hasattr(platform, 'ps8resources'):
+			self._ps_resources.append(*platform.ps8resources)
+
+		self._validate_ps_resources()
+
 		m = Module()
 
 
@@ -62,3 +52,8 @@ class PS8(Elaboratable):
 		)
 
 		return m
+
+	def _validate_ps_resources(self):
+		if any(map(lambda r: not isinstance(r, PS8Resource), self._ps_resources)):
+			raise ValueError('Non-PS8Resource found in ps resources block')
+
