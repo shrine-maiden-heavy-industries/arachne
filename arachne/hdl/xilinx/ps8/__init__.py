@@ -44,11 +44,14 @@ class PS8(Elaboratable):
 
 		self._validate_ps_resources()
 
-		m = Module()
+		mappings = self._generate_mappings()
 
+		m = Module()
 
 		m.submodules.ps8 = Instance(
 			'PS8',
+			# unpack the generated mappings into the instance
+			**mappings,
 		)
 
 		return m
@@ -56,4 +59,13 @@ class PS8(Elaboratable):
 	def _validate_ps_resources(self):
 		if any(map(lambda r: not isinstance(r, PS8Resource), self._ps_resources)):
 			raise ValueError('Non-PS8Resource found in ps resources block')
+
+	def _generate_mappings(self):
+		mappings = {}
+
+		if len(self._ps_resources) > 0:
+			for res in self._ps_resources:
+				mappings.update(res.generate_mapping())
+
+		return mappings
 
