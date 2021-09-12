@@ -153,6 +153,9 @@ class PS7(Elaboratable):
 			# SDIO (SDCard interfaces)
 			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 0),
 			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 1),
+			# SPI
+			**self._map_spi(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_spi(m, platform = platform, mio = fixed_io, num = 1),
 			# UART
 			**self._map_uart(m, platform = platform, mio = fixed_io, num = 0),
 			**self._map_uart(m, platform = platform, mio = fixed_io, num = 1),
@@ -610,6 +613,87 @@ class PS7(Elaboratable):
 			f'i_EMIOSDIO{num}DATAI':  Signal(4),
 			f'o_EMIOSDIO{num}DATAO':  Signal(4),
 			f'o_EMIOSDIO{num}DATATN': Signal(4),
+		}
+
+	def _map_spi(self, m, *, platform, mio, num) -> dict:
+		spi = self._ps_resources[f'spi{num}']
+		if spi is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(spi))
+
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = spi, subsignal = subsignal)
+
+			if unmapped:
+				cs_i = Signal()
+				cs_o = Signal(2)
+				cs_oe = Signal()
+				clk_i = Signal()
+				clk_o = Signal()
+				clk_oe = Signal()
+				copi_i = Signal()
+				copi_o = Signal()
+				copi_oe = Signal()
+				cipo_i = Signal()
+				cipo_o = Signal()
+				cipo_oe = Signal()
+
+				# Controller mode
+				if hasattr(spi.cs, 'o'):
+					if len(spi.cs.o) > 2:
+						raise AssertionError('Too many chip selects for PS SPI block - '
+							f'have 2, requested {len(spi.cs.o)}')
+					m.d.comb += [
+						spi.cs.o.eq(cs_o[:len(spi.cs.o)]),
+						spi.clk.o.eq(clk_o)
+					]
+					if hasattr(spi, 'copi'):
+						m.d.comb += spi.copi.o.eq(copi_o)
+					if hasattr(spi, 'cipo'):
+						m.d.comb += cipo_i.eq(spi.cipo.i)
+				# Peripheral mode
+				else:
+					m.d.comb += [
+						cs_i.eq(spi.cs.i),
+						clk_i.eq(spi.clk.i)
+					]
+					if hasattr(spi, 'copi'):
+						m.d.comb += copi_i.eq(spi.copi.i)
+					if hasattr(spi, 'cipo'):
+						m.d.comb += [
+							spi.cipo.o.eq(cipo_o),
+							spi.cipo.oe.eq(cipo_oe),
+						]
+
+				return {
+					f'i_EMIOSPI{num}SSIN':   cs_i,
+					f'o_EMIOSPI{num}SSON':   cs_o,
+					f'o_EMIOSPI{num}SSNTN':  cs_oe,
+					f'i_EMIOSPI{num}SCLKI':  clk_i,
+					f'o_EMIOSPI{num}SCLKO':  clk_o,
+					f'o_EMIOSPI{num}SCLKTN': clk_oe,
+					f'i_EMIOSPI{num}MI':     cipo_i,
+					f'o_EMIOSPI{num}MO':     copi_o,
+					f'o_EMIOSPI{num}MOTN':   copi_oe,
+					f'i_EMIOSPI{num}SI':     copi_i,
+					f'o_EMIOSPI{num}SO':     cipo_o,
+					f'o_EMIOSPI{num}STN':    cipo_oe,
+				}
+
+		return {
+			f'i_EMIOSPI{num}SSIN':   Signal(),
+			f'o_EMIOSPI{num}SSON':   Signal(2),
+			f'o_EMIOSPI{num}SSNTN':  Signal(),
+			f'i_EMIOSPI{num}SCLKI':  Signal(),
+			f'o_EMIOSPI{num}SCLKO':  Signal(),
+			f'o_EMIOSPI{num}SCLKTN': Signal(),
+			f'i_EMIOSPI{num}MI':     Signal(),
+			f'o_EMIOSPI{num}MO':     Signal(),
+			f'o_EMIOSPI{num}MOTN':   Signal(),
+			f'i_EMIOSPI{num}SI':     Signal(),
+			f'o_EMIOSPI{num}SO':     Signal(),
+			f'o_EMIOSPI{num}STN':    Signal(),
 		}
 
 	def _map_uart(self, m, *, platform, mio, num) -> dict:
