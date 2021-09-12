@@ -119,12 +119,7 @@ class PS7(Elaboratable):
 
 	def elaborate(self, platform) -> Module:
 		m = Module()
-
-		mio = Signal(54)
-		if platform.package.lower() == 'clg255':
-			pass
-		else:
-			pass
+		mio = Signal(54, reset_less = True)
 
 		ddr_map, ddr_adaptor = self._map_ddr()
 		if ddr_adaptor is not None:
@@ -148,7 +143,7 @@ class PS7(Elaboratable):
 			# DDR3 Memory
 			**ddr_map,
 			# JTAG
-			**self._map_jtag(m),
+			**self._map_jtag(m, platform = platform, mio = mio),
 			# SDIO (SDCard interfaces)
 			**self._map_sdio(m, platform = platform, mio = mio, num = 0),
 			**self._map_sdio(m, platform = platform, mio = mio, num = 1),
@@ -378,28 +373,35 @@ class PS7(Elaboratable):
 				'io_DDRVRN':  Signal(),
 			}, None)
 
-	def _map_jtag(self, m) -> dict:
-		if self._ps_resources['jtag'] is not None:
-			jtag = self._ps_resources['jtag']
-			tdo_oe_n = Signal()
+	def _map_jtag(self, m, *, platform, mio) -> dict:
+		jtag = self._ps_resources['jtag']
+		if jtag is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(jtag))
 
-			m.d.comb += jtag.tdo.oe.eq(~tdo_oe_n)
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = jtag, subsignal = subsignal)
 
-			return {
-				'i_EMIOPJTAGTCK':  jtag.tck.i,
-				'i_EMIOPJTAGTMS':  jtag.tms.i,
-				'i_EMIOPJTAGTDI':  jtag.tdi.i,
-				'o_EMIOPJTAGTDO':  jtag.tdo.o,
-				'o_EMIOPJTAGTDTN': tdo_oe_n,
-			}
-		else:
-			return {
-				'i_EMIOPJTAGTCK':  Signal(),
-				'i_EMIOPJTAGTMS':  Signal(),
-				'i_EMIOPJTAGTDI':  Signal(),
-				'o_EMIOPJTAGTDO':  Signal(),
-				'o_EMIOPJTAGTDTN': Signal(),
-			}
+			if unmapped:
+				tdo_oe_n = Signal()
+
+				m.d.comb += jtag.tdo.oe.eq(~tdo_oe_n)
+
+				return {
+					'i_EMIOPJTAGTCK':  jtag.tck.i,
+					'i_EMIOPJTAGTMS':  jtag.tms.i,
+					'i_EMIOPJTAGTDI':  jtag.tdi.i,
+					'o_EMIOPJTAGTDO':  jtag.tdo.o,
+					'o_EMIOPJTAGTDTN': tdo_oe_n,
+				}
+		return {
+			'i_EMIOPJTAGTCK':  Signal(),
+			'i_EMIOPJTAGTMS':  Signal(),
+			'i_EMIOPJTAGTDI':  Signal(),
+			'o_EMIOPJTAGTDO':  Signal(),
+			'o_EMIOPJTAGTDTN': Signal(),
+		}
 
 	def _map_sdio(self, m, *, platform, mio, num) -> dict:
 		sdio = self._ps_resources[f'sdio{num}']
