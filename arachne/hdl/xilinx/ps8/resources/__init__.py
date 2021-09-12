@@ -5,7 +5,7 @@ from .can    import CANResource
 from .csu    import CSUResource
 from .ddr    import DDRResource, DDRType, DDRModuleType
 from .dp     import DPResource
-from .gem    import GEMResource
+from .eth    import ETHResource
 from .gpio   import GPIOResource
 from .i2c    import I2CResource
 from .nand   import NANDResource
@@ -29,7 +29,7 @@ __all__ = (
 	'CSUResource',
 	'DDRResource', 'DDRType', 'DDRModuleType',
 	'DPResource',
-	'GEMResource',
+	'ETHResource',
 	'GPIOResource',
 	'I2CResource',
 	'NANDResource',

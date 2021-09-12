@@ -5,11 +5,11 @@ from nmigen.build import *
 from .common      import PS8Resource
 
 __all__ = (
-	'GEMResource',
+	'ETHResource',
 )
 
-class GEMResource(PS8Resource):
-	name = 'gem'
+class ETHResource(PS8Resource):
+	name = 'eth'
 	claimable_mio = [ ]
 
 	def __init__(self, num):
