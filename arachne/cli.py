@@ -8,21 +8,21 @@ def _register_core_cli(parser):
 	# Logging options and the like
 	display = parser.add_argument_group('Arachne Display Settings')
 	verbosity = display.add_mutually_exclusive_group()
-	verbosity_opts.add_argument(
+	verbosity.add_argument(
 		'--verbose',
 		dest   = 'arachne_display_verbose',
 		action = 'store_true',
 		help   = 'Enable verbose debug logging'
 	)
 
-	verbosity_opts.add_argument(
+	verbosity.add_argument(
 		'--debug',
 		dest   = 'arachne_display_debug',
 		action = 'store_true',
 		help   = 'Enable debug logging. THIS IS NOISY'
 	)
 
-	verbosity_opts.add_argument(
+	verbosity.add_argument(
 		'--quiet',
 		dest   = 'arachne_display_quiet',
 		action = 'store_true',
