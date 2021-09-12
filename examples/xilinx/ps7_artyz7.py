@@ -82,11 +82,11 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 		EthernetResource(0,
 			rxck = 'B17',
 			rxd =  'D11 A16 F15 A15',
-			#rxctl = 'D13',
+			rx_ctl = 'D13',
 
 			txck = 'A19',
-			txd =  'E14 B18 D10 A16',
-			#txctl = 'F14',
+			txd =  'E14 B18 D10 A17',
+			tx_ctl = 'F14',
 
 			mdc =  'C10',
 			mdio = 'C11',
