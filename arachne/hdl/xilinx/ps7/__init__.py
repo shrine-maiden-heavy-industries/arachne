@@ -26,8 +26,8 @@ class PS7(Elaboratable):
 			'dma2':  kwargs.get('dma2', None),
 			'dma3':  kwargs.get('dma3', None),
 			'ddr':   kwargs.get('ddr', None),
-			'emac0': kwargs.get('emac0', None),
-			'emac1': kwargs.get('emac1', None),
+			'eth0':  kwargs.get('eth0', None),
+			'eth1':  kwargs.get('eth1', None),
 			'i2c0':  kwargs.get('i2c0', None),
 			'i2c1':  kwargs.get('i2c1', None),
 			'jtag':  kwargs.get('jtag', None),
@@ -142,6 +142,9 @@ class PS7(Elaboratable):
 			**self._map_axi_hp(num = 3),
 			# DDR3 Memory
 			**ddr_map,
+			# Ethernet
+			**self._map_eth(m, platform = platform, mio = mio, num = 0),
+			**self._map_eth(m, platform = platform, mio = mio, num = 1),
 			# JTAG
 			**self._map_jtag(m, platform = platform, mio = mio),
 			# SDIO (SDCard interfaces)
@@ -376,6 +379,123 @@ class PS7(Elaboratable):
 				'io_DDRVRN':  Signal(),
 			}, None)
 
+	def _map_eth(self, m, *, platform, mio, num) -> dict:
+		eth = self._ps_resources[f'eth{num}']
+		if eth is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(eth))
+
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = eth, subsignal = subsignal)
+
+			if unmapped:
+				rx_domain = f'eth{num}_rx'
+				tx_domain = f'eth{num}_tx'
+
+				rx_clk = Signal()
+				rx = Signal(8)
+				rx_dv = Signal()
+				rx_err = Signal()
+
+				tx_clk = Signal()
+				tx = Signal(8)
+				tx_en = Signal()
+				tx_err = Signal()
+
+				m.domains += ClockDomain(rx_domain)
+				m.domains += ClockDomain(tx_domain)
+
+				m.d.comb += [
+					ClockSignal(rx_domain).eq(rx_clk),
+					ClockSignal(tx_domain).eq(tx_clk),
+				]
+
+				# Apparently the Ethernet is miss-timed and requires a pipeline stage inserting.
+				# RGMII
+				if hasattr(eth, 'rx_ctl'):
+					converter = GMIItoRGMII(rgmii = eth)
+					m.submodules += converter
+
+					m.d.comb += [
+						rx_clk.eq(converter.rx_clk),
+						converter.tx_clk.eq(tx_clk),
+					]
+
+					m.d[rx_domain] += [
+						rx.eq(converter.rx),
+						rx_dv.eq(converter.rx_dv),
+						rx_err.eq(converter.rx_err),
+					]
+
+					m.d[tx_domain] += [
+						converter.tx.eq(tx),
+						converter.tx_en.eq(tx_en),
+						converter.tx_err.eq(tx_err),
+					]
+				else:
+				# GMII
+					m.d.comb += [
+						rx_clk.eq(eth.rx_clk.i),
+						eth.tx_clk.o.eq(tx_clk),
+					]
+
+					m.d[rx_domain] += [
+						rx.eq(eth.rx.i),
+						rx_dv.eq(eth.rx_dv.i),
+						rx_err.eq(eth.rx_err.i),
+					]
+
+					m.d[tx_domain] += [
+						eth.tx.o.eq(tx),
+						eth.tx_en.o.eq(tx_en),
+						eth.tx_err.o.eq(tx_err),
+						# col
+						# crs
+					]
+
+				mdc = eth.mdc.o if hasattr(eth, 'mdc') else Signal()
+				mdio_i = eth.mdio.i if hasattr(eth, 'mdio') else Signal()
+				mdio_o = eth.mdio.o if hasattr(eth, 'mdio') else Signal()
+				mdio_oe_n = Signal()
+
+				if hasattr(eth, 'mdio'):
+					m.d.comb += eth.mdio.oe.eq(~mdio_oe_n)
+
+				return {
+					f'i_EMIOENET{num}GMIIRXCLK': rx_clk,
+					f'i_EMIOENET{num}GMIIRXD':   rx,
+					f'i_EMIOENET{num}GMIIRXDV':  rx_dv,
+					f'i_EMIOENET{num}GMIIRXER':  rx_err,
+
+					f'o_EMIOENET{num}GMIITXCLK': tx_clk,
+					f'o_EMIOENET{num}GMIITXD':   tx,
+					f'o_EMIOENET{num}GMIITXEN':  tx_en,
+					f'o_EMIOENeT{num}GMIITXER':  tx_err,
+
+					f'o_EMIOENET{num}MDIOMDC':   mdc,
+					f'i_EMIOENET{num}MDIOI':     mdio_i,
+					f'o_EMIOENET{num}MDIOO':     mdio_o,
+					f'o_EMIOENET{num}MDIOTN':    mdio_oe_n,
+				}
+
+		return {
+			f'i_EMIOENET{num}GMIIRXCLK': Signal(),
+			f'i_EMIOENET{num}GMIIRXD':   Signal(8),
+			f'i_EMIOENET{num}GMIIRXDV':  Signal(),
+			f'i_EMIOENET{num}GMIIRXER':  Signal(),
+
+			f'o_EMIOENET{num}GMIITXCLK': Signal(),
+			f'o_EMIOENET{num}GMIITXD':   Signal(8),
+			f'o_EMIOENET{num}GMIITXEN':  Signal(),
+			f'o_EMIOENET{num}GMIITXER':  Signal(),
+
+			f'o_EMIOENET{num}MDIOMDC':   Signal(),
+			f'i_EMIOENET{num}MDIOI':     Signal(),
+			f'o_EMIOENET{num}MDIOO':     Signal(),
+			f'o_EMIOENET{num}MDIOTN':    Signal(),
+		}
+
 	def _map_jtag(self, m, *, platform, mio) -> dict:
 		jtag = self._ps_resources['jtag']
 		if jtag is not None:
@@ -398,6 +518,7 @@ class PS7(Elaboratable):
 					'o_EMIOPJTAGTDO':  jtag.tdo.o,
 					'o_EMIOPJTAGTDTN': tdo_oe_n,
 				}
+
 		return {
 			'i_EMIOPJTAGTCK':  Signal(),
 			'i_EMIOPJTAGTMS':  Signal(),
@@ -468,6 +589,7 @@ class PS7(Elaboratable):
 					f'i_EMIOUART{num}DCDN': dcd_n,
 					f'i_EMIOUART{num}RIN':  ri_n,
 				}
+
 		return {
 			f'i_EMIOUART{num}RX':   Signal(),
 			f'o_EMIOUART{num}TX':   Signal(),
