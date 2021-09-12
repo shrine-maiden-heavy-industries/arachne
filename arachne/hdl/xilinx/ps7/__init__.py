@@ -140,6 +140,9 @@ class PS7(Elaboratable):
 			**self._map_axi_hp(num = 1),
 			**self._map_axi_hp(num = 2),
 			**self._map_axi_hp(num = 3),
+			# CAN
+			**self._map_can(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_can(m, platform = platform, mio = fixed_io, num = 1),
 			# DDR3 Memory
 			**ddr_map,
 			# Ethernet
@@ -348,6 +351,27 @@ class PS7(Elaboratable):
 			f'i_SAXI{name}AWLOCK':  bus.awlock,
 			# Write QoS
 			f'i_SAXI{name}AWQOS':   bus.awqos,
+		}
+
+	def _map_can(self, m, *, platform, mio, num) -> dict:
+		can = self._ps_resources[f'can{num}']
+		if can is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(can))
+
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = can, subsignal = subsignal)
+
+			if unmapped:
+				return {
+					f'i_EMIOCAN{num}PHYRX': can.rx.i,
+					f'o_EMIOCAN{num}PHYTX': can.tx.o,
+				}
+
+		return {
+			f'i_EMIOCAN{num}PHYRX': Signal(),
+			f'o_EMIOCAN{num}PHYTX': Signal(),
 		}
 
 	def _map_ddr(self) -> Tuple[dict, Elaboratable]:
