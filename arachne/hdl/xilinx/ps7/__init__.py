@@ -651,7 +651,7 @@ class PS7(Elaboratable):
 
 			if unmapped:
 				cs_i = Signal()
-				cs_o = Signal(2)
+				cs_o = Signal(3)
 				cs_oe = Signal()
 				clk_i = Signal()
 				clk_o = Signal()
@@ -665,9 +665,9 @@ class PS7(Elaboratable):
 
 				# Controller mode
 				if hasattr(spi.cs, 'o'):
-					if len(spi.cs.o) > 2:
+					if len(spi.cs.o) > 3:
 						raise AssertionError('Too many chip selects for PS SPI block - '
-							f'have 2, requested {len(spi.cs.o)}')
+							f'have 3, requested {len(spi.cs.o)}')
 					m.d.comb += [
 						spi.cs.o.eq(cs_o[:len(spi.cs.o)]),
 						spi.clk.o.eq(clk_o)
@@ -707,7 +707,7 @@ class PS7(Elaboratable):
 
 		return {
 			f'i_EMIOSPI{num}SSIN':   Signal(),
-			f'o_EMIOSPI{num}SSON':   Signal(2),
+			f'o_EMIOSPI{num}SSON':   Signal(3),
 			f'o_EMIOSPI{num}SSNTN':  Signal(),
 			f'i_EMIOSPI{num}SCLKI':  Signal(),
 			f'o_EMIOSPI{num}SCLKO':  Signal(),
