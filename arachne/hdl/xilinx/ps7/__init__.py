@@ -167,7 +167,7 @@ class PS7(Elaboratable):
 		# the outside world, which causes errors
 		mio = Signal.like(fixed_io)
 		for idx in range(len(mio)):
-			m.submodules += Instance(
+			m.submodules[f'mio_buf_{idx}'] = Instance(
 				'BIBUF',
 				io_PAD = mio[idx],
 				i_IO = fixed_io[idx],
