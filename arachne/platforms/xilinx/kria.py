@@ -22,14 +22,19 @@ class _KriaK26SOMPlatform(XilinxUltraScalePlatform):
 
 	"""
 
-	device      = 'xck26'
-	package     = 'sfvc784'
-	default_clk = 'clk_pspl'
-	speed_grade = '2lv'
+	device       = 'xck26'
+	package      = 'sfvc784'
+	default_clk  = 'clk_pspl'
+	speed_grade  = '2lv'
 
-	resources   = []
+	resources    = [
 
-	connectors = [
+	]
+
+	ps8resources = [
+	]
+
+	connectors   = [
 		Connector('som240_1', 0, {
 			# Row A
 			'som240_1_a3': 'A2',
