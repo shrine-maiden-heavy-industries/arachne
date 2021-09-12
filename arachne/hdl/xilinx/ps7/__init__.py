@@ -145,6 +145,9 @@ class PS7(Elaboratable):
 			# Ethernet
 			**self._map_eth(m, platform = platform, mio = fixed_io, num = 0),
 			**self._map_eth(m, platform = platform, mio = fixed_io, num = 1),
+			# I2C
+			**self._map_i2c(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_i2c(m, platform = platform, mio = fixed_io, num = 1),
 			# JTAG
 			**self._map_jtag(m, platform = platform, mio = fixed_io),
 			# SDIO (SDCard interfaces)
@@ -506,6 +509,43 @@ class PS7(Elaboratable):
 			f'i_EMIOENET{num}MDIOI':     Signal(),
 			f'o_EMIOENET{num}MDIOO':     Signal(),
 			f'o_EMIOENET{num}MDIOTN':    Signal(),
+		}
+
+	def _map_i2c(self, m, *, platform, mio, num) -> dict:
+		i2c = self._ps_resources[f'i2c{num}']
+		if i2c is not None:
+			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
+			resource = platform.lookup(*self._demap_resource(i2c))
+
+			unmapped = True
+			for subsignal in resource.ios:
+				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = i2c, subsignal = subsignal)
+
+			if unmapped:
+				scl_oe_n = Signal()
+				sda_oe_n = Signal()
+
+				m.d.comb += [
+					i2c.scl.oe.eq(~scl_oe_n),
+					i2c.sda.oe.eq(~sda_oe_n),
+				]
+
+				return  {
+					f'i_EMIOI2C{num}SCLI':  i2c.scl.i,
+					f'o_EMIOI2C{num}SCLO':  i2c.scl.o,
+					f'o_EMIOI2C{num}SCLTN': scl_oe_n,
+					f'i_EMIOI2C{num}SDAI':  i2c.sda.i,
+					f'o_EMIOI2C{num}SDAO':  i2c.sda.o,
+					f'o_EMIOI2C{num}SDATN': sda_oe_n,
+				}
+
+		return {
+			f'i_EMIOI2C{num}SCLI':  Signal(),
+			f'o_EMIOI2C{num}SCLO':  Signal(),
+			f'o_EMIOI2C{num}SCLTN': Signal(),
+			f'i_EMIOI2C{num}SDAI':  Signal(),
+			f'o_EMIOI2C{num}SDAO':  Signal(),
+			f'o_EMIOI2C{num}SDATN': Signal(),
 		}
 
 	def _map_jtag(self, m, *, platform, mio) -> dict:
