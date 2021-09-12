@@ -12,7 +12,7 @@ from pathlib import Path
 from sys import path
 path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from arachne.resources.interface import JTAGResource
+from arachne.resources.interface import *
 from arachne.hdl.xilinx.ps7 import *
 
 class ArtyZ720PS7Platform(ArtyZ720Platform):
@@ -77,6 +77,22 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 			dat3 =  'B15',
 			cd =    'B14',
 			attrs = Attrs(IOSTANDARD = 'LVCMOS18')
+		),
+
+		EthernetResource(0,
+			rxck = 'B17',
+			rxd =  'D11 A16 F15 A15',
+			#rxctl = 'D13',
+
+			txck = 'A19',
+			txd =  'E14 B18 D10 A16',
+			#txctl = 'F14',
+
+			mdc =  'C10',
+			mdio = 'C11',
+
+			attrs = Attrs(IOSTANDARD = 'LVCMOS18'),
+			mdio_attrs = Attrs(IOSTANDARD = 'LVCMOS18')
 		),
 	]
 
@@ -207,7 +223,9 @@ class System(Elaboratable):
 
 		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		#ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
+		ps7.add_resource(name = 'eth0', resource = platform.request('eth'))
 		ps7.add_resource(name = 'usb0', resource = platform.request('usb'))
+		ps7.add_resource(name = 'uart0', resource = platform.request('uart'))
 		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit'))
 
 		return m
