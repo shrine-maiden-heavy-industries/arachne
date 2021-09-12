@@ -30,12 +30,17 @@ def _validate_data_mode(mode, data_mode):
 
 
 class QSPIResource(PS8Resource):
+	name = 'qspi'
+
 	def __init__(self, *, mode, data_mode, feedback_clk = False):
 		_validate_data_mode(mode, data_mode)
 
 		self.mode         = mode
 		self.data_mode    = data_mode
 		self.feedback_clk = feedback_clk
+
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
 		raise NotImplementedError # :nocov:

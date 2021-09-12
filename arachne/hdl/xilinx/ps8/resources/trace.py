@@ -9,8 +9,13 @@ __all__ = (
 )
 
 class TraceResource(PS8Resource):
+	name = 'trace'
+
 	def __init__(self):
 		pass
+
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
 		raise NotImplementedError # :nocov:

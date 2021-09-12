@@ -11,10 +11,14 @@ __all__ = (
 )
 
 class PS8Resource(Subsignal, metaclass = ABCMeta):
-	def __init__(self, name, number, *args):
-		super().__init__(name, *args)
+	name = abstractproperty()
 
-		self.number = number
+	def __init__(self, *args):
+		pass
+
+	@abstractmethod
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	@abstractmethod
 	def generate_mapping(self, **kwargs):

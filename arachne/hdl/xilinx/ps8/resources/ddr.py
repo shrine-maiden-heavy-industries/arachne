@@ -79,11 +79,16 @@ def _validate_ecc(ddr_type, ecc):
 
 
 class DDRResource(PS8Resource):
+	name = 'ddr'
+
 	def __init__(self, *, frq, ddr_type, module_type, width, ecc):
 		_validate_freq(ddr_type, frq)
 		_validate_module(ddr_type, module_type)
 		_validate_width(ddr_type, width)
 		_validate_ecc(ddr_type, ecc)
+
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
 		raise NotImplementedError # :nocov:

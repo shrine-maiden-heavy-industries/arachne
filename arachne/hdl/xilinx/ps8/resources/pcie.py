@@ -24,8 +24,13 @@ class PCIELaneWidth(enum.Enum):
 	x4 = enum.auto()
 
 class PCIEResource(PS8Resource):
+	name = 'pcie'
+
 	def __init__(self):
 		pass
+
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
 		raise NotImplementedError # :nocov:

@@ -9,8 +9,13 @@ __all__ = (
 )
 
 class DPResource(PS8Resource):
+	name = 'dp'
+
 	def __init__(self):
 		pass
+
+	def used_mio(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
 		raise NotImplementedError # :nocov:
