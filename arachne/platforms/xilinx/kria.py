@@ -32,6 +32,10 @@ class _KriaK26SOMPlatform(XilinxUltraScalePlatform):
 	]
 
 	ps8resources = [
+		QSPIResource(
+			mode = QSPIMode.Single,
+			data_mode = QSPIDataMode.x4
+		),
 	]
 
 	connectors   = [
