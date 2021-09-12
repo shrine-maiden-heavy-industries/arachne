@@ -180,18 +180,25 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 				return f'mio[{bit}]'
 
 	def iter_port_constraints_bits(self):
+		from arachne.hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
+		mio_attrs = {}
+
 		for port_name, pin_names, attrs in self.iter_port_constraints():
 			if len(pin_names) == 1:
 				if pin_names[0] in self._mapping['mio']:
-					yield self._mio_translate(pin_names[0]), pin_names[0], attrs
+					mio_attrs[pin_names[0]] = attrs
 				else:
 					yield port_name, pin_names[0], attrs
 			else:
 				for bit, pin_name in enumerate(pin_names):
 					if pin_name in self._mapping['mio']:
-						yield self._mio_translate(pin_name), pin_name, attrs
+						mio_attrs[pin_name] = attrs
 					else:
 						yield f'{port_name}[{bit}]', pin_name, attrs
+
+		mapping = _PS7_MIO_MAPPING[self.device, self.package]['mio']
+		for bit, pin_name in mapping:
+			yield f'mio[{bit}]', pin_name, mio_attrs.get(pin_name, {}) # TODO: IO directions and voltages..?
 
 class System(Elaboratable):
 	def elaborate(self, platform):
