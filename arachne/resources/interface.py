@@ -4,7 +4,9 @@ from nmigen.build import *
 from .            import assert_width
 
 __all__ = (
-	'JTAGResource', 'EthernetResource'
+	'JTAGResource',
+	'EthernetResource',
+	'CANResource',
 )
 
 def JTAGResource(*args, tck, tms, tdi, tdo, conn = None, attrs = None):
@@ -57,3 +59,12 @@ def EthernetResource(*args, rxck, rxd, txck, txd, rx_dv = None, rx_err = None, r
 	if attrs is not None:
 		ios.append(attrs)
 	return Resource.family(*args, default_name = 'eth', ios = ios)
+
+def CANResource(*args, rx, tx, conn = None, attrs = None):
+	ios = [
+		Subsignal('rx', Pins(rx, dir = 'o', conn = conn)),
+		Subsignal('tx', Pins(tx, dir = 'o', conn = conn)),
+	]
+	if attrs is not None:
+		ios.append(attrs)
+	return Resource.family(*args, default_name = 'can', ios = ios)
