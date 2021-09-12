@@ -44,10 +44,10 @@ arachne.hdl.xilinx.ps8.resources.dp module
    :undoc-members:
    :show-inheritance:
 
-arachne.hdl.xilinx.ps8.resources.gem module
+arachne.hdl.xilinx.ps8.resources.eth module
 -------------------------------------------
 
-.. automodule:: arachne.hdl.xilinx.ps8.resources.gem
+.. automodule:: arachne.hdl.xilinx.ps8.resources.eth
    :members:
    :undoc-members:
    :show-inheritance:
