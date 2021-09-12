@@ -33,6 +33,8 @@ class QSPIResource(PS8Resource):
 	name = 'qspi'
 
 	def __init__(self, *, mode, data_mode, feedback_clk = False):
+		super().__init__(0, 0)
+
 		_validate_data_mode(mode, data_mode)
 
 		self.mode         = mode

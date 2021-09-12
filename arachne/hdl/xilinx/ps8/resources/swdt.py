@@ -12,8 +12,7 @@ class SWDTResource(PS8Resource):
 	name = 'swdt'
 
 	def __init__(self, num):
-		if num > 1:
-			raise ValueError(f'PS8 Only has swdt0..1, not {num}')
+		super().__init__(num, 1)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:

@@ -27,7 +27,7 @@ class PCIEResource(PS8Resource):
 	name = 'pcie'
 
 	def __init__(self):
-		pass
+		super().__init__(0, 0)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:

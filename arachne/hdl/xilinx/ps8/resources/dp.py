@@ -12,7 +12,7 @@ class DPResource(PS8Resource):
 	name = 'dp'
 
 	def __init__(self):
-		pass
+		super().__init__(0, 0)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:

@@ -82,6 +82,8 @@ class DDRResource(PS8Resource):
 	name = 'ddr'
 
 	def __init__(self, *, frq, ddr_type, module_type, width, ecc):
+		super().__init__(0, 0)
+
 		_validate_freq(ddr_type, frq)
 		_validate_module(ddr_type, module_type)
 		_validate_width(ddr_type, width)

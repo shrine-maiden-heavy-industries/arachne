@@ -13,8 +13,10 @@ __all__ = (
 class PS8Resource(Subsignal, metaclass = ABCMeta):
 	name = abstractproperty()
 
-	def __init__(self, *args):
-		pass
+	def __init__(self, num, rnum_max, *args):
+		if num > rnum_max:
+			raise ValueError(f'PS8 Only has {self.name}0..{rnum_max}, not {num}')
+
 
 	@abstractmethod
 	def used_mio(self, **kwargs):
