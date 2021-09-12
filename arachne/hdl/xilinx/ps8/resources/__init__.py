@@ -12,7 +12,7 @@ from .nand   import NANDResource
 from .pcie   import PCIEResource, PCIEPortType, PCIEPortType
 from .pjtag  import PJTAGResource
 from .pmu    import PMUResource
-from .qspi   import QSPIResource
+from .qspi   import QSPIResource, QSPIMode, QSPIDataMode
 from .sata   import SATAResource
 from .sd     import SDResource
 from .spi    import SPIResource
@@ -36,7 +36,7 @@ __all__ = (
 	'PCIEResource', 'PCIEPortType', 'PCIEPortType',
 	'PJTAGResource',
 	'PMUResource',
-	'QSPIResource',
+	'QSPIResource', 'QSPIMode', 'QSPIDataMode',
 	'SATAResource',
 	'SDResource',
 	'SPIResource',
