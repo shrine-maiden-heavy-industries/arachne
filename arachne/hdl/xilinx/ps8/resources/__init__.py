@@ -3,7 +3,7 @@ from .common import PS8Resource
 
 from .can    import CANResource
 from .csu    import CSUResource
-from .ddr    import DDRResource
+from .ddr    import DDRResource, DDRType, DDRModuleType
 from .dp     import DPResource
 from .gem    import GEMResource
 from .gpio   import GPIOResource
@@ -27,7 +27,7 @@ __all__ = (
 
 	'CANResource',
 	'CSUResource',
-	'DDRResource',
+	'DDRResource', 'DDRType', 'DDRModuleType',
 	'DPResource',
 	'GEMResource',
 	'GPIOResource',

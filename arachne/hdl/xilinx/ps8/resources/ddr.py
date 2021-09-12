@@ -8,6 +8,8 @@ from .common      import PS8Resource
 
 __all__ = (
 	'DDRResource',
+	'DDRType',
+	'DDRModuleType',
 )
 
 @enum.unique
