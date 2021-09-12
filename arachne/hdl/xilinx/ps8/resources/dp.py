@@ -8,7 +8,9 @@ __all__ = (
 	'DPResource',
 )
 
-def DPResource():
-	io = []
+class DPResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('dp', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

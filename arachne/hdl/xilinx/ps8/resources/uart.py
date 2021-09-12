@@ -8,10 +8,11 @@ __all__ = (
 	'UARTResource',
 )
 
-def UARTResource(num):
-	if num > 1:
-		raise ValueError(f'PS8 Only has uart0..1, not {num}')
+class UARTResource(PS8Resource):
+	def __init__(self, num):
+		if num > 1:
+			raise ValueError(f'PS8 Only has uart0..1, not {num}')
 
-	io = []
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
-	return PS8Resource('uart', num, *io, Attrs(IOSTANDARD="LVCMOS33"))

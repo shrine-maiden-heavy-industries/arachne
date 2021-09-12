@@ -9,7 +9,9 @@ __all__ = (
 )
 
 
-def PJTAGResource():
-	io = []
+class PJTAGResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('pjtag', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

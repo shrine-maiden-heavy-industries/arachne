@@ -8,7 +8,9 @@ __all__ = (
 	'PMUResource',
 )
 
-def PMUResource():
-	io = []
+class PMUResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('pmu', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

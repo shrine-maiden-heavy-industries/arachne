@@ -8,7 +8,9 @@ __all__ = (
 	'SATAResource',
 )
 
-def SATAResource():
-	io = []
+class SATAResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('sata', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

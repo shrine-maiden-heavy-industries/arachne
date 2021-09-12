@@ -8,10 +8,10 @@ __all__ = (
 	'GEMResource',
 )
 
-def GEMResource(num):
-	if num > 3:
-		raise ValueError(f'PS8 Only has gem0..3, not {num}')
+class GEMResource(PS8Resource):
+	def __init__(self, num):
+		if num > 3:
+			raise ValueError(f'PS8 Only has gem0..3, not {num}')
 
-	io = []
-
-	return PS8Resource('gem', num, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

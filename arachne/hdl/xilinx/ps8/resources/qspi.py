@@ -8,7 +8,9 @@ __all__ = (
 	'QSPIResource',
 )
 
-def QSPIResource():
-	io = []
+class QSPIResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('qspi', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

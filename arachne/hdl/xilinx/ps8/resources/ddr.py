@@ -78,12 +78,12 @@ def _validate_ecc(ddr_type, ecc):
 
 
 
-def DDRResource(*, frq, ddr_type, module_type, width, ecc):
-	_validate_freq(ddr_type, frq)
-	_validate_module(ddr_type, module_type)
-	_validate_width(ddr_type, width)
-	_validate_ecc(ddr_type, ecc)
+class DDRResource(PS8Resource):
+	def __init__(self, *, frq, ddr_type, module_type, width, ecc):
+		_validate_freq(ddr_type, frq)
+		_validate_module(ddr_type, module_type)
+		_validate_width(ddr_type, width)
+		_validate_ecc(ddr_type, ecc)
 
-	io = []
-
-	return PS8Resource('can', num, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

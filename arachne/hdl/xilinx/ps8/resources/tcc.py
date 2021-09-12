@@ -9,10 +9,11 @@ __all__ = (
 )
 
 
-def TCCResource(num):
-	if num > 3:
-		raise ValueError(f'PS8 Only has tcc0..3, not {num}')
+class TCCResource(PS8Resource):
+	def __init__(self, num):
+		if num > 3:
+			raise ValueError(f'PS8 Only has tcc0..3, not {num}')
 
-	io = []
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:
 
-	return PS8Resource('tcc', num, *io, Attrs(IOSTANDARD="LVCMOS33"))

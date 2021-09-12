@@ -8,7 +8,9 @@ __all__ = (
 	'TraceResource',
 )
 
-def TraceResource():
-	io = []
+class TraceResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('trace', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

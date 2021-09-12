@@ -8,10 +8,10 @@ __all__ = (
 	'I2CResource',
 )
 
-def I2CResource(num):
-	if num > 1:
-		raise ValueError(f'PS8 Only has i2c0..1, not {num}')
+class I2CResource(PS8Resource):
+	def __init__(self, num):
+		if num > 1:
+			raise ValueError(f'PS8 Only has i2c0..1, not {num}')
 
-	io = []
-
-	return PS8Resource('i2c', num, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

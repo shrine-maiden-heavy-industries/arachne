@@ -23,7 +23,9 @@ class PCIELaneWidth(enum.Enum):
 	x2 = enum.auto()
 	x4 = enum.auto()
 
-def PCIEResource(*, rst, ):
-	io = []
+class PCIEResource(PS8Resource):
+	def __init__(self):
+		pass
 
-	return PS8Resource('pcie', 0, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:

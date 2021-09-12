@@ -8,10 +8,10 @@ __all__ = (
 	'SPIResource',
 )
 
-def SPIResource(num):
-	if num > 1:
-		raise ValueError(f'PS8 Only has spi0..1, not {num}')
+class SPIResource(PS8Resource):
+	def __init__(self, num):
+		if num > 1:
+			raise ValueError(f'PS8 Only has spi0..1, not {num}')
 
-	io = []
-
-	return PS8Resource('spi', num, *io, Attrs(IOSTANDARD="LVCMOS33"))
+	def generate_mapping(self, **kwargs):
+		raise NotImplementedError # :nocov:
