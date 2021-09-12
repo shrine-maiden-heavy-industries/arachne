@@ -9,10 +9,10 @@ __all__ = (
 
 def JTAGResource(*args, tck, tms, tdi, tdo, conn = None, attrs = None):
 	ios = [
-		Subsignal("tck", Pins(tck, dir = 'i', conn = conn)),
-		Subsignal("tms", Pins(tms, dir = 'i', conn = conn)),
-		Subsignal("tdi", Pins(tdi, dir = 'i', conn = conn)),
-		Subsignal("tdo", Pins(tdo, dir = 'oe', conn = conn)),
+		Subsignal('tck', Pins(tck, dir = 'i', conn = conn, assert_width = 1)),
+		Subsignal('tms', Pins(tms, dir = 'i', conn = conn, assert_width = 1)),
+		Subsignal('tdi', Pins(tdi, dir = 'i', conn = conn, assert_width = 1)),
+		Subsignal('tdo', Pins(tdo, dir = 'oe', conn = conn, assert_width = 1)),
 	]
 	if attrs is not None:
 		ios.append(attrs)
