@@ -29,8 +29,8 @@ def EthernetResource(*args, rxck, rxd, txck, txd, mdc = None, mdio = None,
 		Subsignal('tx_dat', Pins(txd, dir = 'o', conn = conn)),
 	]
 	if mdc is not None and mdio is not None:
-		ios.append(Subsignal('mdc', Pins(dir = 'o', conn = conn, assert_width = 1), mdio_attrs))
-		ios.append(Subsignal('mdio', Pins(dir = 'io', conn = conn, assert_width = 1), mdio_attrs))
+		ios.append(Subsignal('mdc', Pins(mdc, dir = 'o', conn = conn, assert_width = 1), mdio_attrs))
+		ios.append(Subsignal('mdio', Pins(mdio, dir = 'io', conn = conn, assert_width = 1), mdio_attrs))
 	if attrs is not None:
 		ios.append(attrs)
 	return Resource.family(*args, default_name = 'eth', ios = ios)
