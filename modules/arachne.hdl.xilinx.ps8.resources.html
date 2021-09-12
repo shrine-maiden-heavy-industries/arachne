@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>arachne.hdl.xilinx.ps8.resources package &mdash; Arachne 0.1.dev1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/platformpicker.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="arachne.platforms package" href="arachne.platforms.html" />
+    <link rel="prev" title="arachne.hdl.xilinx.ps8 package" href="arachne.hdl.xilinx.ps8.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Arachne
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.dev1+g770e754
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="arachne.html">arachne package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="arachne.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="arachne.core.html">arachne.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core.formal">arachne.core.formal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core.sim">arachne.core.sim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="arachne.hdl.html">arachne.hdl package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="arachne.hdl.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.hdl.html#module-arachne.hdl">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arachne.platforms.html">arachne.platforms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arachne.platforms.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.platforms.html#module-arachne.platforms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne.cli">arachne.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne.util">arachne.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Arachne</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="arachne.html">arachne package</a> &raquo;</li>
+        
+          <li><a href="arachne.hdl.html">arachne.hdl package</a> &raquo;</li>
+        
+          <li><a href="arachne.hdl.xilinx.html">arachne.hdl.xilinx package</a> &raquo;</li>
+        
+          <li><a href="arachne.hdl.xilinx.ps8.html">arachne.hdl.xilinx.ps8 package</a> &raquo;</li>
+        
+      <li>arachne.hdl.xilinx.ps8.resources package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/modules/arachne.hdl.xilinx.ps8.resources.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arachne-hdl-xilinx-ps8-resources-package">
+<h1>arachne.hdl.xilinx.ps8.resources package<a class="headerlink" href="#arachne-hdl-xilinx-ps8-resources-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.can">
+<span id="arachne-hdl-xilinx-ps8-resources-can-module"></span><h2>arachne.hdl.xilinx.ps8.resources.can module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.can" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.can.CANResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.can.</span></span><span class="sig-name descname"><span class="pre">CANResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.can.CANResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.common">
+<span id="arachne-hdl-xilinx-ps8-resources-common-module"></span><h2>arachne.hdl.xilinx.ps8.resources.common module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.common" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.common.PS8Resource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.common.</span></span><span class="sig-name descname"><span class="pre">PS8Resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.common.PS8Resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">nmigen.build.dsl.Subsignal</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.csu">
+<span id="arachne-hdl-xilinx-ps8-resources-csu-module"></span><h2>arachne.hdl.xilinx.ps8.resources.csu module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.csu" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.csu.CSUResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.csu.</span></span><span class="sig-name descname"><span class="pre">CSUResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.csu.CSUResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.dp">
+<span id="arachne-hdl-xilinx-ps8-resources-dp-module"></span><h2>arachne.hdl.xilinx.ps8.resources.dp module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.dp" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.dp.DPResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.dp.</span></span><span class="sig-name descname"><span class="pre">DPResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.dp.DPResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.gem">
+<span id="arachne-hdl-xilinx-ps8-resources-gem-module"></span><h2>arachne.hdl.xilinx.ps8.resources.gem module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.gem" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.gem.GEMResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.gem.</span></span><span class="sig-name descname"><span class="pre">GEMResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.gem.GEMResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.gpio">
+<span id="arachne-hdl-xilinx-ps8-resources-gpio-module"></span><h2>arachne.hdl.xilinx.ps8.resources.gpio module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.gpio" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.gpio.GPIOResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.gpio.</span></span><span class="sig-name descname"><span class="pre">GPIOResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.gpio.GPIOResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.i2c">
+<span id="arachne-hdl-xilinx-ps8-resources-i2c-module"></span><h2>arachne.hdl.xilinx.ps8.resources.i2c module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.i2c" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.i2c.I2CResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.i2c.</span></span><span class="sig-name descname"><span class="pre">I2CResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.i2c.I2CResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.nand">
+<span id="arachne-hdl-xilinx-ps8-resources-nand-module"></span><h2>arachne.hdl.xilinx.ps8.resources.nand module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.nand" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.nand.NANDResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.nand.</span></span><span class="sig-name descname"><span class="pre">NANDResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.nand.NANDResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.pcie">
+<span id="arachne-hdl-xilinx-ps8-resources-pcie-module"></span><h2>arachne.hdl.xilinx.ps8.resources.pcie module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.pcie" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.pcie.</span></span><span class="sig-name descname"><span class="pre">PCIELaneWidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x1">
+<span class="sig-name descname"><span class="pre">x1</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x2">
+<span class="sig-name descname"><span class="pre">x2</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x4">
+<span class="sig-name descname"><span class="pre">x4</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIELaneWidth.x4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.pcie.</span></span><span class="sig-name descname"><span class="pre">PCIEPortType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType.Endpoint">
+<span class="sig-name descname"><span class="pre">Endpoint</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType.Endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType.RootPort">
+<span class="sig-name descname"><span class="pre">RootPort</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIEPortType.RootPort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pcie.PCIEResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.pcie.</span></span><span class="sig-name descname"><span class="pre">PCIEResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pcie.PCIEResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.pjtag">
+<span id="arachne-hdl-xilinx-ps8-resources-pjtag-module"></span><h2>arachne.hdl.xilinx.ps8.resources.pjtag module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.pjtag" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pjtag.PJTAGResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.pjtag.</span></span><span class="sig-name descname"><span class="pre">PJTAGResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pjtag.PJTAGResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.pmu">
+<span id="arachne-hdl-xilinx-ps8-resources-pmu-module"></span><h2>arachne.hdl.xilinx.ps8.resources.pmu module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.pmu" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.pmu.PMUResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.pmu.</span></span><span class="sig-name descname"><span class="pre">PMUResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.pmu.PMUResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.qspi">
+<span id="arachne-hdl-xilinx-ps8-resources-qspi-module"></span><h2>arachne.hdl.xilinx.ps8.resources.qspi module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.qspi" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.qspi.QSPIResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.qspi.</span></span><span class="sig-name descname"><span class="pre">QSPIResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.qspi.QSPIResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.sata">
+<span id="arachne-hdl-xilinx-ps8-resources-sata-module"></span><h2>arachne.hdl.xilinx.ps8.resources.sata module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.sata" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.sata.SATAResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.sata.</span></span><span class="sig-name descname"><span class="pre">SATAResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.sata.SATAResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.sd">
+<span id="arachne-hdl-xilinx-ps8-resources-sd-module"></span><h2>arachne.hdl.xilinx.ps8.resources.sd module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.sd" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.sd.SDResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.sd.</span></span><span class="sig-name descname"><span class="pre">SDResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.sd.SDResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.spi">
+<span id="arachne-hdl-xilinx-ps8-resources-spi-module"></span><h2>arachne.hdl.xilinx.ps8.resources.spi module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.spi" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.spi.SPIResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.spi.</span></span><span class="sig-name descname"><span class="pre">SPIResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.spi.SPIResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.swdt">
+<span id="arachne-hdl-xilinx-ps8-resources-swdt-module"></span><h2>arachne.hdl.xilinx.ps8.resources.swdt module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.swdt" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.swdt.SWDTResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.swdt.</span></span><span class="sig-name descname"><span class="pre">SWDTResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.swdt.SWDTResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.tcc">
+<span id="arachne-hdl-xilinx-ps8-resources-tcc-module"></span><h2>arachne.hdl.xilinx.ps8.resources.tcc module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.tcc" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.tcc.TCCResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.tcc.</span></span><span class="sig-name descname"><span class="pre">TCCResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.tcc.TCCResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.trace">
+<span id="arachne-hdl-xilinx-ps8-resources-trace-module"></span><h2>arachne.hdl.xilinx.ps8.resources.trace module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.trace" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.trace.TraceResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.trace.</span></span><span class="sig-name descname"><span class="pre">TraceResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.trace.TraceResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.uart">
+<span id="arachne-hdl-xilinx-ps8-resources-uart-module"></span><h2>arachne.hdl.xilinx.ps8.resources.uart module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.uart" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.uart.UARTResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.uart.</span></span><span class="sig-name descname"><span class="pre">UARTResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.uart.UARTResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources.usb">
+<span id="arachne-hdl-xilinx-ps8-resources-usb-module"></span><h2>arachne.hdl.xilinx.ps8.resources.usb module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources.usb" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.usb.USBResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.usb.</span></span><span class="sig-name descname"><span class="pre">USBResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.usb.USBResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arachne.hdl.xilinx.ps8.resources">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-arachne.hdl.xilinx.ps8.resources" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.CANResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">CANResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.CANResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.CSUResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">CSUResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.CSUResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.DPResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">DPResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.DPResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.GEMResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">GEMResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.GEMResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.GPIOResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">GPIOResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.GPIOResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.I2CResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">I2CResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.I2CResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.NANDResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">NANDResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.NANDResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PCIEPortType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">PCIEPortType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PCIEPortType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PCIEPortType.Endpoint">
+<span class="sig-name descname"><span class="pre">Endpoint</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PCIEPortType.Endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PCIEPortType.RootPort">
+<span class="sig-name descname"><span class="pre">RootPort</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PCIEPortType.RootPort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PCIEResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">PCIEResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PCIEResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PJTAGResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">PJTAGResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PJTAGResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PMUResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">PMUResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PMUResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.PS8Resource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">PS8Resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.PS8Resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">nmigen.build.dsl.Subsignal</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.QSPIResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">QSPIResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.QSPIResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.SATAResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">SATAResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.SATAResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.SDResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">SDResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.SDResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.SPIResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">SPIResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.SPIResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.SWDTResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">SWDTResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.SWDTResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.TCCResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">TCCResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.TCCResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.TraceResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">TraceResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.TraceResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.UARTResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">UARTResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.UARTResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps8.resources.USBResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps8.resources.</span></span><span class="sig-name descname"><span class="pre">USBResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps8.resources.USBResource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="arachne.platforms.html" class="btn btn-neutral float-right" title="arachne.platforms package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="arachne.hdl.xilinx.ps8.html" class="btn btn-neutral float-left" title="arachne.hdl.xilinx.ps8 package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Arachne developers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+arachne.hdl.xilinx.ps8.resources package
+========================================
+
+Submodules
+----------
+
+arachne.hdl.xilinx.ps8.resources.can module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.can
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.common module
+----------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.common
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.csu module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.csu
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.dp module
+------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.dp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.gem module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.gem
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.gpio module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.gpio
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.i2c module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.i2c
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.nand module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.nand
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.pcie module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.pcie
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.pjtag module
+---------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.pjtag
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.pmu module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.pmu
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.qspi module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.qspi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.sata module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.sata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.sd module
+------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.sd
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.spi module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.spi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.swdt module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.swdt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.tcc module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.tcc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.trace module
+---------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.trace
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.uart module
+--------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.uart
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps8.resources.usb module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.usb
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:
