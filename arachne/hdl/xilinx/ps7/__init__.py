@@ -119,7 +119,7 @@ class PS7(Elaboratable):
 
 	def elaborate(self, platform) -> Module:
 		m = Module()
-		mio = Signal(54, reset_less = True)
+		fixed_io = Signal(54, reset_less = True)
 
 		ddr_map, ddr_adaptor = self._map_ddr()
 		if ddr_adaptor is not None:
@@ -132,7 +132,7 @@ class PS7(Elaboratable):
 			i_PSPORB = self._core.por_n.i,
 			i_PSSRSTB = self._core.srst_n.i,
 			# MIO
-			io_MIO = mio,
+			o_MIO = fixed_io,
 			# AXI Bus'
 			**self._map_axi_gp(num = 0),
 			**self._map_axi_gp(num = 1),
@@ -143,20 +143,32 @@ class PS7(Elaboratable):
 			# DDR3 Memory
 			**ddr_map,
 			# Ethernet
-			**self._map_eth(m, platform = platform, mio = mio, num = 0),
-			**self._map_eth(m, platform = platform, mio = mio, num = 1),
+			**self._map_eth(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_eth(m, platform = platform, mio = fixed_io, num = 1),
 			# JTAG
-			**self._map_jtag(m, platform = platform, mio = mio),
+			**self._map_jtag(m, platform = platform, mio = fixed_io),
 			# SDIO (SDCard interfaces)
-			**self._map_sdio(m, platform = platform, mio = mio, num = 0),
-			**self._map_sdio(m, platform = platform, mio = mio, num = 1),
+			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 1),
 			# UART
-			**self._map_uart(m, platform = platform, mio = mio, num = 0),
-			**self._map_uart(m, platform = platform, mio = mio, num = 1),
+			**self._map_uart(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_uart(m, platform = platform, mio = fixed_io, num = 1),
 			# USB
-			**self._map_usb(m, platform = platform, mio = mio, num = 0),
-			**self._map_usb(m, platform = platform, mio = mio, num = 1),
+			**self._map_usb(m, platform = platform, mio = fixed_io, num = 0),
+			**self._map_usb(m, platform = platform, mio = fixed_io, num = 1),
 		)
+
+		# This is a pile of hacks. We tell nMigen that the MIO on the PS7 instance
+		# "drives" fixed_io, and we tell it that the BIBUF's below are "driven"
+		# by fixed_io, and this stops it from propergating the signal up through to
+		# the outside world, which causes errors
+		mio = Signal.like(fixed_io)
+		for idx in range(len(mio)):
+			m.submodules += Instance(
+				'BIBUF',
+				io_PAD = mio[idx],
+				i_IO = fixed_io[idx],
+			)
 		return m
 
 	def _demap_resource(self, resource : Record) -> Tuple[str, int]:
