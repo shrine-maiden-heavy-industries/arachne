@@ -104,7 +104,9 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 	@staticmethod
 	def _flatten_mapping(mapping : dict) -> list:
 		flat_map = {'mio': [], 'other': []}
-		for pinset in mapping.values():
+		for key, pinset in mapping.items():
+			if key == 'mio_banks':
+				continue
 			if isinstance(pinset, dict):
 				flat_map['other'].extend(pinset.values())
 			elif isinstance(pinset, list):
@@ -115,9 +117,13 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 	def _demap_pin(self, pin : Record) -> Tuple[str, int, str]:
 		parts = pin.name.split('__', maxsplit = 1)
 		name, number = parts[0].rsplit('_', maxsplit = 1)
+		if len(parts) == 1:
+			return (name, int(number), name)
 		return (name, int(number), parts[1])
 
 	def _find_subsignal(self, resource : Resource, name : str) -> Subsignal:
+		if resource.name == name:
+			return resource
 		for subsig in resource.ios:
 			if subsig.name == name:
 				return subsig
@@ -212,9 +218,35 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 					else:
 						yield f'{port_name}[{bit}]', pin_name, attrs
 
+		banks = _PS7_MIO_MAPPING[self.device, self.package]['mio_banks']
 		mapping = _PS7_MIO_MAPPING[self.device, self.package]['mio']
+
+		for bank in banks.values():
+			attrs = []
+			for mio in bank['mios']:
+				_, pin = mapping[mio]
+				if pin in mio_attrs:
+					attrs.append(mio_attrs[pin])
+
+			io_standards = set()
+			for attr in attrs:
+				for key, value in attr.items():
+					if key != 'IOSTANDARD':
+						continue
+					io_standards.add(value)
+
+			assert len(io_standards) <= 1, f'Cannot mix IO standards on a bank, have {io_standards}'
+			if len(io_standards) == 1:
+				io_standard = io_standards.pop()
+			else:
+				io_standard = bank['default_standard']
+
+			for mio in bank['mios']:
+				_, pin = mapping[mio]
+				mio_attrs.setdefault(pin, Attrs(IOSTANDARD=io_standard))
+
 		for bit, pin_name in mapping:
-			yield f'mio[{bit}]', pin_name, mio_attrs.get(pin_name, {}) # TODO: IO directions and voltages..?
+			yield f'mio[{bit}]', pin_name, mio_attrs.get(pin_name) # TODO: IO directions..?
 
 class System(Elaboratable):
 	def elaborate(self, platform):
