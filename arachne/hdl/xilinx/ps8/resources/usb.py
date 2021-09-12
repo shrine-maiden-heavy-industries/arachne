@@ -10,6 +10,7 @@ __all__ = (
 
 class USBResource(PS8Resource):
 	name = 'usb'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

@@ -80,6 +80,7 @@ def _validate_ecc(ddr_type, ecc):
 
 class DDRResource(PS8Resource):
 	name = 'ddr'
+	claimable_mio = [ ]
 
 	def __init__(self, *, frq, ddr_type, module_type, width, ecc):
 		super().__init__(0, 0)

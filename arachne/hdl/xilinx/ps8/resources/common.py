@@ -11,7 +11,8 @@ __all__ = (
 )
 
 class PS8Resource(Subsignal, metaclass = ABCMeta):
-	name = abstractproperty()
+	name          = abstractproperty()
+	claimable_mio = abstractproperty()
 
 	def __init__(self, num, rnum_max, *args):
 		if num > rnum_max:

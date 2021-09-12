@@ -10,6 +10,7 @@ __all__ = (
 
 class GEMResource(PS8Resource):
 	name = 'gem'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 3)

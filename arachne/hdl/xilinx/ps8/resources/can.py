@@ -10,6 +10,7 @@ __all__ = (
 
 class CANResource(PS8Resource):
 	name = 'can'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

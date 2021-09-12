@@ -10,6 +10,7 @@ __all__ = (
 
 class UARTResource(PS8Resource):
 	name = 'uart'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

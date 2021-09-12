@@ -11,6 +11,7 @@ __all__ = (
 
 class PJTAGResource(PS8Resource):
 	name = 'pjtag'
+	claimable_mio = [ ]
 
 	def __init__(self):
 		super().__init__(0, 0)

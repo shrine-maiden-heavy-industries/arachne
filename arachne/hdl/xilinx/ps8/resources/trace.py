@@ -10,6 +10,7 @@ __all__ = (
 
 class TraceResource(PS8Resource):
 	name = 'trace'
+	claimable_mio = [ ]
 
 	def __init__(self):
 		super().__init__(0, 0)

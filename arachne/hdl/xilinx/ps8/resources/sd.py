@@ -10,6 +10,7 @@ __all__ = (
 
 class SDResource(PS8Resource):
 	name = 'sd'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

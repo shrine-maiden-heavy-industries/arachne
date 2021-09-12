@@ -10,6 +10,7 @@ __all__ = (
 
 class I2CResource(PS8Resource):
 	name = 'i2c'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

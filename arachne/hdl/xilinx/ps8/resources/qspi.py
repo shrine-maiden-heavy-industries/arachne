@@ -31,6 +31,9 @@ def _validate_data_mode(mode, data_mode):
 
 class QSPIResource(PS8Resource):
 	name = 'qspi'
+	claimable_mio = [
+		(0, 12)
+	]
 
 	def __init__(self, *, mode, data_mode, feedback_clk = False):
 		super().__init__(0, 0)

@@ -10,6 +10,7 @@ __all__ = (
 
 class CSUResource(PS8Resource):
 	name = 'csu'
+	claimable_mio = [ ]
 
 	def __init__(self):
 		super().__init__(0, 0)

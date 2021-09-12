@@ -10,8 +10,11 @@ __all__ = (
 
 class NANDResource(PS8Resource):
 	name = 'nand'
+	claimable_mio = [
+		(9, 27), 32
+	]
 
-	def __init__(self):
+	def __init__(self, ):
 		super().__init__(0, 0)
 
 	def used_mio(self, **kwargs):

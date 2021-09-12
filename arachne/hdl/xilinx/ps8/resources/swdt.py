@@ -10,6 +10,7 @@ __all__ = (
 
 class SWDTResource(PS8Resource):
 	name = 'swdt'
+	claimable_mio = [ ]
 
 	def __init__(self, num):
 		super().__init__(num, 1)

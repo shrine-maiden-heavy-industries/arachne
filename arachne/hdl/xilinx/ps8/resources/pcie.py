@@ -25,6 +25,7 @@ class PCIELaneWidth(enum.Enum):
 
 class PCIEResource(PS8Resource):
 	name = 'pcie'
+	claimable_mio = [ ]
 
 	def __init__(self):
 		super().__init__(0, 0)
