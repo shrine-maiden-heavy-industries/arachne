@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
 from nmigen import *
+from nmigen.build import Resource
 
 __all__ = (
-	'DDR3Adaptor',
+	'DDR3Adaptor', 'GMIItoRGMII'
 )
 
 class DDR3Adaptor(Elaboratable):
@@ -69,4 +70,46 @@ class DDR3Adaptor(Elaboratable):
 			self.voltage_ref_p.eq(bus.vref_p.i),
 			self.voltage_ref_n.eq(bus.vref_n.i),
 		]
+		return m
+
+class GMIItoRGMII(Elaboratable):
+	def __init__(self, *, rgmii : Resource):
+		self.rx_clk = Signal()
+		self.rx = Signal(8)
+		self.rx_vd = Signal()
+		self.rx_err = Signal()
+
+		self.tx_clk = Signal()
+		self.tx = Signal(8)
+		self.tx_en = Signal()
+		self.tx_err = Signal()
+
+		self._iface = rgmii
+
+	def elaborate(self, platform):
+		m = Module()
+		eth = self._iface
+
+		m.d.comb += [
+			self.rx_clk.eq(eth.rx_clk.i),
+
+			self.rx[0:4].eq(eth.rx.i0),
+			self.gmii.rx[4:8].eq(eth.rx.i1),
+			eth.rx.i_clk.eq(eth.rx_clk.i),
+
+			self.rx_vd.eq(eth.rx_ctl.i0),
+			self.rx_err.eq(eth.rx_ctl.i0 ^ eth.rx_ctl.i1),
+			eth.rx_ctl.i_clk.eq(eth.rx_clk.i),
+
+			eth.tx_clk.o.eq(self.tx_clk),
+
+			eth.tx.o0.eq(self.tx[0:4]),
+			eth.tx.o1.eq(self.tx[4:8]),
+			eth.tx.o_clk.eq(self.tx_clk),
+
+			eth.tx_ctl.o0.eq(self.tx_en),
+			eth.tx_ctl.o1.eq(self.tx_en ^ self.tx_err),
+			eth.tx_ctl.o_clk.eq(self.tx_clk),
+		]
+
 		return m
