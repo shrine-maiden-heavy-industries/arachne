@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from .common import PS8Resource
+from .common import PS8Resource, MIOSet
 
 from .can    import CANResource
 from .csu    import CSUResource
@@ -23,7 +23,7 @@ from .uart   import UARTResource
 from .usb    import USBResource
 
 __all__ = (
-	'PS8Resource',
+	'PS8Resource', 'MIOSet',
 
 	'CANResource',
 	'CSUResource',

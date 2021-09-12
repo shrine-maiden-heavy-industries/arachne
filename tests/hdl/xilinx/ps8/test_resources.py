@@ -13,7 +13,7 @@ class PS8ResourcesTestCase(TestCase):
 			claimable_mio = []
 
 			def __init__(self, num):
-				super().__init__(num, 1)
+				super().__init__(num, 1, None, False)
 
 			def used_mio(self, **kwargs):
 				raise NotImplementedError

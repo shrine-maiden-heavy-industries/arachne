@@ -4,7 +4,7 @@ import enum
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource
+from .common      import PS8Resource, MIOSet
 
 __all__ = (
 	'QSPIResource',
@@ -36,7 +36,7 @@ class QSPIResource(PS8Resource):
 	]
 
 	def __init__(self, *, mode, data_mode, feedback_clk = False):
-		super().__init__(0, 0)
+		super().__init__(0, 0, None, False)
 
 		_validate_data_mode(mode, data_mode)
 

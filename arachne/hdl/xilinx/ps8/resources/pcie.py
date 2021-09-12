@@ -4,7 +4,7 @@ import enum
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource
+from .common      import PS8Resource, MIOSet
 
 __all__ = (
 	'PCIEResource',
@@ -27,8 +27,8 @@ class PCIEResource(PS8Resource):
 	name = 'pcie'
 	claimable_mio = [ ]
 
-	def __init__(self):
-		super().__init__(0, 0)
+	def __init__(self, *, width):
+		super().__init__(0, 0, None, False)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:

@@ -2,7 +2,7 @@
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource
+from .common      import PS8Resource, MIOSet
 
 __all__ = (
 	'NANDResource',
@@ -15,7 +15,7 @@ class NANDResource(PS8Resource):
 	]
 
 	def __init__(self, ):
-		super().__init__(0, 0)
+		super().__init__(0, 0, mio_set, False)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:

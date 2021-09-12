@@ -4,7 +4,7 @@ import enum
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource
+from .common      import PS8Resource, MIOSet
 
 __all__ = (
 	'DDRResource',

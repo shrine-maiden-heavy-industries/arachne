@@ -2,7 +2,7 @@
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource
+from .common      import PS8Resource, MIOSet
 
 __all__ = (
 	'GPIOResource',
@@ -12,8 +12,8 @@ class GPIOResource(PS8Resource):
 	name = 'gpio'
 	claimable_mio = [ ]
 
-	def __init__(self):
-		super().__init__(0, 0)
+	def __init__(self, num, mio_set):
+		super().__init__(num, 2, mio_set, True)
 
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:
