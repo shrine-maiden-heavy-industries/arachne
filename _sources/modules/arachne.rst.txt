@@ -10,6 +10,7 @@ Subpackages
    arachne.core
    arachne.hdl
    arachne.platforms
+   arachne.resources
 
 Submodules
 ----------

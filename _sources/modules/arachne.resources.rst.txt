@@ -1,0 +1,21 @@
+arachne.resources package
+=========================
+
+Submodules
+----------
+
+arachne.resources.interface module
+----------------------------------
+
+.. automodule:: arachne.resources.interface
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:
