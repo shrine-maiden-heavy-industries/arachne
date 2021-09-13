@@ -513,7 +513,7 @@ class PS7(Elaboratable):
 					f'o_EMIOENET{num}GMIITXCLK': tx_clk,
 					f'o_EMIOENET{num}GMIITXD':   tx,
 					f'o_EMIOENET{num}GMIITXEN':  tx_en,
-					f'o_EMIOENeT{num}GMIITXER':  tx_err,
+					f'o_EMIOENET{num}GMIITXER':  tx_err,
 
 					f'o_EMIOENET{num}MDIOMDC':   mdc,
 					f'i_EMIOENET{num}MDIOI':     mdio_i,
