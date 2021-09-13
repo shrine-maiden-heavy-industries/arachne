@@ -255,10 +255,10 @@ class System(Elaboratable):
 
 		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		#ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
-		ps7.add_resource(name = 'eth0', resource = platform.request('eth'))
-		ps7.add_resource(name = 'usb0', resource = platform.request('usb'))
-		ps7.add_resource(name = 'uart0', resource = platform.request('uart'))
-		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit'))
+		ps7.add_resource(name = 'eth0', resource = platform.request('eth', 0))
+		ps7.add_resource(name = 'usb0', resource = platform.request('usb', 0))
+		ps7.add_resource(name = 'uart0', resource = platform.request('uart', 0))
+		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit', 0))
 
 		return m
 
