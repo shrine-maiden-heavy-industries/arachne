@@ -234,11 +234,11 @@ class PS7(Elaboratable):
 	def _map_axi_hp(self, *, num) -> dict:
 		bus = self._pl_resources[f'axi_hp{num}']
 		return {
-			f'o_SAXIHP{num}RACOUNT':       Signal(),
-			f'o_SAXIHP{num}RCOUNT':        Signal(),
+			f'o_SAXIHP{num}RACOUNT':       Signal(3),
+			f'o_SAXIHP{num}RCOUNT':        Signal(8),
 			f'i_SAXIHP{num}RDISSUECAP1EN': Signal(),
-			f'o_SAXIHP{num}WACOUNT':       Signal(),
-			f'o_SAXIHP{num}WCOUNT':        Signal(),
+			f'o_SAXIHP{num}WACOUNT':       Signal(6),
+			f'o_SAXIHP{num}WCOUNT':        Signal(8),
 			f'i_SAXIHP{num}WRISSUECAP1EN': Signal(),
 			**self._map_axi_subordinate(name = f'HP{num}', bus = bus)
 		}
