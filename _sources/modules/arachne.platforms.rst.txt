@@ -9,6 +9,17 @@ Subpackages
 
    arachne.platforms.xilinx
 
+Submodules
+----------
+
+arachne.platforms.xilinx\_zynq7000 module
+-----------------------------------------
+
+.. automodule:: arachne.platforms.xilinx_zynq7000
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
