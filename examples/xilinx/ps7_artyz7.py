@@ -138,6 +138,13 @@ class ArtyZ720PS7Platform(ArtyZ720Platform):
 				return part.names[0]
 		raise ValueError('Failed to map pin to pad')
 
+	# Support both the current upstream behaviour and MWK's unified Xilinx patch
+	# (https://github.com/nmigen/nmigen/pull/563)
+	def _get_valid_xdrs(self):
+		if hasattr(super(), '_get_valid_xdrs'):
+			return super()._get_valid_xdrs()
+		return (0, 1, 2)
+
 	def get_input(self, pin, port, attrs, invert):
 		pad = self._map_pin_to_pad(pin)
 		if pad not in self._mapping['mio'] and pad not in self._mapping['other']:
