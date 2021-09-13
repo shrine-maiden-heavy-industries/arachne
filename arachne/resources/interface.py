@@ -28,7 +28,7 @@ def EthernetResource(*args, rxck, rxd, txck, txd, rx_dv = None, rx_err = None, r
 	ios = [
 		Subsignal('rx_clk', Pins(rxck, dir = 'i', conn = conn, assert_width = 1)),
 		Subsignal('rx_dat', Pins(rxd, dir = 'i', conn = conn)),
-		Subsignal('tx_clk', Pins(txck, dir = 'i', conn = conn, assert_width = 1)),
+		Subsignal('tx_clk', Pins(txck, dir = 'o', conn = conn, assert_width = 1)),
 		Subsignal('tx_dat', Pins(txd, dir = 'o', conn = conn)),
 	]
 
