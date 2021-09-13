@@ -83,6 +83,20 @@ class MIOSet(enum.Enum):
 	MIO61 = 61
 	MIO62 = 62
 	MIO63 = 63
+	MIO64 = 64
+	MIO65 = 65
+	MIO66 = 66
+	MIO67 = 67
+	MIO68 = 68
+	MIO69 = 69
+	MIO70 = 70
+	MIO71 = 71
+	MIO72 = 72
+	MIO73 = 73
+	MIO74 = 74
+	MIO75 = 75
+	MIO76 = 76
+	MIO77 = 77
 
 class PS8Resource(Subsignal, metaclass = ABCMeta):
 	name          = abstractproperty()
