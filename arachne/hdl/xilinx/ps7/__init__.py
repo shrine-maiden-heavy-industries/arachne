@@ -141,30 +141,30 @@ class PS7(Elaboratable):
 			**self._map_axi_hp(num = 2),
 			**self._map_axi_hp(num = 3),
 			# CAN
-			**self._map_can(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_can(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_can(platform = platform, num = 0),
+			**self._map_can(platform = platform, num = 1),
 			# DDR3 Memory
 			**ddr_map,
 			# Ethernet
-			**self._map_eth(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_eth(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_eth(m, platform = platform, num = 0),
+			**self._map_eth(m, platform = platform, num = 1),
 			# I2C
-			**self._map_i2c(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_i2c(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_i2c(m, platform = platform, num = 0),
+			**self._map_i2c(m, platform = platform, num = 1),
 			# JTAG
-			**self._map_jtag(m, platform = platform, mio = fixed_io),
+			**self._map_jtag(m, platform = platform),
 			# SDIO (SDCard interfaces)
-			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_sdio(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_sdio(m, platform = platform, num = 0),
+			**self._map_sdio(m, platform = platform, num = 1),
 			# SPI
-			**self._map_spi(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_spi(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_spi(m, platform = platform, num = 0),
+			**self._map_spi(m, platform = platform, num = 1),
 			# UART
-			**self._map_uart(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_uart(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_uart(platform = platform, num = 0),
+			**self._map_uart(platform = platform, num = 1),
 			# USB
-			**self._map_usb(m, platform = platform, mio = fixed_io, num = 0),
-			**self._map_usb(m, platform = platform, mio = fixed_io, num = 1),
+			**self._map_usb(m, platform = platform, num = 0),
+			**self._map_usb(m, platform = platform, num = 1),
 		)
 
 		# This is a pile of hacks. We tell nMigen that the MIO on the PS7 instance
@@ -202,24 +202,18 @@ class PS7(Elaboratable):
 				return idx
 		return None
 
-	def _mio_map_pads(self, m, mapping, mio, subsig, pads, dir):
-		unmapped = False
-		for i, pad in enumerate(pads):
+	def _mio_map_pads(self, mapping, pads):
+		for _, pad in enumerate(pads):
 			idx = self._mio_idx(mapping = mapping, pad = pad)
 			if idx is None:
-				unmapped = True
-				continue
-			if 'i' in dir:
-				m.d.comb += mio[idx].eq(subsig.i[i])
-			else:
-				m.d.comb += subsig.o[i].eq(mio[idx])
-		return unmapped
+				return True
+		return False
 
-	def _map_mio(self, m, *, mapping, mio, resource, subsignal):
+	def _map_mio(self, *, mapping, subsignal):
 		unmapped = True
 		for io in subsignal.ios:
 			if isinstance(io, Pins):
-				unmapped &= self._mio_map_pads(m, mapping, mio, getattr(resource, subsignal.name), io.names, io.dir)
+				unmapped &= self._mio_map_pads(mapping, io.names)
 			else:
 				unmapped = False
 		return unmapped
@@ -353,7 +347,7 @@ class PS7(Elaboratable):
 			f'i_SAXI{name}AWQOS':   bus.awqos,
 		}
 
-	def _map_can(self, m, *, platform, mio, num) -> dict:
+	def _map_can(self, *, platform, num) -> dict:
 		can = self._ps_resources[f'can{num}']
 		if can is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -361,7 +355,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = can, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				return {
@@ -421,7 +415,7 @@ class PS7(Elaboratable):
 				'io_DDRVRN':  Signal(),
 			}, None)
 
-	def _map_eth(self, m, *, platform, mio, num) -> dict:
+	def _map_eth(self, m, *, platform, num) -> dict:
 		eth = self._ps_resources[f'eth{num}']
 		if eth is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -429,7 +423,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = eth, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				rx_domain = f'eth{num}_rx'
@@ -545,7 +539,7 @@ class PS7(Elaboratable):
 			f'o_EMIOENET{num}MDIOTN':    Signal(),
 		}
 
-	def _map_i2c(self, m, *, platform, mio, num) -> dict:
+	def _map_i2c(self, m, *, platform, num) -> dict:
 		i2c = self._ps_resources[f'i2c{num}']
 		if i2c is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -553,7 +547,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = i2c, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				scl_oe_n = Signal()
@@ -582,7 +576,7 @@ class PS7(Elaboratable):
 			f'o_EMIOI2C{num}SDATN': Signal(),
 		}
 
-	def _map_jtag(self, m, *, platform, mio) -> dict:
+	def _map_jtag(self, m, *, platform) -> dict:
 		jtag = self._ps_resources['jtag']
 		if jtag is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -590,7 +584,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = jtag, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				tdo_oe_n = Signal()
@@ -613,7 +607,7 @@ class PS7(Elaboratable):
 			'o_EMIOPJTAGTDTN': Signal(),
 		}
 
-	def _map_sdio(self, m, *, platform, mio, num) -> dict:
+	def _map_sdio(self, m, *, platform, num) -> dict:
 		sdio = self._ps_resources[f'sdio{num}']
 		if sdio is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -621,7 +615,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = sdio, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				data_oe_n = Signal()
@@ -646,7 +640,7 @@ class PS7(Elaboratable):
 			f'o_EMIOSDIO{num}DATATN': Signal(4),
 		}
 
-	def _map_spi(self, m, *, platform, mio, num) -> dict:
+	def _map_spi(self, m, *, platform, num) -> dict:
 		spi = self._ps_resources[f'spi{num}']
 		if spi is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -654,7 +648,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = spi, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				cs_i = Signal()
@@ -727,7 +721,7 @@ class PS7(Elaboratable):
 			f'o_EMIOSPI{num}STN':    Signal(),
 		}
 
-	def _map_uart(self, m, *, platform, mio, num) -> dict:
+	def _map_uart(self, *, platform, num) -> dict:
 		uart = self._ps_resources[f'uart{num}']
 		if uart is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -735,7 +729,7 @@ class PS7(Elaboratable):
 
 			unmapped = True
 			for subsignal in resource.ios:
-				unmapped &= self._map_mio(m, mapping = mapping, mio = mio, resource = uart, subsignal = subsignal)
+				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			if unmapped:
 				rts_n = Signal()
@@ -769,7 +763,7 @@ class PS7(Elaboratable):
 			f'i_EMIOUART{num}RIN':  Signal(),
 		}
 
-	def _map_usb(self, m, *, platform, mio, num) -> dict:
+	def _map_usb(self, m, *, platform, num) -> dict:
 		usb = self._ps_resources[f'usb{num}']
 		if usb is not None:
 			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
@@ -786,7 +780,7 @@ class PS7(Elaboratable):
 				elif subsignal.name == 'vbus_fault':
 					m.d.comb += vbus_pwr_fault.eq(usb.vbus_fault)
 				else:
-					self._map_mio(m, mapping = mapping, mio = mio, resource = usb, subsignal = subsignal)
+					self._map_mio(mapping = mapping, subsignal = subsignal)
 
 			return {
 				f'o_EMIOUSB{num}PORTINDCTL': port_ind_ctrl,
