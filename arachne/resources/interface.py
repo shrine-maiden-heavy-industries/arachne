@@ -28,7 +28,7 @@ def EthernetResource(*args, rxck, rxd, txck, txd, rx_dv = None, rx_err = None, r
 	ios = [
 		Subsignal('rx_clk', Pins(rxck, dir = 'i', conn = conn, assert_width = 1)),
 		Subsignal('rx_dat', Pins(rxd, dir = 'i', conn = conn)),
-		Subsignal('tx_clk', Pins(txck, dir = 'o', conn = conn, assert_width = 1)),
+		Subsignal('tx_clk', Pins(txck, dir = 'i', conn = conn, assert_width = 1)),
 		Subsignal('tx_dat', Pins(txd, dir = 'o', conn = conn)),
 	]
 
@@ -45,7 +45,12 @@ def EthernetResource(*args, rxck, rxd, txck, txd, rx_dv = None, rx_err = None, r
 		assert tx_ctl is None
 		ios.append(Subsignal('tx_en', Pins(tx_en, dir = 'o', conn = conn, assert_width = 1)))
 		ios.append(Subsignal('tx_err', Pins(tx_err, dir = 'o', conn = conn, assert_width = 1)))
+		if col is not None:
+			ios.append(Subsignal('col', Pins(col, dir = 'i', conn = conn, assert_width = 1)))
+		if crs is not None:
+			ios.append(Subsignal('crs', Pins(crs, dir = 'i', conn = conn, assert_width = 1)))
 	elif tx_ctl is not None:
+		assert col is None and crs is None
 		ios.append(Subsignal('tx_ctl', Pins(tx_ctl, dir = 'o', conn = conn, assert_width = 1)))
 	else:
 		raise AssertionError('Must specify either MII TXDV + TXER pins or RGMII TXCTL')
