@@ -48,4 +48,4 @@ class QSPIResource(PS8Resource):
 		raise NotImplementedError # :nocov:
 
 	def generate_mapping(self, **kwargs):
-		raise NotImplementedError # :nocov:
+		return {}
