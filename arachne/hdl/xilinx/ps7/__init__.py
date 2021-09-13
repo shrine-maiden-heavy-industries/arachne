@@ -444,6 +444,8 @@ class PS7(Elaboratable):
 				tx = Signal(8)
 				tx_en = Signal()
 				tx_err = Signal()
+				col = Signal()
+				crs = Signal()
 
 				m.domains += ClockDomain(rx_domain)
 				m.domains += ClockDomain(tx_domain)
@@ -492,9 +494,11 @@ class PS7(Elaboratable):
 						eth.tx.o.eq(tx),
 						eth.tx_en.o.eq(tx_en),
 						eth.tx_err.o.eq(tx_err),
-						# col
-						# crs
 					]
+					if hasattr(eth, 'col'):
+						m.d[tx_domain] += col.eq(eth.col.i)
+					if hasattr(eth, 'crs'):
+						m.d[tx_domain] == crs.eq(eth.crs.i)
 
 				mdc = eth.mdc.o if hasattr(eth, 'mdc') else Signal()
 				mdio_i = eth.mdio.i if hasattr(eth, 'mdio') else Signal()
@@ -514,6 +518,8 @@ class PS7(Elaboratable):
 					f'o_EMIOENET{num}GMIITXD':   tx,
 					f'o_EMIOENET{num}GMIITXEN':  tx_en,
 					f'o_EMIOENET{num}GMIITXER':  tx_err,
+					f'i_EMIOENET{num}GMIICOL':   col,
+					f'i_EMIOENET{num}GMIICRS':   crs,
 
 					f'o_EMIOENET{num}MDIOMDC':   mdc,
 					f'i_EMIOENET{num}MDIOI':     mdio_i,
@@ -531,6 +537,8 @@ class PS7(Elaboratable):
 			f'o_EMIOENET{num}GMIITXD':   Signal(8),
 			f'o_EMIOENET{num}GMIITXEN':  Signal(),
 			f'o_EMIOENET{num}GMIITXER':  Signal(),
+			f'i_EMIOENET{num}GMIICOL':   Signal(),
+			f'i_EMIOENET{num}GMIICRS':   Signal(),
 
 			f'o_EMIOENET{num}MDIOMDC':   Signal(),
 			f'i_EMIOENET{num}MDIOI':     Signal(),
