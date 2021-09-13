@@ -458,12 +458,11 @@ class PS7(Elaboratable):
 				# Apparently the Ethernet is miss-timed and requires a pipeline stage inserting.
 				# RGMII
 				if hasattr(eth, 'rx_ctl'):
-					converter = GMIItoRGMII(rgmii = eth)
-					m.submodules += converter
+					m.submodules[f'rgmii{num}'] = converter = GMIItoRGMII(rgmii = eth)
 
 					m.d.comb += [
 						rx_clk.eq(converter.rx_clk),
-						converter.tx_clk.eq(tx_clk),
+						tx_clk.eq(converter.tx_clk),
 					]
 
 					m.d[rx_domain] += [
@@ -477,11 +476,11 @@ class PS7(Elaboratable):
 						converter.tx_en.eq(tx_en),
 						converter.tx_err.eq(tx_err),
 					]
-				else:
 				# GMII
+				else:
 					m.d.comb += [
 						rx_clk.eq(eth.rx_clk.i),
-						eth.tx_clk.o.eq(tx_clk),
+						tx_clk.eq(eth.tx_clk.i),
 					]
 
 					m.d[rx_domain] += [
@@ -514,7 +513,7 @@ class PS7(Elaboratable):
 					f'i_EMIOENET{num}GMIIRXDV':  rx_dv,
 					f'i_EMIOENET{num}GMIIRXER':  rx_err,
 
-					f'o_EMIOENET{num}GMIITXCLK': tx_clk,
+					f'i_EMIOENET{num}GMIITXCLK': tx_clk,
 					f'o_EMIOENET{num}GMIITXD':   tx,
 					f'o_EMIOENET{num}GMIITXEN':  tx_en,
 					f'o_EMIOENET{num}GMIITXER':  tx_err,

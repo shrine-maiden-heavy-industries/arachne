@@ -101,15 +101,15 @@ class GMIItoRGMII(Elaboratable):
 			self.rx_err.eq(eth.rx_ctl.i0 ^ eth.rx_ctl.i1),
 			eth.rx_ctl.i_clk.eq(eth.rx_clk.i),
 
-			eth.tx_clk.o.eq(self.tx_clk),
+			self.tx_clk.eq(eth.tx_clk.i),
 
 			eth.tx_dat.o0.eq(self.tx[0:4]),
 			eth.tx_dat.o1.eq(self.tx[4:8]),
-			eth.tx_dat.o_clk.eq(self.tx_clk),
+			eth.tx_dat.o_clk.eq(eth.tx_clk.i),
 
 			eth.tx_ctl.o0.eq(self.tx_en),
 			eth.tx_ctl.o1.eq(self.tx_en ^ self.tx_err),
-			eth.tx_ctl.o_clk.eq(self.tx_clk),
+			eth.tx_ctl.o_clk.eq(eth.tx_clk.i),
 		]
 
 		return m
