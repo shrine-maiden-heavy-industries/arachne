@@ -11,7 +11,7 @@ from pathlib import Path
 from sys import path
 path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from arachne.platforms.xilinx_zynq7000 import XilinxZynq7000Platform
+from arachne.platforms.xilinx.zynq7000 import XilinxZynq7000Platform
 from arachne.resources.interface import *
 from arachne.hdl.xilinx.ps7 import *
 

@@ -4,7 +4,7 @@ from nmigen                       import *
 from nmigen.build                 import *
 from nmigen.vendor.xilinx_7series import *
 
-from ..hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
+from ...hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
 
 __all__ = ('XilinxZynq7000Platform',)
 
