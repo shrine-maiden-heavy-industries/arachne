@@ -12,6 +12,14 @@ arachne.platforms.xilinx.kria module
    :undoc-members:
    :show-inheritance:
 
+arachne.platforms.xilinx.unified module
+---------------------------------------
+
+.. automodule:: arachne.platforms.xilinx.unified
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 arachne.platforms.xilinx.zynq7000 module
 ----------------------------------------
 
