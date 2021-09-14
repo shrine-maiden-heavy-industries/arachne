@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from typing                       import Tuple
-from nmigen                       import *
-from nmigen.build                 import *
-from nmigen.vendor.xilinx_7series import *
+from typing                import Tuple
+from nmigen                import *
+from nmigen.build          import *
 
+from .unified              import XilinxPlatform
 from ...hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
 
 __all__ = ('XilinxZynq7000Platform',)
 
-class XilinxZynq7000Platform(Xilinx7SeriesPlatform):
+class XilinxZynq7000Platform(XilinxPlatform):
 	def __init__(self, *args, **kwargs):
 		self._mapping = self._flatten_mapping(_PS7_MIO_MAPPING[self.device, self.package])
 		super().__init__(*args, *kwargs)

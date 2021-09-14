@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
+from nmigen                      import *
+from nmigen.build                import *
 
-from nmigen       import *
-from nmigen.build import *
+from .unified                    import XilinxPlatform
 
-from nmigen.vendor.xilinx_ultrascale  import XilinxUltraScalePlatform
-
-from arachne.hdl.xilinx.ps8.resources import *
+from ...hdl.xilinx.ps8.resources import *
 
 __all__ = (
 	'KriaK26CSOMPlatform',
@@ -13,7 +12,7 @@ __all__ = (
 	'KriaKV260Platform',
 )
 
-class _KriaK26SOMPlatform(XilinxUltraScalePlatform):
+class _KriaK26SOMPlatform(XilinxPlatform):
 	"""Xilinx Kria KV26 system-on-module
 
 	Datasheet
@@ -282,7 +281,7 @@ class KriaK26CSOMPlatform(_KriaK26SOMPlatform):
 	speed = f'{_KriaK26SOMPlatform.speed_grade}-c'
 
 
-class KriaKV260Platform(XilinxUltraScalePlatform):
+class KriaKV260Platform(XilinxPlatform):
 	"""Xilinx Kria KV260 Vision AI Starter Kit
 
 	Datasheet
