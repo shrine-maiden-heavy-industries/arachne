@@ -113,6 +113,8 @@ class PS8Resource(Subsignal, metaclass = ABCMeta):
 			if int(mio_set) > len(claimable_mio):
 				raise ValueError(f'mio set is out of range of {self.name}')
 
+		self.num = num
+
 	@abstractmethod
 	def used_mio(self, **kwargs):
 		raise NotImplementedError # :nocov:
