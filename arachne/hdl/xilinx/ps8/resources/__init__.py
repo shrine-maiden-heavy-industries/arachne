@@ -4,6 +4,7 @@ from .common import PS8Resource, MIOSet
 from .can    import CANResource
 from .csu    import CSUResource
 from .ddr    import DDRResource, DDRType, DDRModuleType
+from .dma    import DMAResource
 from .dp     import DPResource
 from .eth    import ETHResource
 from .gpio   import GPIOResource
@@ -28,6 +29,7 @@ __all__ = (
 	'CANResource',
 	'CSUResource',
 	'DDRResource', 'DDRType', 'DDRModuleType',
+	'DMAResource',
 	'DPResource',
 	'ETHResource',
 	'GPIOResource',
