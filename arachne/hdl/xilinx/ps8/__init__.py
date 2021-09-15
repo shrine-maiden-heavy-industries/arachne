@@ -7,6 +7,8 @@ from ....util     import dbg
 from .mio         import *
 from .resources   import PS8Resource
 
+from .ps8_test    import _PS8_TEST_SIGNALS
+
 __all__ = (
 	'PS8',
 )
@@ -37,6 +39,8 @@ class PS8(Elaboratable):
 	def __init__(self, *, resources = [], **kwargs):
 		self._ps_resources = [ *resources ]
 
+		self._block = 'PS8_TEST' if kwargs.get('test_instance', False)  else 'PS8'
+
 	def elaborate(self, platform) -> Module:
 		# check to see if there is a `ps8resources` block for us
 		if hasattr(platform, 'ps8resources'):
@@ -46,10 +50,15 @@ class PS8(Elaboratable):
 
 		mappings = self._generate_mappings()
 
+		# Append the massive chunk of test signals to the instance
+		if self._block == 'PS8_TEST':
+			mappings.update(**_PS8_TEST_SIGNALS)
+
+
 		m = Module()
 
 		m.submodules.ps8 = Instance(
-			'PS8',
+			self._block,
 			# unpack the generated mappings into the instance
 			**mappings,
 		)
