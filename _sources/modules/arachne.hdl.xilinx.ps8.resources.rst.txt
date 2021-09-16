@@ -36,6 +36,14 @@ arachne.hdl.xilinx.ps8.resources.ddr module
    :undoc-members:
    :show-inheritance:
 
+arachne.hdl.xilinx.ps8.resources.dma module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.resources.dma
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 arachne.hdl.xilinx.ps8.resources.dp module
 ------------------------------------------
 

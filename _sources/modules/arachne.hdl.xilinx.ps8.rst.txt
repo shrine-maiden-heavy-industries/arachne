@@ -20,6 +20,14 @@ arachne.hdl.xilinx.ps8.mio module
    :undoc-members:
    :show-inheritance:
 
+arachne.hdl.xilinx.ps8.ps8\_test module
+---------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps8.ps8_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
