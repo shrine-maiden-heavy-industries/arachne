@@ -383,14 +383,14 @@ class PS7(Elaboratable):
 				'o_DDRA':     ddr.address,
 				'o_DDRBA':    ddr.bank_address,
 
-				'io_DDRDQSP': ddr.data_strobe_p,
-				'io_DDRDQSN': ddr.data_strobe_n,
-				'io_DDRDQ':   ddr.data,
-				'io_DDRDM':   ddr.data_mask,
+				'o_DDRDQSP': ddr.data_strobe_p,
+				'o_DDRDQSN': ddr.data_strobe_n,
+				'o_DDRDQ':   ddr.data,
+				'o_DDRDM':   ddr.data_mask,
 
-				'io_DDRODT':  ddr.odt_en,
-				'io_DDRVRP':  ddr.voltage_ref_p,
-				'io_DDRVRN':  ddr.voltage_ref_n,
+				'o_DDRODT':  ddr.odt_en,
+				'i_DDRVRP':  ddr.voltage_ref_p,
+				'i_DDRVRN':  ddr.voltage_ref_n,
 			}, ddr)
 		else:
 			return ({
