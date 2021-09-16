@@ -34,21 +34,6 @@ class DDR3Adaptor(Elaboratable):
 		m = Module()
 		bus = self._bus
 
-		io_signals = {bus.dqs_p, bus.dqs_n, bus.dq, bus.dm}
-		io_signals = tuple(map(lambda signal: f'{signal.name}__io', io_signals))
-		ios = []
-		for port in platform.iter_ports():
-			if port.name in io_signals:
-				if '_dqs_p' in port.name:
-					dqs_p = port
-				elif '_dqs_n' in port.name:
-					dqs_n = port
-				elif '_dm' in port.name:
-					dm = port
-				else:
-					dq = port
-				ios.append(port)
-
 		m.d.comb += [
 			bus.rst.o.eq(~self.rst_n),
 			bus.clk_p.o.eq(self.clk_p),
@@ -61,10 +46,10 @@ class DDR3Adaptor(Elaboratable):
 			bus.a.o.eq(self.address[0:len(bus.a.o)]),
 			bus.ba.o.eq(self.bank_address[0:len(bus.ba.o)]),
 
-			dqs_p.eq(self.data_strobe_p[0:len(dqs_p)]),
-			dqs_n.eq(self.data_strobe_n[0:len(dqs_n)]),
-			dq.eq(self.data[0:len(dq)]),
-			dm.eq(self.data_mask[0:len(dm)]),
+			bus.dqs_p.o.eq(self.data_strobe_p[0:len(bus.dqs_p.o)]),
+			bus.dqs_n.o.eq(self.data_strobe_n[0:len(bus.dqs_n.o)]),
+			bus.dq.o.eq(self.data[0:len(bus.dq.o)]),
+			bus.dm.o.eq(self.data_mask[0:len(bus.dm.o)]),
 
 			bus.odt.o.eq(self.odt_en),
 			self.voltage_ref_p.eq(bus.vref_p.i),
