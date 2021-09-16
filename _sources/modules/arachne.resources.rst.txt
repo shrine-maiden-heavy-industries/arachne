@@ -4,10 +4,26 @@ arachne.resources package
 Submodules
 ----------
 
+arachne.resources.enums module
+------------------------------
+
+.. automodule:: arachne.resources.enums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 arachne.resources.interface module
 ----------------------------------
 
 .. automodule:: arachne.resources.interface
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.resources.memory module
+-------------------------------
+
+.. automodule:: arachne.resources.memory
    :members:
    :undoc-members:
    :show-inheritance:
