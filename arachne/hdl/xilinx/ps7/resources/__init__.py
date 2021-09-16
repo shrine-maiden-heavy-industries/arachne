@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
 from nmigen.build import *
-from .mio import _PS7_MIO_MAPPING
+
+from ..mio        import _PS7_MIO_MAPPING
 
 __all__ = (
-	'PS7CoreResource', 'PS7DDR3Resource'
+	'PS7CoreResource',
+	'PS7DDR3Resource',
 )
 
 _ddr3_name_map = {
