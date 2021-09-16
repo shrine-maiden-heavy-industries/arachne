@@ -2,7 +2,7 @@
 from nmigen       import *
 from nmigen.build import *
 
-from .common      import PS8Resource,
+from .common      import PS8Resource
 
 __all__ = (
 	'DMAResource',
