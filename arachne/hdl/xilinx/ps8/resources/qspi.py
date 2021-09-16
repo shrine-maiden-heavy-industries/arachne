@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
-import enum
+from nmigen               import *
+from nmigen.build         import *
 
-from nmigen       import *
-from nmigen.build import *
-
-from .common      import PS8Resource, MIOSet
+from .....resources.enums import *
+from .common              import PS8Resource, MIOSet
 
 __all__ = (
 	'QSPIResource',
@@ -12,19 +11,7 @@ __all__ = (
 	'QSPIDataMode',
 )
 
-@enum.unique
-class QSPIMode(enum.Enum):
-	Single       = enum.auto()
-	DualStacked  = enum.auto()
-	DualParallel = enum.auto()
-
-@enum.unique
-class QSPIDataMode(enum.Enum):
-	x1 = enum.auto()
-	x2 = enum.auto()
-	x4 = enum.auto()
-
-def _validate_data_mode(mode, data_mode):
+def _validate_data_mode(mode : QSPIMode, data_mode : QSPIDataMode):
 	if mode == QSPIMode.DualParallel and data_mode != QSPIDataMode.x4:
 		raise ValueError(f'For QSPI in Dual Parallel mode the data mode must be x4 not {data_mode}')
 
@@ -35,7 +22,7 @@ class QSPIResource(PS8Resource):
 		(0, 12)
 	]
 
-	def __init__(self, *, mode, data_mode, feedback_clk = False):
+	def __init__(self, *, mode : QSPIMode, data_mode : QSPIDataMode, feedback_clk = False):
 		super().__init__(0, 0, None, False)
 
 		_validate_data_mode(mode, data_mode)
