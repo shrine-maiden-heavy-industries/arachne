@@ -108,7 +108,7 @@ class System(Elaboratable):
 		m = Module()
 		m.submodules.ps7 = ps7 = PS7(core = platform.request('ps7_core'))
 
-		#ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
+		ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		#ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
 		ps7.add_resource(name = 'eth0', resource = platform.request('eth', 0))
 		ps7.add_resource(name = 'usb0', resource = platform.request('usb', 0))
