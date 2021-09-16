@@ -84,15 +84,15 @@ class XilinxZynq7000Platform(XilinxPlatform):
 		self._check_feature("single-ended output", pin, attrs,
 							valid_xdrs=self._get_valid_xdrs(), valid_attrs=True)
 		m = Module()
-		# o = Signal(pin.width)
-		# o = self._invert_if(invert, pin.o)
-		# i, o, t = self._get_xdr_buffer(m, pin, attrs.get("IOSTANDARD"), i_invert=invert)
-		# for bit in range(pin.width):
-		# 	m.submodules["{}_{}".format(pin.name, bit)] = Instance(
-		# 		'BIBUF',
-		# 		io_PAD = port.io[bit],
-		# 		i_IO = o[bit]
-		# 	)
+		if pad in self._mapping['other']:
+			o = Signal(pin.width)
+			m.d.comb += o.eq(self._invert_if(invert, pin.o))
+			for bit in range(pin.width):
+				m.submodules["{}_{}".format(pin.name, bit)] = Instance(
+					'BIBUF',
+					io_PAD = port.io[bit],
+					i_IO = o[bit]
+				)
 		return m
 
 	def get_input_output(self, pin, port, attrs, invert):
@@ -109,7 +109,7 @@ class XilinxZynq7000Platform(XilinxPlatform):
 				m.submodules["{}_{}".format(pin.name, bit)] = Instance(
 					'BIBUF',
 					io_PAD = port.io[bit],
-					io_IO = pin.i[bit]
+					i_IO = pin.o[bit]
 				)
 		return m
 
