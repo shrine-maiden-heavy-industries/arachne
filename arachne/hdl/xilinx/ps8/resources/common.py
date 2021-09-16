@@ -110,7 +110,7 @@ class PS8Resource(Subsignal, metaclass = ABCMeta):
 			if mio_set == MIOSet.EMIO and not allow_emio:
 				raise ValueError(f'EMIO is not allowed for {self.name}')
 
-			if int(mio_set) > len(claimable_mio):
+			if int(mio_set) > len(self.claimable_mio):
 				raise ValueError(f'mio set is out of range of {self.name}')
 
 		self.num = num
