@@ -14,12 +14,19 @@ path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from arachne.platforms.xilinx.zynq7000 import XilinxZynq7000Platform
 from arachne.resources.interface import *
 from arachne.hdl.xilinx.ps7 import *
+from arachne.hdl.xilinx.ps7.resources import *
 
 class ArtyZ720PS7Platform(XilinxZynq7000Platform):
 	device      = 'xc7z020'
 	package     = 'clg400'
 	speed       = '1'
 	default_clk = 'clk125'
+
+	ps7resources = [
+		EthernetResource(0, enable_mdio = True)
+	]
+
+	ps7mio_attrs = (Attrs(IOSTANDARD = 'LVCMOS33'), Attrs(IOSTANDARD = 'LVCMOS18'))
 
 	resources = ArtyZ720Platform.resources + [
 		PS7CoreResource(0,
@@ -83,22 +90,6 @@ class ArtyZ720PS7Platform(XilinxZynq7000Platform):
 			cd =    'B14',
 			attrs = Attrs(IOSTANDARD = 'LVCMOS18')
 		),
-
-		EthernetResource(0,
-			rxck = 'B17',
-			rxd =  'D11 A16 F15 A15',
-			rx_ctl = 'D13',
-
-			txck = 'A19',
-			txd =  'E14 B18 D10 A17',
-			tx_ctl = 'F14',
-
-			mdc =  'C10',
-			mdio = 'C11',
-
-			attrs = Attrs(IOSTANDARD = 'LVCMOS18'),
-			mdio_attrs = Attrs(IOSTANDARD = 'LVCMOS18')
-		),
 	]
 
 	connectors = ArtyZ720Platform.connectors
@@ -110,7 +101,7 @@ class System(Elaboratable):
 
 		ps7.add_resource(name = 'ddr', resource = platform.request('ps7_ddr3'))
 		#ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
-		ps7.add_resource(name = 'eth0', resource = platform.request('eth', 0))
+		ps7.add_resource(name = 'eth0', resource = platform.ps7resources[0])
 		ps7.add_resource(name = 'usb0', resource = platform.request('usb', 0))
 		ps7.add_resource(name = 'uart0', resource = platform.request('uart', 0))
 		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit', 0))
