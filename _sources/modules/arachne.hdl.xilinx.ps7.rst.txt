@@ -1,6 +1,14 @@
 arachne.hdl.xilinx.ps7 package
 ==============================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arachne.hdl.xilinx.ps7.resources
+
 Submodules
 ----------
 
@@ -16,14 +24,6 @@ arachne.hdl.xilinx.ps7.mio module
 ---------------------------------
 
 .. automodule:: arachne.hdl.xilinx.ps7.mio
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arachne.hdl.xilinx.ps7.resources module
----------------------------------------
-
-.. automodule:: arachne.hdl.xilinx.ps7.resources
    :members:
    :undoc-members:
    :show-inheritance:

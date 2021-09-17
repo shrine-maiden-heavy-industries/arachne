@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>arachne.hdl.xilinx.ps7.resources package &mdash; Arachne 0.1.dev1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/platformpicker.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="arachne.hdl.xilinx.ps8 package" href="arachne.hdl.xilinx.ps8.html" />
+    <link rel="prev" title="arachne.hdl.xilinx.ps7 package" href="arachne.hdl.xilinx.ps7.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Arachne
+          </a>
+              <div class="version">
+                0.1.dev1+g969aba0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="arachne.html">arachne package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="arachne.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="arachne.core.html">arachne.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core.formal">arachne.core.formal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core.sim">arachne.core.sim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.core.html#module-arachne.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="arachne.hdl.html">arachne.hdl package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="arachne.hdl.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.hdl.html#module-arachne.hdl">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arachne.platforms.html">arachne.platforms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arachne.platforms.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.platforms.html#module-arachne.platforms">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arachne.resources.html">arachne.resources package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arachne.resources.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.resources.html#module-arachne.resources.enums">arachne.resources.enums module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.resources.html#module-arachne.resources.interface">arachne.resources.interface module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.resources.html#module-arachne.resources.memory">arachne.resources.memory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arachne.resources.html#module-arachne.resources">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne.cli">arachne.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne.util">arachne.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arachne.html#module-arachne">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Arachne</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="arachne.html">arachne package</a> &raquo;</li>
+          <li><a href="arachne.hdl.html">arachne.hdl package</a> &raquo;</li>
+          <li><a href="arachne.hdl.xilinx.html">arachne.hdl.xilinx package</a> &raquo;</li>
+          <li><a href="arachne.hdl.xilinx.ps7.html">arachne.hdl.xilinx.ps7 package</a> &raquo;</li>
+      <li>arachne.hdl.xilinx.ps7.resources package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/arachne.hdl.xilinx.ps7.resources.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arachne-hdl-xilinx-ps7-resources-package">
+<h1>arachne.hdl.xilinx.ps7.resources package<a class="headerlink" href="#arachne-hdl-xilinx-ps7-resources-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-arachne.hdl.xilinx.ps7.resources.common">
+<span id="arachne-hdl-xilinx-ps7-resources-common-module"></span><h2>arachne.hdl.xilinx.ps7.resources.common module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps7.resources.common" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.common.</span></span><span class="sig-name descname"><span class="pre">MIOSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.EMIO">
+<span class="sig-name descname"><span class="pre">EMIO</span></span><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.EMIO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO00">
+<span class="sig-name descname"><span class="pre">MIO00</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO00" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO01">
+<span class="sig-name descname"><span class="pre">MIO01</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO01" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO02">
+<span class="sig-name descname"><span class="pre">MIO02</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO02" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO03">
+<span class="sig-name descname"><span class="pre">MIO03</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO03" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO04">
+<span class="sig-name descname"><span class="pre">MIO04</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO04" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO05">
+<span class="sig-name descname"><span class="pre">MIO05</span></span><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO05" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO06">
+<span class="sig-name descname"><span class="pre">MIO06</span></span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO06" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO07">
+<span class="sig-name descname"><span class="pre">MIO07</span></span><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO07" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO08">
+<span class="sig-name descname"><span class="pre">MIO08</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO08" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO09">
+<span class="sig-name descname"><span class="pre">MIO09</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO09" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO10">
+<span class="sig-name descname"><span class="pre">MIO10</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO10" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO11">
+<span class="sig-name descname"><span class="pre">MIO11</span></span><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO11" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO12">
+<span class="sig-name descname"><span class="pre">MIO12</span></span><em class="property"> <span class="pre">=</span> <span class="pre">12</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO12" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO13">
+<span class="sig-name descname"><span class="pre">MIO13</span></span><em class="property"> <span class="pre">=</span> <span class="pre">13</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO13" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO14">
+<span class="sig-name descname"><span class="pre">MIO14</span></span><em class="property"> <span class="pre">=</span> <span class="pre">14</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO14" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO15">
+<span class="sig-name descname"><span class="pre">MIO15</span></span><em class="property"> <span class="pre">=</span> <span class="pre">15</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO15" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO16">
+<span class="sig-name descname"><span class="pre">MIO16</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO16" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO17">
+<span class="sig-name descname"><span class="pre">MIO17</span></span><em class="property"> <span class="pre">=</span> <span class="pre">17</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO17" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO18">
+<span class="sig-name descname"><span class="pre">MIO18</span></span><em class="property"> <span class="pre">=</span> <span class="pre">18</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO18" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO19">
+<span class="sig-name descname"><span class="pre">MIO19</span></span><em class="property"> <span class="pre">=</span> <span class="pre">19</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO19" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO20">
+<span class="sig-name descname"><span class="pre">MIO20</span></span><em class="property"> <span class="pre">=</span> <span class="pre">20</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO20" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO21">
+<span class="sig-name descname"><span class="pre">MIO21</span></span><em class="property"> <span class="pre">=</span> <span class="pre">21</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO21" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO22">
+<span class="sig-name descname"><span class="pre">MIO22</span></span><em class="property"> <span class="pre">=</span> <span class="pre">22</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO22" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO23">
+<span class="sig-name descname"><span class="pre">MIO23</span></span><em class="property"> <span class="pre">=</span> <span class="pre">23</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO23" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO24">
+<span class="sig-name descname"><span class="pre">MIO24</span></span><em class="property"> <span class="pre">=</span> <span class="pre">24</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO24" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO25">
+<span class="sig-name descname"><span class="pre">MIO25</span></span><em class="property"> <span class="pre">=</span> <span class="pre">25</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO25" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO26">
+<span class="sig-name descname"><span class="pre">MIO26</span></span><em class="property"> <span class="pre">=</span> <span class="pre">26</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO26" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO27">
+<span class="sig-name descname"><span class="pre">MIO27</span></span><em class="property"> <span class="pre">=</span> <span class="pre">27</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO27" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO28">
+<span class="sig-name descname"><span class="pre">MIO28</span></span><em class="property"> <span class="pre">=</span> <span class="pre">28</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO28" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO29">
+<span class="sig-name descname"><span class="pre">MIO29</span></span><em class="property"> <span class="pre">=</span> <span class="pre">29</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO29" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO30">
+<span class="sig-name descname"><span class="pre">MIO30</span></span><em class="property"> <span class="pre">=</span> <span class="pre">30</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO30" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO31">
+<span class="sig-name descname"><span class="pre">MIO31</span></span><em class="property"> <span class="pre">=</span> <span class="pre">31</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO31" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO32">
+<span class="sig-name descname"><span class="pre">MIO32</span></span><em class="property"> <span class="pre">=</span> <span class="pre">32</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO32" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO33">
+<span class="sig-name descname"><span class="pre">MIO33</span></span><em class="property"> <span class="pre">=</span> <span class="pre">33</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO33" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO34">
+<span class="sig-name descname"><span class="pre">MIO34</span></span><em class="property"> <span class="pre">=</span> <span class="pre">34</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO34" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO35">
+<span class="sig-name descname"><span class="pre">MIO35</span></span><em class="property"> <span class="pre">=</span> <span class="pre">35</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO35" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO36">
+<span class="sig-name descname"><span class="pre">MIO36</span></span><em class="property"> <span class="pre">=</span> <span class="pre">36</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO36" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO37">
+<span class="sig-name descname"><span class="pre">MIO37</span></span><em class="property"> <span class="pre">=</span> <span class="pre">37</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO37" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO38">
+<span class="sig-name descname"><span class="pre">MIO38</span></span><em class="property"> <span class="pre">=</span> <span class="pre">38</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO38" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO39">
+<span class="sig-name descname"><span class="pre">MIO39</span></span><em class="property"> <span class="pre">=</span> <span class="pre">39</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO39" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO40">
+<span class="sig-name descname"><span class="pre">MIO40</span></span><em class="property"> <span class="pre">=</span> <span class="pre">40</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO40" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO41">
+<span class="sig-name descname"><span class="pre">MIO41</span></span><em class="property"> <span class="pre">=</span> <span class="pre">41</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO41" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO42">
+<span class="sig-name descname"><span class="pre">MIO42</span></span><em class="property"> <span class="pre">=</span> <span class="pre">42</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO42" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO43">
+<span class="sig-name descname"><span class="pre">MIO43</span></span><em class="property"> <span class="pre">=</span> <span class="pre">43</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO43" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO44">
+<span class="sig-name descname"><span class="pre">MIO44</span></span><em class="property"> <span class="pre">=</span> <span class="pre">44</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO44" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO45">
+<span class="sig-name descname"><span class="pre">MIO45</span></span><em class="property"> <span class="pre">=</span> <span class="pre">45</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO45" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO46">
+<span class="sig-name descname"><span class="pre">MIO46</span></span><em class="property"> <span class="pre">=</span> <span class="pre">46</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO46" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO47">
+<span class="sig-name descname"><span class="pre">MIO47</span></span><em class="property"> <span class="pre">=</span> <span class="pre">47</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO47" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO48">
+<span class="sig-name descname"><span class="pre">MIO48</span></span><em class="property"> <span class="pre">=</span> <span class="pre">48</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO48" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO49">
+<span class="sig-name descname"><span class="pre">MIO49</span></span><em class="property"> <span class="pre">=</span> <span class="pre">49</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO49" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO50">
+<span class="sig-name descname"><span class="pre">MIO50</span></span><em class="property"> <span class="pre">=</span> <span class="pre">50</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO50" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO51">
+<span class="sig-name descname"><span class="pre">MIO51</span></span><em class="property"> <span class="pre">=</span> <span class="pre">51</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO51" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO52">
+<span class="sig-name descname"><span class="pre">MIO52</span></span><em class="property"> <span class="pre">=</span> <span class="pre">52</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO52" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO53">
+<span class="sig-name descname"><span class="pre">MIO53</span></span><em class="property"> <span class="pre">=</span> <span class="pre">53</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet.MIO53" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.common.</span></span><span class="sig-name descname"><span class="pre">PS7Resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnum_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mio_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_emio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">nmigen.hdl.rec.Record</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource.claimable_mio">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">claimable_mio</span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource.claimable_mio" title="Permalink to this definition"></a></dt>
+<dd><p>A decorator indicating abstract properties.</p>
+<p>Requires that the metaclass is ABCMeta or derived from it.  A
+class that has a metaclass derived from ABCMeta cannot be
+instantiated unless all of its abstract properties are overridden.
+The abstract properties can be called using any of the normal
+‘super’ call mechanisms.</p>
+<p>Usage:</p>
+<blockquote>
+<div><dl>
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>&#64;abstractproperty
+def my_abstract_property(self):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>This defines a read-only property; you can also define a read-write
+abstract property using the ‘long’ form of property declaration:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>def getx(self): …
+def setx(self, value): …
+x = abstractproperty(getx, setx)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>‘abstractproperty’ is deprecated. Use ‘property’ with ‘abstractmethod’
+instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource.generate_mapping">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">generate_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource.generate_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource.name">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource.name" title="Permalink to this definition"></a></dt>
+<dd><p>A decorator indicating abstract properties.</p>
+<p>Requires that the metaclass is ABCMeta or derived from it.  A
+class that has a metaclass derived from ABCMeta cannot be
+instantiated unless all of its abstract properties are overridden.
+The abstract properties can be called using any of the normal
+‘super’ call mechanisms.</p>
+<p>Usage:</p>
+<blockquote>
+<div><dl>
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>&#64;abstractproperty
+def my_abstract_property(self):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>This defines a read-only property; you can also define a read-write
+abstract property using the ‘long’ form of property declaration:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>def getx(self): …
+def setx(self, value): …
+x = abstractproperty(getx, setx)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>‘abstractproperty’ is deprecated. Use ‘property’ with ‘abstractmethod’
+instead.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource.signals">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">signals</span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource.signals" title="Permalink to this definition"></a></dt>
+<dd><p>A decorator indicating abstract properties.</p>
+<p>Requires that the metaclass is ABCMeta or derived from it.  A
+class that has a metaclass derived from ABCMeta cannot be
+instantiated unless all of its abstract properties are overridden.
+The abstract properties can be called using any of the normal
+‘super’ call mechanisms.</p>
+<p>Usage:</p>
+<blockquote>
+<div><dl>
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>&#64;abstractproperty
+def my_abstract_property(self):</p>
+<blockquote>
+<div><p>…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>This defines a read-only property; you can also define a read-write
+abstract property using the ‘long’ form of property declaration:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>class C(metaclass=ABCMeta):</dt><dd><p>def getx(self): …
+def setx(self, value): …
+x = abstractproperty(getx, setx)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>‘abstractproperty’ is deprecated. Use ‘property’ with ‘abstractmethod’
+instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.common.PS7Resource.used_mio">
+<span class="sig-name descname"><span class="pre">used_mio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#arachne.hdl.xilinx.ps7.resources.common.MIOSet" title="arachne.hdl.xilinx.ps7.resources.common.MIOSet"><span class="pre">arachne.hdl.xilinx.ps7.resources.common.MIOSet</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource.used_mio" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-arachne.hdl.xilinx.ps7.resources.ethernet">
+<span id="arachne-hdl-xilinx-ps7-resources-ethernet-module"></span><h2>arachne.hdl.xilinx.ps7.resources.ethernet module<a class="headerlink" href="#module-arachne.hdl.xilinx.ps7.resources.ethernet" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.ethernet.</span></span><span class="sig-name descname"><span class="pre">EthernetResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_mdio</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource" title="arachne.hdl.xilinx.ps7.resources.common.PS7Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arachne.hdl.xilinx.ps7.resources.common.PS7Resource</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.claimable_mio">
+<span class="sig-name descname"><span class="pre">claimable_mio</span></span><em class="property"> <span class="pre">=</span> <span class="pre">(((&lt;MIOSet.MIO16:</span> <span class="pre">16&gt;,</span> <span class="pre">&lt;MIOSet.MIO27:</span> <span class="pre">27&gt;),</span> <span class="pre">(&lt;MIOSet.MIO52:</span> <span class="pre">52&gt;,</span> <span class="pre">&lt;MIOSet.MIO53:</span> <span class="pre">53&gt;)),</span> <span class="pre">((&lt;MIOSet.MIO28:</span> <span class="pre">28&gt;,</span> <span class="pre">&lt;MIOSet.MIO39:</span> <span class="pre">39&gt;),</span> <span class="pre">(&lt;MIOSet.MIO52:</span> <span class="pre">52&gt;,</span> <span class="pre">&lt;MIOSet.MIO53:</span> <span class="pre">53&gt;)))</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.claimable_mio" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.generate_mapping">
+<span class="sig-name descname"><span class="pre">generate_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">nmigen.hdl.dsl.Module</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.generate_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"> <span class="pre">=</span> <span class="pre">('eth',)</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.signals">
+<span class="sig-name descname"><span class="pre">signals</span></span><em class="property"> <span class="pre">=</span> <span class="pre">(('rx_clk',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx',</span> <span class="pre">8,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx_dv',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx_err',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('tx_clk',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('tx',</span> <span class="pre">8,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('tx_en',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('tx_err',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('col',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('crs',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('mdc',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('mdio_i',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('mdio_o',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('mdio_oe',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;))</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.ethernet.EthernetResource.signals" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-arachne.hdl.xilinx.ps7.resources">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-arachne.hdl.xilinx.ps7.resources" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.EthernetResource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.</span></span><span class="sig-name descname"><span class="pre">EthernetResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_mdio</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.EthernetResource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arachne.hdl.xilinx.ps7.resources.common.PS7Resource" title="arachne.hdl.xilinx.ps7.resources.common.PS7Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arachne.hdl.xilinx.ps7.resources.common.PS7Resource</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.EthernetResource.claimable_mio">
+<span class="sig-name descname"><span class="pre">claimable_mio</span></span><em class="property"> <span class="pre">=</span> <span class="pre">(((&lt;MIOSet.MIO16:</span> <span class="pre">16&gt;,</span> <span class="pre">&lt;MIOSet.MIO27:</span> <span class="pre">27&gt;),</span> <span class="pre">(&lt;MIOSet.MIO52:</span> <span class="pre">52&gt;,</span> <span class="pre">&lt;MIOSet.MIO53:</span> <span class="pre">53&gt;)),</span> <span class="pre">((&lt;MIOSet.MIO28:</span> <span class="pre">28&gt;,</span> <span class="pre">&lt;MIOSet.MIO39:</span> <span class="pre">39&gt;),</span> <span class="pre">(&lt;MIOSet.MIO52:</span> <span class="pre">52&gt;,</span> <span class="pre">&lt;MIOSet.MIO53:</span> <span class="pre">53&gt;)))</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.EthernetResource.claimable_mio" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.EthernetResource.generate_mapping">
+<span class="sig-name descname"><span class="pre">generate_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">nmigen.hdl.dsl.Module</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.EthernetResource.generate_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.EthernetResource.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"> <span class="pre">=</span> <span class="pre">('eth',)</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.EthernetResource.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.EthernetResource.signals">
+<span class="sig-name descname"><span class="pre">signals</span></span><em class="property"> <span class="pre">=</span> <span class="pre">(('rx_clk',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx',</span> <span class="pre">8,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx_dv',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('rx_err',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('tx_clk',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('tx',</span> <span class="pre">8,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('tx_en',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('tx_err',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('col',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('crs',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('mdc',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('mdio_i',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANIN:</span> <span class="pre">3&gt;),</span> <span class="pre">('mdio_o',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;),</span> <span class="pre">('mdio_oe',</span> <span class="pre">1,</span> <span class="pre">&lt;Direction.FANOUT:</span> <span class="pre">2&gt;))</span></em><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.EthernetResource.signals" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.PS7CoreResource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.</span></span><span class="sig-name descname"><span class="pre">PS7CoreResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clk_freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.PS7CoreResource" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arachne.hdl.xilinx.ps7.resources.PS7DDR3Resource">
+<span class="sig-prename descclassname"><span class="pre">arachne.hdl.xilinx.ps7.resources.</span></span><span class="sig-name descname"><span class="pre">PS7DDR3Resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddr3</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">nmigen.build.dsl.Resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#arachne.hdl.xilinx.ps7.resources.PS7DDR3Resource" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arachne.hdl.xilinx.ps7.html" class="btn btn-neutral float-left" title="arachne.hdl.xilinx.ps7 package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arachne.hdl.xilinx.ps8.html" class="btn btn-neutral float-right" title="arachne.hdl.xilinx.ps8 package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Arachne developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

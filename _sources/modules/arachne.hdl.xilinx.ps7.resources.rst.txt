@@ -1,0 +1,29 @@
+arachne.hdl.xilinx.ps7.resources package
+========================================
+
+Submodules
+----------
+
+arachne.hdl.xilinx.ps7.resources.common module
+----------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.resources.common
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+arachne.hdl.xilinx.ps7.resources.ethernet module
+------------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.resources.ethernet
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:
