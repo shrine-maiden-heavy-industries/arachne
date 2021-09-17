@@ -8,23 +8,33 @@ __all__ = (
 )
 
 def _collect_sims(*, pkg):
-	import pkgutil
-	from inspect import getmembers
-	from os      import path
+	from pkgutil    import walk_packages
+	from importlib  import import_module
+	from inspect    import getmembers
+	from os         import path
+	from nmigen.sim import Simulator
+
+	def _case_predicate(member):
+		return (
+			isinstance(member, tuple) and
+			len(member) == 2 and
+			isinstance(member[0], Simulator) and
+			isinstance(member[1], str)
+		)
 
 	sims = []
 
 	if not path.exists(pkg):
 		raise RuntimeError(f'The package {pkg} does not exist, unable to attempt to import test cases')
 
-	for _, name, is_pkg in pkgutil.itr_modules(path = pkg):
+	for _, name, is_pkg in walk_packages(path = (pkg,), prefix = f'{pkg.replace("/", ".")}.'):
 		if not is_pkg:
-			pkg_import = __import__(f'{pkg}.{name}')
-			# TODO: Figure out the import stuff
-			# sims.append({
-			# 	'name' : name,
-			# 	'cases': getmembers(pkg, lambda o: isinstance(o, ))
-			# })
+			pkg_import = import_module(name)
+			cases_variables = getmembers(pkg_import, _case_predicate)
+			sims.append({
+				'name' : name,
+				'cases': [case for _, case in cases_variables]
+			})
 
 	return sims
 
@@ -49,7 +59,7 @@ def sim_case(*, domains, dut, platform = None, engine = 'pysim'):
 	return _reg_sim
 
 def run_sims(*, pkg, result_dir, skip = []):
-	from os import path, mkdir
+	from os import path, mkdir, makedirs
 
 	if not path.exists(result_dir):
 		mkdir(result_dir)
@@ -57,9 +67,9 @@ def run_sims(*, pkg, result_dir, skip = []):
 	for sim in _collect_sims(pkg = pkg):
 		log(f'Running simulation {sim["name"]}...')
 
-		out_dir = path.join(result_dir, sim['name'])
+		out_dir = path.join(result_dir, sim['name'].replace('.', '/'))
 		if not path.exists(out_dir):
-			mkdir(out_dir)
+			makedirs(out_dir, exist_ok = True)
 
 		for case, name in sim['cases']:
 			inf(f' => Running {name}')
