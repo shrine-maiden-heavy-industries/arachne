@@ -23,6 +23,14 @@ arachne.cli module
    :undoc-members:
    :show-inheritance:
 
+arachne.time module
+-------------------
+
+.. automodule:: arachne.time
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 arachne.util module
 -------------------
 
