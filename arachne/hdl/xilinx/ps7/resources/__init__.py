@@ -2,14 +2,18 @@
 from nmigen.build import *
 
 from ..mio        import _PS7_MIO_MAPPING
+from .common      import MIOSet
 from .ethernet    import EthernetResource
 from .i2c         import I2CResource
+from .uart        import UARTResource
 
 __all__ = (
 	'PS7CoreResource',
 	'PS7DDR3Resource',
+	'MIOSet',
 	'EthernetResource',
 	'I2CResource',
+	'UARTResource',
 )
 
 _ddr3_name_map = {
