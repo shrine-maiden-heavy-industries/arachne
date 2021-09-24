@@ -49,15 +49,14 @@ class I2CResource(PS7Resource):
 	)
 
 	def __init__(self, num, *, mios = None, emio = None):
-		assert (mios is not None and emio is None) or (mios is None and emio is not None)
+		assert mios is None or emio is None
 		if mios is not None:
 			self._validate_mios(num, mios)
 			mio = mios
 		elif emio is not None:
 			mio = MIOSet.EMIO
 		else:
-			layout = self.signals
-			mio = MIOSet.EMIO
+			mio = ()
 
 		if mio == MIOSet.EMIO and emio is True:
 			layout = self.signals
