@@ -146,11 +146,11 @@ class PS7(Elaboratable):
 			# DDR3 Memory
 			**ddr_map,
 			# Ethernet
-			**self._map_eth(m, platform = platform, num = 0),
-			**self._map_eth(m, platform = platform, num = 1),
+			**self._map_eth(m, num = 0),
+			**self._map_eth(m, num = 1),
 			# I2C
-			**self._map_i2c(m, platform = platform, num = 0),
-			**self._map_i2c(m, platform = platform, num = 1),
+			**self._map_i2c(m, num = 0),
+			**self._map_i2c(m, num = 1),
 			# JTAG
 			**self._map_jtag(m, platform = platform),
 			# SDIO (SDCard interfaces)
@@ -415,14 +415,14 @@ class PS7(Elaboratable):
 				'io_DDRVRN':  Signal(),
 			}, None)
 
-	def _map_eth(self, m, *, platform, num) -> dict:
+	def _map_eth(self, m, *, num) -> dict:
 		eth = self._ps_resources[f'eth{num}']
 		if eth is not None:
 			return eth.generate_mapping(m)
 		else:
 			return EthernetResource(num).generate_mapping(m)
 
-	def _map_i2c(self, m, *, platform, num) -> dict:
+	def _map_i2c(self, m, *, num) -> dict:
 		i2c = self._ps_resources[f'i2c{num}']
 		if i2c is not None:
 			return i2c.generate_mapping(m)
