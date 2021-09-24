@@ -3,11 +3,13 @@ from nmigen.build import *
 
 from ..mio        import _PS7_MIO_MAPPING
 from .ethernet    import EthernetResource
+from .i2c         import I2CResource
 
 __all__ = (
 	'PS7CoreResource',
 	'PS7DDR3Resource',
 	'EthernetResource',
+	'I2CResource',
 )
 
 _ddr3_name_map = {
