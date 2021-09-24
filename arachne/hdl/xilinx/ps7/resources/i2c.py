@@ -85,12 +85,12 @@ class I2CResource(PS7Resource):
 		sda_oe_n = Signal()
 
 		if self._mios != MIOSet.EMIO:
-			i2c = Record(self.signals, name = f'i2c_{num}')
+			resource = Record(self.signals, name = f'i2c_{num}')
 		elif self._emio is None:
-			i2c = self
+			resource = self
 		else:
 			emio = self._emio
-			i2c = Record(self.signals, name = f'i2c_{num}', fields = {
+			resource = Record(self.signals, name = f'i2c_{num}', fields = {
 				'scl_i':  emio.scl.i,
 				'scl_o':  emio.scl.o,
 				'scl_oe': emio.scl.oe,
@@ -100,15 +100,15 @@ class I2CResource(PS7Resource):
 			})
 
 		m.d.comb += [
-			i2c.scl_oe.eq(~scl_oe_n),
-			i2c.sda_oe.eq(~sda_oe_n),
+			resource.scl_oe.eq(~scl_oe_n),
+			resource.sda_oe.eq(~sda_oe_n),
 		]
 
 		return  {
-			f'i_EMIOI2C{num}SCLI':  i2c.scl_i,
-			f'o_EMIOI2C{num}SCLO':  i2c.scl_o,
+			f'i_EMIOI2C{num}SCLI':  resource.scl_i,
+			f'o_EMIOI2C{num}SCLO':  resource.scl_o,
 			f'o_EMIOI2C{num}SCLTN': scl_oe_n,
-			f'i_EMIOI2C{num}SDAI':  i2c.sda_i,
-			f'o_EMIOI2C{num}SDAO':  i2c.sda_o,
+			f'i_EMIOI2C{num}SDAI':  resource.sda_i,
+			f'o_EMIOI2C{num}SDAO':  resource.sda_o,
 			f'o_EMIOI2C{num}SDATN': sda_oe_n,
 		}
