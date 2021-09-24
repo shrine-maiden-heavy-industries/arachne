@@ -11,16 +11,16 @@ __all__ = (
 
 class EthernetResource(PS7Resource):
 	name = 'eth'
-	claimable_mio = (
-		(
+	claimable_mio = {
+		0: (
 			(MIOSet.MIO16, MIOSet.MIO27),
 			(MIOSet.MIO52, MIOSet.MIO53),
 		),
-		(
+		1: (
 			(MIOSet.MIO28, MIOSet.MIO39),
 			(MIOSet.MIO52, MIOSet.MIO53),
 		)
-	)
+	}
 
 	signals = (
 		('rx_clk',  1, DIR_FANIN),
@@ -51,6 +51,8 @@ class EthernetResource(PS7Resource):
 				mio = self.claimable_mio[num][0]
 			else:
 				mio = MIOSet.EMIO
+		else:
+			mio = None
 
 		if mio == MIOSet.EMIO and emio is True:
 			layout = self.signals
@@ -67,45 +69,8 @@ class EthernetResource(PS7Resource):
 
 		if self._mios != MIOSet.EMIO:
 			resource = Record(self.signals, name = f'eth_{num}')
-			m.d.comb += resource.mdio_oe.eq(~mdio_oe_n)
-			return {
-				f'i_EMIOENET{num}GMIIRXCLK': resource.rx_clk,
-				f'i_EMIOENET{num}GMIIRXD':   resource.rx,
-				f'i_EMIOENET{num}GMIIRXDV':  resource.rx_dv,
-				f'i_EMIOENET{num}GMIIRXER':  resource.rx_err,
-
-				f'i_EMIOENET{num}GMIITXCLK': resource.tx_clk,
-				f'o_EMIOENET{num}GMIITXD':   resource.tx,
-				f'o_EMIOENET{num}GMIITXEN':  resource.tx_en,
-				f'o_EMIOENET{num}GMIITXER':  resource.tx_err,
-				f'i_EMIOENET{num}GMIICOL':   resource.col,
-				f'i_EMIOENET{num}GMIICRS':   resource.crs,
-
-				f'o_EMIOENET{num}MDIOMDC':   resource.mdc,
-				f'i_EMIOENET{num}MDIOI':     resource.mdio_i,
-				f'o_EMIOENET{num}MDIOO':     resource.mdio_o,
-				f'o_EMIOENET{num}MDIOTN':    mdio_oe_n,
-			}
 		elif self._emio is None:
-			m.d.comb += self.mdio_oe.eq(~mdio_oe_n)
-			return {
-				f'i_EMIOENET{num}GMIIRXCLK': self.rx_clk,
-				f'i_EMIOENET{num}GMIIRXD':   self.rx,
-				f'i_EMIOENET{num}GMIIRXDV':  self.rx_dv,
-				f'i_EMIOENET{num}GMIIRXER':  self.rx_err,
-
-				f'i_EMIOENET{num}GMIITXCLK': self.tx_clk,
-				f'o_EMIOENET{num}GMIITXD':   self.tx,
-				f'o_EMIOENET{num}GMIITXEN':  self.tx_en,
-				f'o_EMIOENET{num}GMIITXER':  self.tx_err,
-				f'i_EMIOENET{num}GMIICOL':   self.col,
-				f'i_EMIOENET{num}GMIICRS':   self.crs,
-
-				f'o_EMIOENET{num}MDIOMDC':   self.mdc,
-				f'i_EMIOENET{num}MDIOI':     self.mdio_i,
-				f'o_EMIOENET{num}MDIOO':     self.mdio_o,
-				f'o_EMIOENET{num}MDIOTN':    mdio_oe_n,
-			}
+			resource = self
 		else:
 			eth = self._emio
 			rx_domain = f'eth{num}_rx'
@@ -201,3 +166,24 @@ class EthernetResource(PS7Resource):
 				f'o_EMIOENET{num}MDIOO':     mdio_o,
 				f'o_EMIOENET{num}MDIOTN':    mdio_oe_n,
 			}
+
+		m.d.comb += resource.mdio_oe.eq(~mdio_oe_n)
+
+		return {
+			f'i_EMIOENET{num}GMIIRXCLK': resource.rx_clk,
+			f'i_EMIOENET{num}GMIIRXD':   resource.rx,
+			f'i_EMIOENET{num}GMIIRXDV':  resource.rx_dv,
+			f'i_EMIOENET{num}GMIIRXER':  resource.rx_err,
+
+			f'i_EMIOENET{num}GMIITXCLK': resource.tx_clk,
+			f'o_EMIOENET{num}GMIITXD':   resource.tx,
+			f'o_EMIOENET{num}GMIITXEN':  resource.tx_en,
+			f'o_EMIOENET{num}GMIITXER':  resource.tx_err,
+			f'i_EMIOENET{num}GMIICOL':   resource.col,
+			f'i_EMIOENET{num}GMIICRS':   resource.crs,
+
+			f'o_EMIOENET{num}MDIOMDC':   resource.mdc,
+			f'i_EMIOENET{num}MDIOI':     resource.mdio_i,
+			f'o_EMIOENET{num}MDIOO':     resource.mdio_o,
+			f'o_EMIOENET{num}MDIOTN':    mdio_oe_n,
+		}
