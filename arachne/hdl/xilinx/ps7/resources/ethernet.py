@@ -6,11 +6,11 @@ from .common        import *
 from ..adaptors     import GMIItoRGMII
 
 __all__ = (
-	'EthernetResource'
+	'EthernetResource',
 )
 
 class EthernetResource(PS7Resource):
-	name = 'eth',
+	name = 'eth'
 	claimable_mio = (
 		(
 			(MIOSet.MIO16, MIOSet.MIO27),
