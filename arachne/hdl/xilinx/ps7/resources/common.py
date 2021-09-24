@@ -100,7 +100,7 @@ class PS7Resource(Record, metaclass = ABCMeta):
 	claimable_mio = abstractproperty()
 	signals       = abstractproperty()
 
-	def __init__(self, *, num, rnum_max, mio_set, allow_emio, layout):
+	def __init__(self, *, num, rnum_max, layout, mio_set = (), allow_emio = False):
 		if num > rnum_max:
 			raise AssertionError(f'PS7 only has {self.name}0..{rnum_max}, not {num}')
 		elif mio_set is None:
