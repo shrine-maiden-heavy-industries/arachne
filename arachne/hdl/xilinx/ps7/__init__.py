@@ -160,8 +160,8 @@ class PS7(Elaboratable):
 			**self._map_spi(m, platform = platform, num = 0),
 			**self._map_spi(m, platform = platform, num = 1),
 			# UART
-			**self._map_uart(platform = platform, num = 0),
-			**self._map_uart(platform = platform, num = 1),
+			**self._map_uart(m, num = 0),
+			**self._map_uart(m, num = 1),
 			# USB
 			**self._map_usb(m, platform = platform, num = 0),
 			**self._map_usb(m, platform = platform, num = 1),
@@ -574,47 +574,12 @@ class PS7(Elaboratable):
 			f'o_EMIOSPI{num}STN':    Signal(),
 		}
 
-	def _map_uart(self, *, platform, num) -> dict:
+	def _map_uart(self, m, *, num) -> dict:
 		uart = self._ps_resources[f'uart{num}']
 		if uart is not None:
-			mapping = _PS7_MIO_MAPPING[platform.device, platform.package]['mio']
-			resource = platform.lookup(*self._demap_resource(uart))
-
-			unmapped = True
-			for subsignal in resource.ios:
-				unmapped &= self._map_mio(mapping = mapping, subsignal = subsignal)
-
-			if unmapped:
-				rts_n = Signal()
-				cts_n = Signal()
-				dtr_n = Signal()
-				dsr_n = Signal()
-				dcd_n = Signal()
-				ri_n = Signal()
-
-				return {
-					f'i_EMIOUART{num}RX':   uart.rx.i,
-					f'o_EMIOUART{num}TX':   uart.tx.o,
-
-					f'o_EMIOUART{num}RTSN': rts_n,
-					f'i_EMIOUART{num}CTSN': cts_n,
-					f'o_EMIOUART{num}DTRN': dtr_n,
-					f'i_EMIOUART{num}DSRN': dsr_n,
-					f'i_EMIOUART{num}DCDN': dcd_n,
-					f'i_EMIOUART{num}RIN':  ri_n,
-				}
-
-		return {
-			f'i_EMIOUART{num}RX':   Signal(),
-			f'o_EMIOUART{num}TX':   Signal(),
-
-			f'o_EMIOUART{num}RTSN': Signal(),
-			f'i_EMIOUART{num}CTSN': Signal(),
-			f'o_EMIOUART{num}DTRN': Signal(),
-			f'i_EMIOUART{num}DSRN': Signal(),
-			f'i_EMIOUART{num}DCDN': Signal(),
-			f'i_EMIOUART{num}RIN':  Signal(),
-		}
+			return uart.generate_mapping(m)
+		else:
+			return UARTResource(num).generate_mapping(m)
 
 	def _map_usb(self, m, *, platform, num) -> dict:
 		usb = self._ps_resources[f'usb{num}']
