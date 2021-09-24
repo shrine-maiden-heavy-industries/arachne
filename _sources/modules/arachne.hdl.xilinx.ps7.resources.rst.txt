@@ -20,6 +20,14 @@ arachne.hdl.xilinx.ps7.resources.ethernet module
    :undoc-members:
    :show-inheritance:
 
+arachne.hdl.xilinx.ps7.resources.i2c module
+-------------------------------------------
+
+.. automodule:: arachne.hdl.xilinx.ps7.resources.i2c
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
