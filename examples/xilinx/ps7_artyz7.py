@@ -5,7 +5,7 @@ from nmigen.build import *
 from nmigen.hdl.ir import Elaboratable
 from nmigen_boards.arty_z7 import ArtyZ720Platform
 from nmigen_boards.resources.memory import DDR3Resource, SDCardResources
-from nmigen_boards.resources.interface import UARTResource, ULPIResource
+from nmigen_boards.resources.interface import ULPIResource
 
 from pathlib import Path
 from sys import path
@@ -23,7 +23,8 @@ class ArtyZ720PS7Platform(XilinxZynq7000Platform):
 	default_clk = 'clk125'
 
 	ps7resources = [
-		EthernetResource(0, enable_mdio = True)
+		EthernetResource(0, enable_mdio = True),
+		UARTResource(0, mios = (MIOSet.MIO14, MIOSet.MIO15)),
 	]
 
 	ps7mio_attrs = (Attrs(IOSTANDARD = 'LVCMOS33'), Attrs(IOSTANDARD = 'LVCMOS18'))
@@ -64,12 +65,6 @@ class ArtyZ720PS7Platform(XilinxZynq7000Platform):
 			),
 		),
 
-		UARTResource(0,
-			rx =    'C5',
-			tx =    'C8',
-			attrs = Attrs(IOSTANDARD = 'LVCMOS33')
-		),
-
 		ULPIResource(0,
 			data =    'A14 D15 A12 F12 C16 A10 E13 C18',
 			clk =     'A11',
@@ -103,7 +98,7 @@ class System(Elaboratable):
 		#ps7.add_resource(name = 'jtag', resource = platform.request('jtag'))
 		ps7.add_resource(name = 'eth0', resource = platform.ps7resources[0])
 		ps7.add_resource(name = 'usb0', resource = platform.request('usb', 0))
-		ps7.add_resource(name = 'uart0', resource = platform.request('uart', 0))
+		ps7.add_resource(name = 'uart0', resource = platform.ps7resources[1])
 		ps7.add_resource(name = 'sdio0', resource = platform.request('sd_card_4bit', 0))
 
 		return m
