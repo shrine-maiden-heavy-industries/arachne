@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen import *
-from nmigen.build import *
-from nmigen.hdl.ir import Elaboratable
-from nmigen_boards.arty_z7 import ArtyZ720Platform
-from nmigen_boards.resources.memory import DDR3Resource, SDCardResources
-from nmigen_boards.resources.interface import ULPIResource
+from amaranth import *
+from amaranth.build import *
+from amaranth.hdl.ir import Elaboratable
+from amaranth_boards.arty_z7 import ArtyZ720Platform
+from amaranth_boards.resources.memory import DDR3Resource, SDCardResources
+from amaranth_boards.resources.interface import ULPIResource
 
 from pathlib import Path
 from sys import path

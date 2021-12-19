@@ -1,10 +1,10 @@
 # Arachne
 
-Arachne is a toolkit for [nmigen](https://github.com/nmigen/nmigen) based designs.
+Arachne is a toolkit for [amaranth](https://github.com/amaranth-lang/amaranth) based designs.
 
 ## Requirements
 
-Arachne requires an [nmigen](https://github.com/nmigen/nmigen) of at least 0.3, along with all of it's prerequisites, there are no additional dependencies at this time.
+Arachne requires an [amaranth](https://github.com/amaranth-lang/amaranth) of at least 0.3, along with all of it's prerequisites, there are no additional dependencies at this time.
 
 ## Installing
 

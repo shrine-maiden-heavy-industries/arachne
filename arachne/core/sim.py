@@ -8,11 +8,11 @@ __all__ = (
 )
 
 def _collect_sims(*, pkg):
-	from pkgutil    import walk_packages
-	from importlib  import import_module
-	from inspect    import getmembers
-	from os         import path
-	from nmigen.sim import Simulator
+	from pkgutil      import walk_packages
+	from importlib    import import_module
+	from inspect      import getmembers
+	from os           import path
+	from amaranth.sim import Simulator
 
 	def _case_predicate(member):
 		return (
@@ -41,8 +41,8 @@ def _collect_sims(*, pkg):
 
 def sim_case(*, domains, dut, platform = None, engine = 'pysim'):
 	def _reg_sim(func):
-		from nmigen.sim    import Simulator
-		from nmigen.hdl.ir import Fragment
+		from amaranth.sim    import Simulator
+		from amaranth.hdl.ir import Fragment
 
 		sim = Simulator(
 			Fragment.get(dut, platform = platform),

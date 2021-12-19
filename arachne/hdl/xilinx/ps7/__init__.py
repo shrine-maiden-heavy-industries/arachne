@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from typing       import List, Tuple, Union
-from nmigen       import *
-from nmigen.build import *
+from typing         import List, Tuple, Union
+from amaranth       import *
+from amaranth.build import *
 
-from ...amba4.axi import *
-from .mio         import _PS7_MIO_MAPPING
-from .resources   import *
-from .adaptors    import *
+from ...amba4.axi   import *
+from .mio           import _PS7_MIO_MAPPING
+from .resources     import *
+from .adaptors      import *
 
 __all__ = (
 	'PS7', 'PS7CoreResource', 'PS7DDR3Resource'

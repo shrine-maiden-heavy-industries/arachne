@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen       import *
-from nmigen.build import *
+from amaranth       import *
+from amaranth.build import *
 
 __all__ = ()
 

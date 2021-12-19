@@ -23,8 +23,8 @@ jobs:
           sudo apt-get -y update
           sudo apt-get -y install libncurses5
           sudo pip3 install --upgrade pip setuptools wheel
-          pip3 install --user 'git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]'
-          pip3 install --user 'git+https://github.com/nmigen/nmigen-boards.git#egg=nmigen-boards'
+          pip3 install --user 'git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]'
+          pip3 install --user 'git+https://github.com/amaranth-lang/amaranth-boards.git#egg=amaranth-boards'
           pip3 install --user -e .
       - name: Synth PS8
         shell: bash
@@ -49,8 +49,8 @@ jobs:
           sudo apt-get -y update
           sudo apt-get -y install libncurses5
           sudo pip3 install --upgrade pip setuptools wheel
-          pip3 install --user 'git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]'
-          pip3 install --user 'git+https://github.com/nmigen/nmigen-boards.git#egg=nmigen-boards'
+          pip3 install --user 'git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]'
+          pip3 install --user 'git+https://github.com/amaranth-lang/amaranth-boards.git#egg=amaranth-boards'
           pip3 install --user -e .
       - name: Synth PS7
         shell: bash

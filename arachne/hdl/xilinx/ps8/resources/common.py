@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from abc          import ABCMeta, abstractmethod, abstractproperty
+from abc            import ABCMeta, abstractmethod, abstractproperty
 import enum
 
-from nmigen       import *
-from nmigen.build import *
+from amaranth       import *
+from amaranth.build import *
 
-from ..mio        import _PS8_MIO_MAPPING
+from ..mio          import _PS8_MIO_MAPPING
 
 __all__ = (
 	'PS8Resource',

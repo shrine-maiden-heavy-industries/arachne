@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen.build import *
+from amaranth.build import *
 
 from .            import assert_width
 

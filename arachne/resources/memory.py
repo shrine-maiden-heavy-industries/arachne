@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen.build import *
-from .enums       import *
+from amaranth.build import *
+from .enums         import *
 
 __all__ = (
 	'QSPIFlashResource'

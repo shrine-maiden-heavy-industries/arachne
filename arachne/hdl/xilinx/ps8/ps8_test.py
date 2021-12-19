@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen       import *
+from amaranth import *
 
 
 _PS8_TEST_SIGNALS = {

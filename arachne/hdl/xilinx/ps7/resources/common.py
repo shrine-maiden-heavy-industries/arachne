@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from typing import List
-from abc    import ABCMeta, abstractproperty, abstractmethod
+from typing   import List
+from abc      import ABCMeta, abstractproperty, abstractmethod
 import enum
-from nmigen import *
+from amaranth import *
 
-from ..mio  import _PS7_MIO_MAPPING
+from ..mio    import _PS7_MIO_MAPPING
 
 __all__ = (
 	'PS7Resource',

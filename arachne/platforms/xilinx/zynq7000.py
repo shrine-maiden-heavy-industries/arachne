@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 from typing                import Tuple
-from nmigen                import *
-from nmigen.build          import *
+from amaranth              import *
+from amaranth.build        import *
 
 from .unified              import XilinxPlatform
 from ...hdl.xilinx.ps7.mio import _PS7_MIO_MAPPING
@@ -51,7 +51,7 @@ class XilinxZynq7000Platform(XilinxPlatform):
 		raise ValueError('Failed to map pin to pad')
 
 	# Support both the current upstream behaviour and MWK's unified Xilinx patch
-	# (https://github.com/nmigen/nmigen/pull/563)
+	# (https://github.com/amaranth-lang/amaranth/pull/563)
 	def _get_valid_xdrs(self):
 		if hasattr(super(), '_get_valid_xdrs'):
 			return super()._get_valid_xdrs()

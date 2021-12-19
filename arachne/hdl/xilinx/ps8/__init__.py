@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen       import *
-from nmigen.build import *
+from amaranth       import *
+from amaranth.build import *
 
-from ....util     import dbg
+from ....util       import dbg
 
-from .mio         import *
-from .resources   import PS8Resource
+from .mio           import *
+from .resources     import PS8Resource
 
-from .ps8_test    import _PS8_TEST_SIGNALS
+from .ps8_test      import _PS8_TEST_SIGNALS
 
 __all__ = (
 	'PS8',

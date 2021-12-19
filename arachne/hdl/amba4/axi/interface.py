@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen   import *
+from amaranth import *
 
 from .common  import *
 from .common  import _check_interface

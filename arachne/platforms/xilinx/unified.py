@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from abc            import abstractproperty
+from abc              import abstractproperty
 
-from nmigen.hdl     import *
-from nmigen.lib.cdc import ResetSynchronizer
-from nmigen.build   import *
+from amaranth.hdl     import *
+from amaranth.lib.cdc import ResetSynchronizer
+from amaranth.build   import *
 
 __all__ = (
 	'XilinxPlatform',
 )
 
 """
-This was taken from the mwk patch to nmigen to unify the xilinx platforms <https://github.com/nmigen/nmigen/pull/563>
+This was taken from the mwk patch to amaranth to unify the xilinx platforms <https://github.com/amaranth-lang/amaranth/pull/563>
 
 It has then been patched to support the Kria k26 SoMs, as well as adding support for partial reconfiguration
 
@@ -24,7 +24,7 @@ class XilinxPlatform(TemplatedPlatform):
 		* ``vivado``
 
 	The environment is populated by running the script specified in the environment variable
-	``NMIGEN_ENV_Vivado``, if present.
+	``AMARANTH_ENV_Vivado``, if present.
 
 	Available overrides:
 		* ``script_after_read``: inserts commands after ``read_xdc`` in Tcl script.
@@ -66,7 +66,7 @@ class XilinxPlatform(TemplatedPlatform):
 		* ``bitgen``
 
 	The environment is populated by running the script specified in the environment variable
-	``NMIGEN_ENV_ISE``, if present.
+	``AMARANTH_ENV_ISE``, if present.
 
 	Available overrides:
 		* ``script_after_run``: inserts commands after ``run`` in XST script.
@@ -107,7 +107,7 @@ class XilinxPlatform(TemplatedPlatform):
 		* ``symbiflow_write_bitstream``
 
 	The environment is populated by running the script specified in the environment variable
-	``NMIGEN_ENV_Symbiflow``, if present.
+	``AMARANTH_ENV_Symbiflow``, if present.
 
 	Available overrides:
 		* ``add_constraints``: inserts commands in XDC file.
@@ -159,15 +159,15 @@ class XilinxPlatform(TemplatedPlatform):
 			{% endfor %}
 			{{get_override("script_after_read")|default("# (script_after_read placeholder)")}}
 			synth_design -top {{name}}
-			foreach cell [get_cells -quiet -hier -filter {nmigen.vivado.false_path == "TRUE"}] {
+			foreach cell [get_cells -quiet -hier -filter {amaranth.vivado.false_path == "TRUE"}] {
 				set_false_path -to $cell
 			}
-			foreach cell [get_cells -quiet -hier -filter {nmigen.vivado.max_delay != ""}] {
+			foreach cell [get_cells -quiet -hier -filter {amaranth.vivado.max_delay != ""}] {
 				set clock [get_clocks -of_objects \
 					[all_fanin -flat -startpoints_only [get_pin $cell/D]]]
 				if {[llength $clock] != 0} {
 					set_max_delay -datapath_only -from $clock \
-						-to [get_cells $cell] [get_property nmigen.vivado.max_delay $cell]
+						-to [get_cells $cell] [get_property amaranth.vivado.max_delay $cell]
 				}
 			}
 			{{get_override("script_after_synth")|default("# (script_after_synth placeholder)")}}
@@ -1009,7 +1009,7 @@ class XilinxPlatform(TemplatedPlatform):
 	# and constraints the FFs to be placed as close as possible, ideally in one CLB. This attribute
 	# only affects the synchronizer FFs themselves.
 	#
-	# Second, for Vivado only, the nmigen.vivado.false_path or nmigen.vivado.max_delay attribute
+	# Second, for Vivado only, the amaranth.vivado.false_path or amaranth.vivado.max_delay attribute
 	# affects the path into the synchronizer. If maximum input delay is specified, a datapath-only
 	# maximum delay constraint is applied, limiting routing delay (and therefore skew) at
 	# the synchronizer input.  Otherwise, a false path constraint is used to omit the input path
@@ -1023,9 +1023,9 @@ class XilinxPlatform(TemplatedPlatform):
 				 for index in range(ff_sync._stages)]
 		if self.toolchain == "Vivado":
 			if ff_sync._max_input_delay is None:
-				flops[0].attrs["nmigen.vivado.false_path"] = "TRUE"
+				flops[0].attrs["amaranth.vivado.false_path"] = "TRUE"
 			else:
-				flops[0].attrs["nmigen.vivado.max_delay"] = str(ff_sync._max_input_delay * 1e9)
+				flops[0].attrs["amaranth.vivado.max_delay"] = str(ff_sync._max_input_delay * 1e9)
 		elif ff_sync._max_input_delay is not None:
 			raise NotImplementedError("Platform '{}' does not support constraining input delay "
 									  "for FFSynchronizer"
@@ -1044,9 +1044,9 @@ class XilinxPlatform(TemplatedPlatform):
 				 for index in range(async_ff_sync._stages)]
 		if self.toolchain == "Vivado":
 			if async_ff_sync._max_input_delay is None:
-				flops[0].attrs["nmigen.vivado.false_path"] = "TRUE"
+				flops[0].attrs["amaranth.vivado.false_path"] = "TRUE"
 			else:
-				flops[0].attrs["nmigen.vivado.max_delay"] = str(async_ff_sync._max_input_delay * 1e9)
+				flops[0].attrs["amaranth.vivado.max_delay"] = str(async_ff_sync._max_input_delay * 1e9)
 		elif async_ff_sync._max_input_delay is not None:
 			raise NotImplementedError("Platform '{}' does not support constraining input delay "
 									  "for AsyncFFSynchronizer"

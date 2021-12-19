@@ -8,7 +8,7 @@ modules/arachne
 
 # Arachne
 
-Arachne is a toolkit for [nmigen](https://github.com/nmigen/nmigen) based designs.
+Arachne is a toolkit for [amaranth](https://github.com/amaranth-lang/amaranth) based designs.
 
 
 

@@ -40,7 +40,7 @@ setup(
 		'wheel', 'setuptools', 'setuptools_scm'
 	],
 	install_requires = [
-		'nmigen>=0.2',
+		'amaranth>=0.3',
 	],
 	packages = find_packages(
 		exclude = [

@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen.build import *
+from amaranth.build import *
 
-from ..mio        import _PS7_MIO_MAPPING
-from .common      import MIOSet
-from .ethernet    import EthernetResource
-from .i2c         import I2CResource
-from .uart        import UARTResource
+from ..mio          import _PS7_MIO_MAPPING
+from .common        import MIOSet
+from .ethernet      import EthernetResource
+from .i2c           import I2CResource
+from .uart          import UARTResource
 
 __all__ = (
 	'PS7CoreResource',

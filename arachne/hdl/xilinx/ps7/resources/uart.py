@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen         import *
-from nmigen.hdl.rec import (DIR_FANIN, DIR_FANOUT)
+from amaranth         import *
+from amaranth.hdl.rec import (DIR_FANIN, DIR_FANOUT)
 
-from .common        import *
+from .common          import *
 
 __all__ = (
 	'UARTResource',

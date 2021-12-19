@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen        import *
-from nmigen.build  import *
-from nmigen.hdl.ir import Elaboratable
+from amaranth        import *
+from amaranth.build  import *
+from amaranth.hdl.ir import Elaboratable
 
 from pathlib import Path
 from sys     import path

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen       import *
-from nmigen.build import *
+from amaranth       import *
+from amaranth.build import *
 
-from .common      import PS8Resource
+from .common        import PS8Resource
 
 __all__ = (
 	'DMAResource',

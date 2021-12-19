@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 import enum
 
-from nmigen       import *
-from nmigen.build import *
+from amaranth       import *
+from amaranth.build import *
 
-from .common      import PS8Resource, MIOSet
+from .common        import PS8Resource, MIOSet
 
 __all__ = (
 	'PCIEResource',

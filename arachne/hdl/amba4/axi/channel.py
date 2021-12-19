@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: BSD-3-Clause
-from nmigen         import *
-from nmigen.hdl.rec import Direction
+from amaranth         import *
+from amaranth.hdl.rec import Direction
 
-from .common        import *
-from .common        import _check_channel
+from .common          import *
+from .common          import _check_channel
 
 __all__ = (
 	'Channel',
