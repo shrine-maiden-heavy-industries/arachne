@@ -28,13 +28,12 @@ def _collect_sims(*, pkg):
 		raise RuntimeError(f'The package {pkg} does not exist, unable to attempt to import test cases')
 
 	for _, name, is_pkg in walk_packages(path = (pkg,), prefix = f'{pkg.replace("/", ".")}.'):
-		if not is_pkg:
-			pkg_import = import_module(name)
-			cases_variables = getmembers(pkg_import, _case_predicate)
-			sims.append({
-				'name' : name,
-				'cases': [case for _, case in cases_variables]
-			})
+		pkg_import = import_module(name)
+		cases_variables = getmembers(pkg_import, _case_predicate)
+		sims.append({
+			'name' : name,
+			'cases': [case for _, case in cases_variables]
+		})
 
 	return sims
 
