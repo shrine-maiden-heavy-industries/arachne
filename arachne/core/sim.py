@@ -1,18 +1,19 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from ..util import *
+from typing       import Dict, List
+from ..util       import *
+from amaranth.sim import Simulator
 
 __all__ = (
 	'sim_case',
 	'run_sims',
 )
 
-def _collect_sims(*, pkg):
-	from pkgutil      import walk_packages
-	from importlib    import import_module
-	from inspect      import getmembers
-	from os           import path
-	from amaranth.sim import Simulator
+def _collect_sims(*, pkg) -> List[Dict[str, Simulator]]:
+	from pkgutil   import walk_packages
+	from importlib import import_module
+	from inspect   import getmembers
+	from os        import path
 
 	def _case_predicate(member):
 		return (
@@ -40,7 +41,6 @@ def _collect_sims(*, pkg):
 
 def sim_case(*, domains, dut, platform = None, engine = 'pysim'):
 	def _reg_sim(func):
-		from amaranth.sim    import Simulator
 		from amaranth.hdl.ir import Fragment
 
 		sim = Simulator(
