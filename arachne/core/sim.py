@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
-from typing       import Dict, List
+from typing       import Dict, List, Union, Tuple
 from ..util       import *
 from amaranth.sim import Simulator
 
@@ -9,7 +9,7 @@ __all__ = (
 	'run_sims',
 )
 
-def _collect_sims(*, pkg) -> List[Dict[str, Simulator]]:
+def _collect_sims(*, pkg) -> List[Dict[str, Union[str, Tuple[Simulator, str]]]]:
 	from pkgutil   import walk_packages
 	from importlib import import_module
 	from inspect   import getmembers
@@ -31,10 +31,11 @@ def _collect_sims(*, pkg) -> List[Dict[str, Simulator]]:
 	for _, name, is_pkg in walk_packages(path = (pkg,), prefix = f'{pkg.replace("/", ".")}.'):
 		pkg_import = import_module(name)
 		cases_variables = getmembers(pkg_import, _case_predicate)
-		sims.append({
-			'name' : name,
-			'cases': [case for _, case in cases_variables]
-		})
+		if len(cases_variables) != 0:
+			sims.append({
+				'name' : name,
+				'cases': [case for _, case in cases_variables]
+			})
 
 	return sims
 
